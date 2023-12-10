@@ -1,18 +1,25 @@
-import { useContext } from 'react';
-import ClientsTable from 'components/ClientsTable/ClientsTable';
+import { useContext, useEffect, useState, memo } from 'react';
+import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
-import clients from 'clients.json';
+import notebookAPI from 'services/notebookAPI';
 import { modalContext } from 'contexts/context';
 
 const App = () => {
     const { isModalShown, modalShownToggle } = useContext(modalContext);
+    const [clients, setClients] = useState([]);
+
+    useEffect(() => {
+        notebookAPI.fetchClients().then(data => {
+            setClients(data);
+        });
+    }, []);
 
     return (
         <>
-            <ClientsTable clients={clients} />
+            {clients.length !== 0 && <ClientTable clients={clients} />}
             {isModalShown && <Modal onClose={modalShownToggle} />}
         </>
     );
 };
 
-export default App;
+export default memo(App);

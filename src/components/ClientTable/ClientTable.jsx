@@ -7,12 +7,12 @@ import {
     TableBody,
     Row,
     Data,
-} from './ClientsTable.styled';
+} from './ClientTable.styled';
 import Button from 'components/Button/Button';
 import { modalContext } from 'contexts/context';
 
 const ClientsTable = ({ clients }) => {
-    const { isModalShown, modalShownToggle } = useContext(modalContext);
+    const { modalShownToggle } = useContext(modalContext);
 
     return (
         <TableWrapper>
@@ -25,10 +25,10 @@ const ClientsTable = ({ clients }) => {
                     </Row>
                 </TableHead>
                 <TableBody>
-                    {clients.map(({ name, numberOfLessons, price }) => (
+                    {clients.map(({ name, lessonsPerWeek, price }) => (
                         <Row key={name}>
                             <Data>{name}</Data>
-                            <Data>{numberOfLessons}</Data>
+                            <Data>{lessonsPerWeek}</Data>
                             <Data>{price}</Data>
                             <Data>
                                 <Button

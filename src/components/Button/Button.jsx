@@ -1,8 +1,10 @@
+import { StyledButton } from './Button.styled';
+
 const Button = ({ children, onClick }) => {
     return (
-        <button type="button" onClick={onClick}>
+        <StyledButton type="button" onClick={onClick}>
             {children}
-        </button>
+        </StyledButton>
     );
 };
 
