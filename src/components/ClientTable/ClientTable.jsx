@@ -16,6 +16,9 @@ const ClientsTable = ({ clients }) => {
 
     return (
         <TableWrapper>
+            <Button type="button" onClick={() => {}} btnType="addClient">
+                Add Client
+            </Button>
             <Table className="table">
                 <TableHead>
                     <Row>
@@ -34,6 +37,7 @@ const ClientsTable = ({ clients }) => {
                                 <Button
                                     type="button"
                                     onClick={modalShownToggle}
+                                    btnType="edit"
                                 >
                                     Edit
                                 </Button>

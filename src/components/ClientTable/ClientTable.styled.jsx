@@ -1,20 +1,40 @@
 import styled from 'styled-components';
 
 export const TableWrapper = styled.div`
-    display: inline-block;
+    position: relative;
 
-    padding: 40px 24px;
+    display: flex;
+
+    width: 100%;
+    max-width: 1024px;
+    padding: 60px 24px 40px;
 
     border: 1px solid rgb(229, 231, 235);
     border-radius: 10px;
+
+    & > button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
 `;
 
 export const Table = styled.table`
+    width: 100%;
+
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 16px;
 
     color: rgb(17, 24, 29);
+
+    @media screen and (min-width: 768px) {
+        font-size: 18px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        font-size: 22px;
+    }
 `;
 export const TableHead = styled.thead`
     border-bottom: 1px solid #d1d5db;
@@ -25,9 +45,7 @@ export const TableHeading = styled.th`
 
     font-weight: 600;
 
-    &:first-child {
-        text-align: left;
-    }
+    text-align: left;
 
     &:not(:first-child) {
         padding: 14px 12px;

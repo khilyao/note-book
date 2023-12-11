@@ -3,20 +3,30 @@ import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
 import notebookAPI from 'services/notebookAPI';
 import { modalContext } from 'contexts/context';
+import { Container, Section } from './App.styled';
 
 const App = () => {
     const { isModalShown, modalShownToggle } = useContext(modalContext);
     const [clients, setClients] = useState([]);
 
     useEffect(() => {
-        notebookAPI.fetchClients().then(data => {
-            setClients(data);
-        });
+        notebookAPI
+            .fetchClients()
+            .then(data => {
+                setClients(data);
+            })
+            .catch(e => {
+                console.error('Error fetching clients:', e);
+            });
     }, []);
 
     return (
         <>
-            {clients.length !== 0 && <ClientTable clients={clients} />}
+            <Container>
+                <Section>
+                    {clients.length !== 0 && <ClientTable clients={clients} />}
+                </Section>
+            </Container>
             {isModalShown && <Modal onClose={modalShownToggle} />}
         </>
     );
