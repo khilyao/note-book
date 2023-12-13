@@ -40,11 +40,11 @@ export const StyledButton = styled.button`
     cursor: pointer;
 
     @media screen and (min-width: 768px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     @media screen and (min-width: 1200px) {
-        font-size: 22px;
+        font-size: 18px;
     }
 
     ${({ $btnType }) => $btnType === 'edit' && editInfoStyles}

@@ -6,7 +6,8 @@ import { modalContext } from 'contexts/context';
 import { Container, Section } from './App.styled';
 
 const App = () => {
-    const { isModalShown, modalShownToggle } = useContext(modalContext);
+    const { isModalShown, modalShownToggle, getClients } =
+        useContext(modalContext);
     const [clients, setClients] = useState([]);
 
     useEffect(() => {
@@ -18,7 +19,7 @@ const App = () => {
             .catch(e => {
                 console.error('Error fetching clients:', e);
             });
-    }, []);
+    }, [getClients]);
 
     return (
         <>

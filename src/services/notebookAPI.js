@@ -12,6 +12,22 @@ const fetchClients = async () => {
     }
 };
 
-const apiTool = { fetchClients };
+const addClient = async client => {
+    try {
+        return await axios.post('/clients', client);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const updateClientInfo = async (id, client) => {
+    try {
+        return await axios.put(`/clients/${id}`, client);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const apiTool = { fetchClients, addClient, updateClientInfo };
 
 export default apiTool;

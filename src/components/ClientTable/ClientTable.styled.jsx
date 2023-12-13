@@ -24,16 +24,16 @@ export const Table = styled.table`
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 14px;
 
     color: rgb(17, 24, 29);
 
     @media screen and (min-width: 768px) {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     @media screen and (min-width: 1200px) {
-        font-size: 22px;
+        font-size: 18px;
     }
 `;
 export const TableHead = styled.thead`
