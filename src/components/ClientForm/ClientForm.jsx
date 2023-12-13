@@ -9,6 +9,8 @@ const ClientForm = ({ formType }) => {
     const {
         toggleModal,
         setGetClients,
+        setIsAddClientBtn,
+        setIsEditClientBtn,
         clientInfo: { id, name, lessonsPerWeek, price },
     } = useContext(modalContext);
 
@@ -28,6 +30,7 @@ const ClientForm = ({ formType }) => {
                 setGetClients([]);
                 resetForm();
                 toggleModal();
+                setIsAddClientBtn(false);
                 setSubmitting(false);
             });
         }
@@ -37,78 +40,62 @@ const ClientForm = ({ formType }) => {
                 setGetClients([]);
                 resetForm();
                 toggleModal();
+                setIsEditClientBtn(false);
                 setSubmitting(false);
             });
         }
     };
 
+    const defineInitialValues = () => {
+        if (formType === 'addClient') {
+            return {
+                name: '',
+                lessonsPerWeek: '',
+                price: '',
+            };
+        }
+
+        if (formType === 'editClient') {
+            return {
+                name,
+                lessonsPerWeek,
+                price,
+            };
+        }
+    };
+
     return (
         <>
-            {formType === 'addClient' && (
-                <Formik
-                    initialValues={{ name: '', lessonsPerWeek: '', price: '' }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                >
-                    <Form>
-                        <div>
-                            <label htmlFor={nameInputId}>Name</label>
-                            <Field name="name" id={nameInputId} type="text" />
-                            <ErrorMessage name="name" />
-                        </div>
-                        <div>
-                            <label htmlFor={lessonsPerWeekId}>
-                                Lessons per week
-                            </label>
-                            <Field
-                                name="lessonsPerWeek"
-                                id={lessonsPerWeekId}
-                                type="number"
-                            />
-                            <ErrorMessage name="lessonsPerWeek" />
-                        </div>
-                        <div>
-                            <label htmlFor={priceId}>Price</label>
-                            <Field name="price" id={priceId} type="number" />
-                            <ErrorMessage name="price" />
-                        </div>
-                        <button type="submit">Add client</button>
-                    </Form>
-                </Formik>
-            )}
-
-            {formType === 'editClient' && (
-                <Formik
-                    initialValues={{ name, lessonsPerWeek, price }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                >
-                    <Form>
-                        <div>
-                            <label htmlFor={nameInputId}>Name</label>
-                            <Field name="name" id={nameInputId} type="text" />
-                            <ErrorMessage name="name" />
-                        </div>
-                        <div>
-                            <label htmlFor={lessonsPerWeekId}>
-                                Lessons per week
-                            </label>
-                            <Field
-                                name="lessonsPerWeek"
-                                id={lessonsPerWeekId}
-                                type="number"
-                            />
-                            <ErrorMessage name="lessonsPerWeek" />
-                        </div>
-                        <div>
-                            <label htmlFor={priceId}>Price</label>
-                            <Field name="price" id={priceId} type="number" />
-                            <ErrorMessage name="price" />
-                        </div>
-                        <button type="submit">Add client</button>
-                    </Form>
-                </Formik>
-            )}
+            <Formik
+                initialValues={defineInitialValues()}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+            >
+                <Form>
+                    <div>
+                        <label htmlFor={nameInputId}>Name</label>
+                        <Field name="name" id={nameInputId} type="text" />
+                        <ErrorMessage name="name" />
+                    </div>
+                    <div>
+                        <label htmlFor={lessonsPerWeekId}>
+                            Lessons per week
+                        </label>
+                        <Field
+                            name="lessonsPerWeek"
+                            id={lessonsPerWeekId}
+                            type="number"
+                        />
+                        <ErrorMessage name="lessonsPerWeek" />
+                    </div>
+                    <div>
+                        <label htmlFor={priceId}>Price</label>
+                        <Field name="price" id={priceId} type="number" />
+                        <ErrorMessage name="price" />
+                    </div>
+                    <button type="submit">Add client</button>
+                </Form>
+            </Formik>
         </>
     );
 };
