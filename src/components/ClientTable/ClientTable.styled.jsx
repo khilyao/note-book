@@ -4,6 +4,7 @@ export const TableWrapper = styled.div`
     position: relative;
 
     display: flex;
+    flex-direction: column;
 
     width: 100%;
     max-width: 1024px;
@@ -25,6 +26,7 @@ export const TableWrapper = styled.div`
 
 export const Table = styled.table`
     width: 100%;
+    margin-bottom: 15px;
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
@@ -86,7 +88,17 @@ export const Data = styled.td`
 
     @media screen and (min-width: 410px) {
         &:nth-child(3) {
-            display: inherit;
+            display: table-cell;
         }
+    }
+`;
+
+export const MonthlyProfit = styled.p`
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+
+    @media screen and (min-width: 768px) {
+        font-size: 16px;
     }
 `;
