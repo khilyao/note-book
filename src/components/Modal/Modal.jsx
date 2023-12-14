@@ -1,34 +1,29 @@
-import { Overlay, StyledModal } from './Modal.styled';
+import { Overlay, StyledModal, StyledCancelSVG } from './Modal.styled';
 import { createPortal } from 'react-dom';
 import { useContext } from 'react';
 import { modalContext } from 'contexts/context';
 import ClientForm from 'components/ClientForm/ClientForm';
-import Button from 'components/Button/Button';
 
 const modalRoot = document.getElementById('modal-root');
 
 const Modal = () => {
-    const { isEditClientBtn, isAddClientBtn, toggleModal } =
+    const { isAddClientBtn, toggleModal, disableButtons } =
         useContext(modalContext);
 
-    const renderModalMarkup = () => {
-        if (isAddClientBtn) {
-            return (
-                <StyledModal>
-                    <Button onClick={toggleModal} />
-                    <ClientForm formType={'addClient'} />
-                </StyledModal>
-            );
-        }
+    const currentAction = isAddClientBtn ? 'addClient' : 'editClient';
 
-        if (isEditClientBtn) {
-            return (
-                <StyledModal>
-                    <Button onClick={toggleModal} />
-                    <ClientForm formType={'editClient'} />
-                </StyledModal>
-            );
-        }
+    const renderModalMarkup = () => {
+        return (
+            <StyledModal>
+                <StyledCancelSVG
+                    onClick={() => {
+                        toggleModal();
+                        disableButtons();
+                    }}
+                />
+                <ClientForm formType={currentAction} />
+            </StyledModal>
+        );
     };
 
     return createPortal(<Overlay>{renderModalMarkup()}</Overlay>, modalRoot);

@@ -4,8 +4,12 @@ export const Section = styled.section`
     display: flex;
     justify-content: center;
 
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding: 15px 0;
+
+    @media screen and (min-width: 768px) {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
 `;
 
 export const Container = styled.div`

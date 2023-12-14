@@ -1,5 +1,13 @@
 import { useContext } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import {
+    StyledForm,
+    StyledField,
+    FieldWrapper,
+    StyledBtn,
+    StyledLabel,
+    StyledErrorMsg,
+} from './ClientForm.styled';
 import { object, string, number } from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import notebookAPI from 'services/notebookAPI';
@@ -24,6 +32,9 @@ const ClientForm = ({ formType }) => {
         price: number().required(),
     });
 
+    const currentFormType =
+        formType === 'addClient' ? 'addClient' : 'editClient';
+
     const handleSubmit = (client, { setSubmitting, resetForm }) => {
         if (formType === 'addClient') {
             notebookAPI.addClient(client).then(() => {
@@ -33,21 +44,20 @@ const ClientForm = ({ formType }) => {
                 setIsAddClientBtn(false);
                 setSubmitting(false);
             });
+            return;
         }
 
-        if (formType === 'editClient') {
-            notebookAPI.updateClientInfo(id, client).then(() => {
-                setGetClients([]);
-                resetForm();
-                toggleModal();
-                setIsEditClientBtn(false);
-                setSubmitting(false);
-            });
-        }
+        notebookAPI.updateClientInfo(id, client).then(() => {
+            setGetClients([]);
+            resetForm();
+            toggleModal();
+            setIsEditClientBtn(false);
+            setSubmitting(false);
+        });
     };
 
     const defineInitialValues = () => {
-        if (formType === 'addClient') {
+        if (currentFormType === 'addClient') {
             return {
                 name: '',
                 lessonsPerWeek: '',
@@ -55,13 +65,11 @@ const ClientForm = ({ formType }) => {
             };
         }
 
-        if (formType === 'editClient') {
-            return {
-                name,
-                lessonsPerWeek,
-                price,
-            };
-        }
+        return {
+            name,
+            lessonsPerWeek,
+            price,
+        };
     };
 
     return (
@@ -71,30 +79,59 @@ const ClientForm = ({ formType }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <Form>
-                    <div>
-                        <label htmlFor={nameInputId}>Name</label>
-                        <Field name="name" id={nameInputId} type="text" />
-                        <ErrorMessage name="name" />
-                    </div>
-                    <div>
-                        <label htmlFor={lessonsPerWeekId}>
+                <StyledForm>
+                    <FieldWrapper>
+                        <StyledLabel htmlFor={nameInputId}>Name</StyledLabel>
+                        <StyledField
+                            name="name"
+                            id={nameInputId}
+                            type="text"
+                            placeholder="David"
+                        />
+                        <ErrorMessage name="name">
+                            {msg => (
+                                <StyledErrorMsg>
+                                    *required field*
+                                </StyledErrorMsg>
+                            )}
+                        </ErrorMessage>
+                    </FieldWrapper>
+                    <FieldWrapper>
+                        <StyledLabel htmlFor={lessonsPerWeekId}>
                             Lessons per week
-                        </label>
-                        <Field
+                        </StyledLabel>
+                        <StyledField
                             name="lessonsPerWeek"
                             id={lessonsPerWeekId}
                             type="number"
+                            placeholder="4"
                         />
-                        <ErrorMessage name="lessonsPerWeek" />
-                    </div>
-                    <div>
-                        <label htmlFor={priceId}>Price</label>
-                        <Field name="price" id={priceId} type="number" />
-                        <ErrorMessage name="price" />
-                    </div>
-                    <button type="submit">Add client</button>
-                </Form>
+                        <ErrorMessage name="lessonsPerWeek">
+                            {msg => (
+                                <StyledErrorMsg>*required field</StyledErrorMsg>
+                            )}
+                        </ErrorMessage>
+                    </FieldWrapper>
+                    <FieldWrapper>
+                        <StyledLabel htmlFor={priceId}>Price</StyledLabel>
+                        <StyledField
+                            name="price"
+                            id={priceId}
+                            type="number"
+                            placeholder="200"
+                        />
+                        <ErrorMessage name="price">
+                            {msg => (
+                                <StyledErrorMsg>*required field</StyledErrorMsg>
+                            )}
+                        </ErrorMessage>
+                    </FieldWrapper>
+                    <StyledBtn type="submit">
+                        {currentFormType === 'addClient'
+                            ? 'Add Client'
+                            : 'Apply'}
+                    </StyledBtn>
+                </StyledForm>
             </Formik>
         </>
     );

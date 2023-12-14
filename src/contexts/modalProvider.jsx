@@ -12,6 +12,11 @@ const Provider = ({ children }) => {
         setIsModalShown(!isModalShown);
     };
 
+    const disableButtons = () => {
+        setIsEditClientBtn(false);
+        setIsAddClientBtn(false);
+    };
+
     const handleGenerateModalContent = e => {
         switch (e.currentTarget.dataset.btntype) {
             case 'edit': {
@@ -41,6 +46,7 @@ const Provider = ({ children }) => {
         setGetClients,
         clientInfo,
         setClientInfo,
+        disableButtons,
     };
 
     return (

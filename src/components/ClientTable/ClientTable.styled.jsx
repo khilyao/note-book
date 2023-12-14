@@ -7,7 +7,7 @@ export const TableWrapper = styled.div`
 
     width: 100%;
     max-width: 1024px;
-    padding: 60px 24px 40px;
+    padding: 60px 24px;
 
     border: 1px solid rgb(229, 231, 235);
     border-radius: 10px;
@@ -16,6 +16,10 @@ export const TableWrapper = styled.div`
         position: absolute;
         top: 20px;
         right: 20px;
+    }
+
+    @media screen and (min-width: 768px) {
+        padding-bottom: 40px;
     }
 `;
 
@@ -47,8 +51,18 @@ export const TableHeading = styled.th`
 
     text-align: left;
 
+    &:nth-child(3) {
+        display: none;
+    }
+
     &:not(:first-child) {
         padding: 14px 12px;
+    }
+
+    @media screen and (min-width: 410px) {
+        &:nth-child(3) {
+            display: inherit;
+        }
     }
 `;
 
@@ -59,8 +73,20 @@ export const Row = styled.tr``;
 export const Data = styled.td`
     padding: 16px 12px 16px 0px;
 
+    max-width: 100px;
+
+    &:nth-child(3) {
+        display: none;
+    }
+
     &:not(:first-child) {
         padding: 16px 12px;
         color: rgb(107, 114, 128);
+    }
+
+    @media screen and (min-width: 410px) {
+        &:nth-child(3) {
+            display: inherit;
+        }
     }
 `;

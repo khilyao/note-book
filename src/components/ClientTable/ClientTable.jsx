@@ -32,7 +32,7 @@ const ClientsTable = ({ clients }) => {
                 <TableHead>
                     <Row>
                         <TableHeading>Name</TableHeading>
-                        <TableHeading>Number of lessons</TableHeading>
+                        <TableHeading>Lessons per week</TableHeading>
                         <TableHeading>Price</TableHeading>
                     </Row>
                 </TableHead>
@@ -41,7 +41,7 @@ const ClientsTable = ({ clients }) => {
                         <Row key={id}>
                             <Data>{name}</Data>
                             <Data>{lessonsPerWeek}</Data>
-                            <Data>{price}</Data>
+                            <Data>{price} UAH</Data>
                             <Data>
                                 <Button
                                     type="button"
