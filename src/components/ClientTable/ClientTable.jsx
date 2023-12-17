@@ -11,6 +11,7 @@ import {
 } from './ClientTable.styled';
 import Button from 'components/Button/Button';
 import { modalContext } from 'contexts/context';
+import { ToastContainer } from 'react-toastify';
 
 const ClientsTable = ({ clients }) => {
     const { toggleModal, handleGenerateModalContent, setClientInfo } =
@@ -25,6 +26,8 @@ const ClientsTable = ({ clients }) => {
     return (
         <>
             <TableWrapper>
+                <ToastContainer />
+
                 <Button
                     type="button"
                     onClick={e => {

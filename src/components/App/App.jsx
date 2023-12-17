@@ -23,7 +23,7 @@ const App = () => {
 
     return (
         <>
-            <Container>
+            <Container $isModalShown={isModalShown}>
                 <Section>
                     {clients.length !== 0 && <ClientTable clients={clients} />}
                 </Section>

@@ -12,8 +12,27 @@ import { object, string, number } from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import notebookAPI from 'services/notebookAPI';
 import { modalContext } from 'contexts/context';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 const ClientForm = ({ formType }) => {
+    const notifyUser = () => {
+        const options = {
+            theme: 'colored',
+            autoClose: 1500,
+            closeOnClick: true,
+            hideProgressBar: true,
+        };
+
+        if (formType === 'addClient') {
+            toast.success('Client was added', options);
+
+            return;
+        }
+
+        toast.success('Information was updated', options);
+    };
+
     const {
         toggleModal,
         setGetClients,
@@ -36,24 +55,19 @@ const ClientForm = ({ formType }) => {
         formType === 'addClient' ? 'addClient' : 'editClient';
 
     const handleSubmit = (client, { setSubmitting, resetForm }) => {
-        if (formType === 'addClient') {
-            notebookAPI.addClient(client).then(() => {
-                setGetClients([]);
-                resetForm();
-                toggleModal();
-                setIsAddClientBtn(false);
-                setSubmitting(false);
-            });
-            return;
-        }
-
-        notebookAPI.updateClientInfo(id, client).then(() => {
+        const formActions = () => {
             setGetClients([]);
             resetForm();
             toggleModal();
+            setIsAddClientBtn(false);
             setIsEditClientBtn(false);
             setSubmitting(false);
-        });
+            notifyUser();
+        };
+
+        formType === 'addClient'
+            ? notebookAPI.addClient(client).then(formActions)
+            : notebookAPI.updateClientInfo(id, client).then(formActions);
     };
 
     const defineInitialValues = () => {
@@ -107,9 +121,7 @@ const ClientForm = ({ formType }) => {
                             placeholder="4"
                         />
                         <ErrorMessage name="lessonsPerWeek">
-                            {msg => (
-                                <StyledErrorMsg>*required field</StyledErrorMsg>
-                            )}
+                            <StyledErrorMsg>*required field</StyledErrorMsg>
                         </ErrorMessage>
                     </FieldWrapper>
                     <FieldWrapper>
@@ -121,9 +133,7 @@ const ClientForm = ({ formType }) => {
                             placeholder="200"
                         />
                         <ErrorMessage name="price">
-                            {msg => (
-                                <StyledErrorMsg>*required field</StyledErrorMsg>
-                            )}
+                            <StyledErrorMsg>*required field</StyledErrorMsg>
                         </ErrorMessage>
                     </FieldWrapper>
                     <StyledBtn type="submit">
