@@ -27,7 +27,6 @@ const ClientsTable = ({ clients }) => {
         <>
             <TableWrapper>
                 <ToastContainer />
-
                 <Button
                     type="button"
                     onClick={e => {
@@ -45,35 +44,45 @@ const ClientsTable = ({ clients }) => {
                             <TableHeading>Name</TableHeading>
                             <TableHeading>Lessons per week</TableHeading>
                             <TableHeading>Price</TableHeading>
+                            <TableHeading>Credit</TableHeading>
                         </Row>
                     </TableHead>
                     <TableBody>
-                        {clients.map(({ id, name, lessonsPerWeek, price }) => (
-                            <Row key={id}>
-                                <Data>{name}</Data>
-                                <Data>{lessonsPerWeek}</Data>
-                                <Data>{`${price} UAH`}</Data>
-                                <Data>
-                                    <Button
-                                        type="button"
-                                        onClick={e => {
-                                            handleGenerateModalContent(e);
-                                            toggleModal();
-                                            setClientInfo({
-                                                id,
-                                                name,
-                                                lessonsPerWeek,
-                                                price,
-                                            });
-                                        }}
-                                        btnType="edit"
-                                        data-btnType="edit"
-                                    >
-                                        Edit
-                                    </Button>
-                                </Data>
-                            </Row>
-                        ))}
+                        {clients.map(
+                            ({ id, name, lessonsPerWeek, price, credit }) => (
+                                <Row key={id}>
+                                    <Data>{name}</Data>
+                                    <Data>{lessonsPerWeek}</Data>
+                                    <Data>{`${price} UAH`}</Data>
+                                    {credit === 0 ? (
+                                        <Data />
+                                    ) : (
+                                        <Data
+                                            style={{ color: 'red' }}
+                                        >{`${credit} UAH`}</Data>
+                                    )}
+                                    <Data>
+                                        <Button
+                                            type="button"
+                                            onClick={e => {
+                                                handleGenerateModalContent(e);
+                                                toggleModal();
+                                                setClientInfo({
+                                                    id,
+                                                    name,
+                                                    lessonsPerWeek,
+                                                    price,
+                                                });
+                                            }}
+                                            btnType="edit"
+                                            data-btnType="edit"
+                                        >
+                                            Edit
+                                        </Button>
+                                    </Data>
+                                </Row>
+                            )
+                        )}
                     </TableBody>
                 </Table>
                 <MonthlyProfit>Monthly profit: {monthlyProfit}</MonthlyProfit>

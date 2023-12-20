@@ -38,17 +38,19 @@ const ClientForm = ({ formType }) => {
         setGetClients,
         setIsAddClientBtn,
         setIsEditClientBtn,
-        clientInfo: { id, name, lessonsPerWeek, price },
+        clientInfo: { id, name, lessonsPerWeek, price, credit },
     } = useContext(modalContext);
 
     const nameInputId = uuidv4();
     const lessonsPerWeekId = uuidv4();
     const priceId = uuidv4();
+    const creditId = uuidv4();
 
     const validationSchema = object({
         name: string().trim().required(),
         lessonsPerWeek: number().required(),
         price: number().required(),
+        credit: number(),
     });
 
     const currentFormType =
@@ -76,6 +78,7 @@ const ClientForm = ({ formType }) => {
                 name: '',
                 lessonsPerWeek: '',
                 price: '',
+                credit: '',
             };
         }
 
@@ -83,6 +86,7 @@ const ClientForm = ({ formType }) => {
             name,
             lessonsPerWeek,
             price,
+            credit: credit || 0,
         };
     };
 
@@ -103,11 +107,7 @@ const ClientForm = ({ formType }) => {
                             placeholder="David"
                         />
                         <ErrorMessage name="name">
-                            {msg => (
-                                <StyledErrorMsg>
-                                    *required field*
-                                </StyledErrorMsg>
-                            )}
+                            <StyledErrorMsg>*required field*</StyledErrorMsg>
                         </ErrorMessage>
                     </FieldWrapper>
                     <FieldWrapper>
@@ -135,6 +135,15 @@ const ClientForm = ({ formType }) => {
                         <ErrorMessage name="price">
                             <StyledErrorMsg>*required field</StyledErrorMsg>
                         </ErrorMessage>
+                    </FieldWrapper>
+                    <FieldWrapper>
+                        <StyledLabel htmlFor={creditId}>Credit</StyledLabel>
+                        <StyledField
+                            name="credit"
+                            id={creditId}
+                            type="number"
+                            placeholder="0"
+                        />
                     </FieldWrapper>
                     <StyledBtn type="submit">
                         {currentFormType === 'addClient'
