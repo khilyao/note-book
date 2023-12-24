@@ -6,6 +6,7 @@ import {
     FieldWrapper,
     StyledBtn,
     StyledLabel,
+    ButtonsWrapper,
     StyledErrorMsg,
 } from './ClientForm.styled';
 import { object, string, number } from 'yup';
@@ -86,7 +87,7 @@ const ClientForm = ({ formType }) => {
             name,
             lessonsPerWeek,
             price,
-            credit: credit || 0,
+            credit: credit,
         };
     };
 
@@ -145,11 +146,30 @@ const ClientForm = ({ formType }) => {
                             placeholder="0"
                         />
                     </FieldWrapper>
-                    <StyledBtn type="submit">
-                        {currentFormType === 'addClient'
-                            ? 'Add Client'
-                            : 'Apply'}
-                    </StyledBtn>
+                    <ButtonsWrapper>
+                        <StyledBtn type="submit">
+                            {currentFormType === 'addClient'
+                                ? 'Add Client'
+                                : 'Apply'}
+                        </StyledBtn>
+                        {currentFormType === 'editClient' && (
+                            <StyledBtn
+                                onClick={() => {
+                                    notebookAPI.deleteClient(id).then(() => {
+                                        toggleModal();
+                                        setIsEditClientBtn(false);
+                                        notifyUser();
+                                        setGetClients([]);
+                                    });
+                                }}
+                                $delete
+                                style={{ marginLeft: '20px' }}
+                                type="button"
+                            >
+                                Delete
+                            </StyledBtn>
+                        )}
+                    </ButtonsWrapper>
                 </StyledForm>
             </Formik>
         </>

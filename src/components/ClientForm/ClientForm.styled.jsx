@@ -58,6 +58,12 @@ export const FieldWrapper = styled.div`
     }
 `;
 
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export const StyledBtn = styled.button`
     display: inline-block;
 
@@ -81,9 +87,15 @@ export const StyledBtn = styled.button`
 
     transition: background-color 100ms linear;
 
+    ${({ $delete }) =>
+        $delete &&
+        `color: #fff;
+    background-color: rgb(236,12,87);`}
+
     &:hover,
     &:focus {
         background-color: rgb(224, 231, 255);
+        ${({ $delete }) => $delete && `background-color: rgb(219, 10, 80);`}
     }
 
     @media screen and (min-width: 460px) {

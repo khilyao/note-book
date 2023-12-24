@@ -7,6 +7,7 @@ const Provider = ({ children }) => {
     const [isAddClientBtn, setIsAddClientBtn] = useState(false);
     const [getClients, setGetClients] = useState(false);
     const [clientInfo, setClientInfo] = useState({});
+    const [currentEditingUserId, setCurrentEditingUserId] = useState(0);
 
     const toggleModal = () => {
         setIsModalShown(!isModalShown);
@@ -47,6 +48,8 @@ const Provider = ({ children }) => {
         clientInfo,
         setClientInfo,
         disableButtons,
+        currentEditingUserId,
+        setCurrentEditingUserId,
     };
 
     return (

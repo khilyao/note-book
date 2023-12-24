@@ -53,13 +53,13 @@ const ClientsTable = ({ clients }) => {
                                 <Row key={id}>
                                     <Data>{name}</Data>
                                     <Data>{lessonsPerWeek}</Data>
-                                    <Data>{`${price} UAH`}</Data>
-                                    {credit === 0 ? (
+                                    <Data>{price} UAH</Data>
+                                    {credit === 0 || credit === '' ? (
                                         <Data />
                                     ) : (
-                                        <Data
-                                            style={{ color: 'red' }}
-                                        >{`${credit} UAH`}</Data>
+                                        <Data style={{ color: 'red' }}>
+                                            {credit} UAH
+                                        </Data>
                                     )}
                                     <Data>
                                         <Button

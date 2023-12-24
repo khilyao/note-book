@@ -28,6 +28,14 @@ const updateClientInfo = async (id, client) => {
     }
 };
 
-const apiTool = { fetchClients, addClient, updateClientInfo };
+const deleteClient = async id => {
+    try {
+        return await axios.delete(`/clients/${id}`);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const apiTool = { fetchClients, addClient, updateClientInfo, deleteClient };
 
 export default apiTool;
