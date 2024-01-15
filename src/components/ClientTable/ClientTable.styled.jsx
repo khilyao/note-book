@@ -74,11 +74,13 @@ export const Row = styled.tr``;
 
 export const Data = styled.td`
     padding: 16px 12px 16px 0px;
-
     max-width: 100px;
 
     &:nth-child(3) {
         display: none;
+    }
+    &[credit] {
+        color: ${({ credit }) => (credit > 0 ? 'green' : 'red')}!important;
     }
 
     &:not(:first-child) {

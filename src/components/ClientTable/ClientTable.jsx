@@ -57,7 +57,7 @@ const ClientsTable = ({ clients }) => {
                                     {credit === 0 || credit === '' ? (
                                         <Data />
                                     ) : (
-                                        <Data style={{ color: 'red' }}>
+                                        <Data credit={credit}>
                                             {credit} UAH
                                         </Data>
                                     )}

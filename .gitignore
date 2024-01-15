@@ -29,5 +29,4 @@ yarn-error.log*
 #other
 .husky
 .eslintcache
-
-src/mockup
+tech-task.md

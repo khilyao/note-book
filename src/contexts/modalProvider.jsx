@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { modalContext } from './context';
 
-const Provider = ({ children }) => {
+const ModalProvider = ({ children }) => {
     const [isModalShown, setIsModalShown] = useState(false);
     const [isEditClientBtn, setIsEditClientBtn] = useState(false);
     const [isAddClientBtn, setIsAddClientBtn] = useState(false);
@@ -59,4 +59,4 @@ const Provider = ({ children }) => {
     );
 };
 
-export default Provider;
+export default ModalProvider;

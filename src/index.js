@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client';
 import App from 'components/App/App';
 import './index.css';
 import 'reset-css';
-import Provider from 'contexts/modalProvider';
+import ModalProvider from 'contexts/modalProvider';
+import AppProvider from 'contexts/appProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <Provider>
-            <App />
-        </Provider>
+        <AppProvider>
+            <ModalProvider>
+                <App />
+            </ModalProvider>
+        </AppProvider>
     </React.StrictMode>
 );
