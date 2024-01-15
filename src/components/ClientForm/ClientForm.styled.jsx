@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
+import { FaPlus, FaMinus } from 'react-icons/fa';
 
 export const StyledForm = styled(Form)`
     display: flex;
@@ -64,10 +65,16 @@ export const ButtonsWrapper = styled.div`
     justify-content: center;
 `;
 
+export const CounterWrapper = styled.div`
+    display: flex;
+    gap: 10px;
+
+    margin-top: 15px;
+`;
+
 export const StyledBtn = styled.button`
     display: inline-block;
 
-    margin-top: 15px;
     padding: 8px 14px;
 
     font-size: 16px;
@@ -101,10 +108,6 @@ export const StyledBtn = styled.button`
     @media screen and (min-width: 460px) {
         font-size: 18px;
     }
-
-    @media screen and (min-width: 768px) {
-        margin-top: 30px;
-    }
 `;
 
 export const StyledErrorMsg = styled.div`
@@ -118,3 +121,7 @@ export const StyledErrorMsg = styled.div`
         font-size: 16px;
     }
 `;
+
+export const StyledPlusIcon = styled(FaPlus)``;
+
+export const StyledMinusIcon = styled(FaMinus)``;

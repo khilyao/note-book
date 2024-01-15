@@ -5,16 +5,20 @@ import {
     StyledField,
     FieldWrapper,
     StyledBtn,
+    CounterWrapper,
     StyledLabel,
     ButtonsWrapper,
     StyledErrorMsg,
+    StyledPlusIcon,
+    StyledMinusIcon,
 } from './ClientForm.styled';
 import { object, string, number } from 'yup';
 import { v4 as uuidv4 } from 'uuid';
-import notebookAPI from 'services/notebookAPI';
 import { modalContext } from 'contexts/context';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import notebookAPI from 'services/notebookAPI';
+import CounterButton from 'components/CounterButton/CounterButton';
 
 const ClientForm = ({ formType }) => {
     const notifyUser = () => {
@@ -87,7 +91,7 @@ const ClientForm = ({ formType }) => {
             name,
             lessonsPerWeek,
             price,
-            credit: credit,
+            credit,
         };
     };
 
@@ -145,6 +149,14 @@ const ClientForm = ({ formType }) => {
                             type="number"
                             placeholder="0"
                         />
+                        <CounterWrapper>
+                            <CounterButton btnType="increment">
+                                <StyledPlusIcon />
+                            </CounterButton>
+                            <CounterButton btnType="decrement">
+                                <StyledMinusIcon />
+                            </CounterButton>
+                        </CounterWrapper>
                     </FieldWrapper>
                     <ButtonsWrapper>
                         <StyledBtn type="submit">

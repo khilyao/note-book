@@ -72,6 +72,7 @@ const ClientsTable = ({ clients }) => {
                                                     name,
                                                     lessonsPerWeek,
                                                     price,
+                                                    credit,
                                                 });
                                             }}
                                             btnType="edit"
