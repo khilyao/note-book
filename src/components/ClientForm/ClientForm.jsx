@@ -102,87 +102,103 @@ const ClientForm = ({ formType }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                <StyledForm>
-                    <FieldWrapper>
-                        <StyledLabel htmlFor={nameInputId}>Name</StyledLabel>
-                        <StyledField
-                            name="name"
-                            id={nameInputId}
-                            type="text"
-                            placeholder="David"
-                        />
-                        <ErrorMessage name="name">
-                            <StyledErrorMsg>*required field*</StyledErrorMsg>
-                        </ErrorMessage>
-                    </FieldWrapper>
-                    <FieldWrapper>
-                        <StyledLabel htmlFor={lessonsPerWeekId}>
-                            Lessons per week
-                        </StyledLabel>
-                        <StyledField
-                            name="lessonsPerWeek"
-                            id={lessonsPerWeekId}
-                            type="number"
-                            placeholder="4"
-                        />
-                        <ErrorMessage name="lessonsPerWeek">
-                            <StyledErrorMsg>*required field</StyledErrorMsg>
-                        </ErrorMessage>
-                    </FieldWrapper>
-                    <FieldWrapper>
-                        <StyledLabel htmlFor={priceId}>Price</StyledLabel>
-                        <StyledField
-                            name="price"
-                            id={priceId}
-                            type="number"
-                            placeholder="200"
-                        />
-                        <ErrorMessage name="price">
-                            <StyledErrorMsg>*required field</StyledErrorMsg>
-                        </ErrorMessage>
-                    </FieldWrapper>
-                    <FieldWrapper>
-                        <StyledLabel htmlFor={creditId}>Credit</StyledLabel>
-                        <StyledField
-                            name="credit"
-                            id={creditId}
-                            type="number"
-                            placeholder="0"
-                        />
-                        <CounterWrapper>
-                            <CounterButton btnType="increment">
-                                <StyledPlusIcon />
-                            </CounterButton>
-                            <CounterButton btnType="decrement">
-                                <StyledMinusIcon />
-                            </CounterButton>
-                        </CounterWrapper>
-                    </FieldWrapper>
-                    <ButtonsWrapper>
-                        <StyledBtn type="submit">
-                            {currentFormType === 'addClient'
-                                ? 'Add Client'
-                                : 'Apply'}
-                        </StyledBtn>
-                        {currentFormType === 'editClient' && (
-                            <StyledBtn
-                                onClick={() => {
-                                    notebookAPI.deleteClient(id).then(() => {
-                                        toggleModal();
-                                        setIsEditClientBtn(false);
-                                        notifyUser();
-                                        setGetClients([]);
-                                    });
-                                }}
-                                $delete
-                                style={{ marginLeft: '20px' }}
-                                type="button"
-                            >
-                                Delete
+                {({ values: { price, credit }, setFieldValue }) => (
+                    <StyledForm>
+                        <FieldWrapper>
+                            <StyledLabel htmlFor={nameInputId}>
+                                Name
+                            </StyledLabel>
+                            <StyledField
+                                name="name"
+                                id={nameInputId}
+                                type="text"
+                                placeholder="David"
+                            />
+                            <ErrorMessage name="name">
+                                <StyledErrorMsg>
+                                    *required field*
+                                </StyledErrorMsg>
+                            </ErrorMessage>
+                        </FieldWrapper>
+                        <FieldWrapper>
+                            <StyledLabel htmlFor={lessonsPerWeekId}>
+                                Lessons per week
+                            </StyledLabel>
+                            <StyledField
+                                name="lessonsPerWeek"
+                                id={lessonsPerWeekId}
+                                type="number"
+                                placeholder="4"
+                            />
+                            <ErrorMessage name="lessonsPerWeek">
+                                <StyledErrorMsg>*required field</StyledErrorMsg>
+                            </ErrorMessage>
+                        </FieldWrapper>
+                        <FieldWrapper>
+                            <StyledLabel htmlFor={priceId}>Price</StyledLabel>
+                            <StyledField
+                                name="price"
+                                id={priceId}
+                                type="number"
+                                placeholder="200"
+                            />
+                            <ErrorMessage name="price">
+                                <StyledErrorMsg>*required field</StyledErrorMsg>
+                            </ErrorMessage>
+                        </FieldWrapper>
+                        <FieldWrapper>
+                            <StyledLabel htmlFor={creditId}>Credit</StyledLabel>
+                            <StyledField
+                                name="credit"
+                                id={creditId}
+                                type="number"
+                                placeholder="0"
+                            />
+                            <CounterWrapper>
+                                <CounterButton
+                                    onClick={() => {
+                                        setFieldValue('credit', credit + price);
+                                    }}
+                                >
+                                    <StyledPlusIcon />
+                                </CounterButton>
+                                <CounterButton
+                                    onClick={() => {
+                                        setFieldValue('credit', credit - price);
+                                    }}
+                                >
+                                    <StyledMinusIcon />
+                                </CounterButton>
+                            </CounterWrapper>
+                        </FieldWrapper>
+                        <ButtonsWrapper>
+                            <StyledBtn type="submit">
+                                {currentFormType === 'addClient'
+                                    ? 'Add Client'
+                                    : 'Apply'}
                             </StyledBtn>
-                        )}
-                    </ButtonsWrapper>
-                </StyledForm>
+                            {currentFormType === 'editClient' && (
+                                <StyledBtn
+                                    onClick={() => {
+                                        notebookAPI
+                                            .deleteClient(id)
+                                            .then(() => {
+                                                toggleModal();
+                                                setIsEditClientBtn(false);
+                                                notifyUser();
+                                                setGetClients([]);
+                                            });
+                                    }}
+                                    $delete
+                                    style={{ marginLeft: '20px' }}
+                                    type="button"
+                                >
+                                    Delete
+                                </StyledBtn>
+                            )}
+                        </ButtonsWrapper>
+                    </StyledForm>
+                )}
             </Formik>
         </>
     );

@@ -80,7 +80,7 @@ export const Data = styled.td`
         display: none;
     }
     &[credit] {
-        color: ${({ credit }) => (credit > 0 ? 'green' : 'red')}!important;
+        color: ${({ credit }) => (credit > 0 ? '#07be07' : 'red')}!important;
     }
 
     &:not(:first-child) {

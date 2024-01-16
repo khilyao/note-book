@@ -12,9 +12,17 @@ export const StyledButton = styled.button`
 
     cursor: pointer;
 
-    transition: border 150ms linear;
+    transition: border 100ms linear;
 
-    &:hover {
-        border-color: red;
+    &:nth-child(1) {
+        &:hover {
+            border-color: #07be07;
+        }
+    }
+
+    &:nth-child(2) {
+        &:hover {
+            border-color: red;
+        }
     }
 `;

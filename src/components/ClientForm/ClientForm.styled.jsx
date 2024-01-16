@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Field, Form } from 'formik';
 import { FaPlus, FaMinus } from 'react-icons/fa';
+import { StyledButton } from '../CounterButton/CounterButton.styled';
 
 export const StyledForm = styled(Form)`
     display: flex;
@@ -122,6 +123,18 @@ export const StyledErrorMsg = styled.div`
     }
 `;
 
-export const StyledPlusIcon = styled(FaPlus)``;
+export const StyledPlusIcon = styled(FaPlus)`
+    transition: fill 100ms linear;
 
-export const StyledMinusIcon = styled(FaMinus)``;
+    ${StyledButton}:hover & {
+        fill: #07be07;
+    }
+`;
+
+export const StyledMinusIcon = styled(FaMinus)`
+    transition: fill 100ms linear;
+
+    ${StyledButton}:hover & {
+        fill: red;
+    }
+`;
