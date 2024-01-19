@@ -79,8 +79,8 @@ export const Data = styled.td`
     &:nth-child(3) {
         display: none;
     }
-    &[credit] {
-        color: ${({ credit }) => (credit > 0 ? '#07be07' : 'red')}!important;
+    &:nth-child(4) {
+        color: ${({ $credit }) => ($credit > 0 ? '#07be07' : 'red')}!important;
     }
 
     &:not(:first-child) {

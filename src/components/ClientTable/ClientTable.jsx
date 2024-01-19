@@ -49,7 +49,14 @@ const ClientsTable = ({ clients }) => {
                     </TableHead>
                     <TableBody>
                         {clients.map(
-                            ({ id, name, lessonsPerWeek, price, credit }) => (
+                            ({
+                                id,
+                                name,
+                                lessonsPerWeek,
+                                price,
+                                credit,
+                                lessonsDate,
+                            }) => (
                                 <Row key={id}>
                                     <Data>{name}</Data>
                                     <Data>{lessonsPerWeek}</Data>
@@ -57,7 +64,7 @@ const ClientsTable = ({ clients }) => {
                                     {credit === 0 || credit === '' ? (
                                         <Data />
                                     ) : (
-                                        <Data credit={credit}>
+                                        <Data $credit={credit}>
                                             {credit} UAH
                                         </Data>
                                     )}
@@ -73,6 +80,7 @@ const ClientsTable = ({ clients }) => {
                                                     lessonsPerWeek,
                                                     price,
                                                     credit,
+                                                    lessonsDate,
                                                 });
                                             }}
                                             btnType="edit"

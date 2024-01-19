@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Formik, ErrorMessage } from 'formik';
 import {
     StyledForm,
@@ -19,8 +19,23 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import notebookAPI from 'services/notebookAPI';
 import CounterButton from 'components/CounterButton/CounterButton';
+import WeekdayPicker from 'components/WeekdayPicker/WeekdayPicker';
 
 const ClientForm = ({ formType }) => {
+    const {
+        toggleModal,
+        setGetClients,
+        setIsAddClientBtn,
+        setIsEditClientBtn,
+        clientInfo: { id, name, lessonsPerWeek, price, credit, lessonsDate },
+    } = useContext(modalContext);
+
+    const initialSelectedWeekDays = formType === 'addClient' ? [] : lessonsDate;
+
+    const [selectedWeekdays, setSelectedWeekdays] = useState(
+        initialSelectedWeekDays
+    );
+
     const notifyUser = () => {
         const options = {
             theme: 'colored',
@@ -38,14 +53,6 @@ const ClientForm = ({ formType }) => {
         toast.success('Information was updated', options);
     };
 
-    const {
-        toggleModal,
-        setGetClients,
-        setIsAddClientBtn,
-        setIsEditClientBtn,
-        clientInfo: { id, name, lessonsPerWeek, price, credit },
-    } = useContext(modalContext);
-
     const nameInputId = uuidv4();
     const lessonsPerWeekId = uuidv4();
     const priceId = uuidv4();
@@ -62,6 +69,8 @@ const ClientForm = ({ formType }) => {
         formType === 'addClient' ? 'addClient' : 'editClient';
 
     const handleSubmit = (client, { setSubmitting, resetForm }) => {
+        const newClient = { ...client, lessonsDate: selectedWeekdays };
+
         const formActions = () => {
             setGetClients([]);
             resetForm();
@@ -73,8 +82,17 @@ const ClientForm = ({ formType }) => {
         };
 
         formType === 'addClient'
-            ? notebookAPI.addClient(client).then(formActions)
-            : notebookAPI.updateClientInfo(id, client).then(formActions);
+            ? notebookAPI.addClient(newClient).then(formActions)
+            : notebookAPI.updateClientInfo(id, newClient).then(formActions);
+    };
+
+    const deleteClient = () => {
+        notebookAPI.deleteClient(id).then(() => {
+            toggleModal();
+            setIsEditClientBtn(false);
+            notifyUser();
+            setGetClients([]);
+        });
     };
 
     const defineInitialValues = () => {
@@ -92,6 +110,7 @@ const ClientForm = ({ formType }) => {
             lessonsPerWeek,
             price,
             credit,
+            lessonsDate,
         };
     };
 
@@ -154,22 +173,37 @@ const ClientForm = ({ formType }) => {
                                 type="number"
                                 placeholder="0"
                             />
-                            <CounterWrapper>
-                                <CounterButton
-                                    onClick={() => {
-                                        setFieldValue('credit', credit + price);
-                                    }}
-                                >
-                                    <StyledPlusIcon />
-                                </CounterButton>
-                                <CounterButton
-                                    onClick={() => {
-                                        setFieldValue('credit', credit - price);
-                                    }}
-                                >
-                                    <StyledMinusIcon />
-                                </CounterButton>
-                            </CounterWrapper>
+                            {currentFormType === 'editClient' && (
+                                <CounterWrapper>
+                                    <CounterButton
+                                        onClick={() => {
+                                            setFieldValue(
+                                                'credit',
+                                                Number(credit) + price
+                                            );
+                                        }}
+                                    >
+                                        <StyledPlusIcon />
+                                    </CounterButton>
+                                    <CounterButton
+                                        onClick={() => {
+                                            setFieldValue(
+                                                'credit',
+                                                Number(credit) - price
+                                            );
+                                        }}
+                                    >
+                                        <StyledMinusIcon />
+                                    </CounterButton>
+                                </CounterWrapper>
+                            )}
+                        </FieldWrapper>
+                        <FieldWrapper>
+                            <StyledLabel htmlFor={priceId}>Date</StyledLabel>
+                            <WeekdayPicker
+                                selectedWeekdays={selectedWeekdays}
+                                setSelectedWeekdays={setSelectedWeekdays}
+                            />
                         </FieldWrapper>
                         <ButtonsWrapper>
                             <StyledBtn type="submit">
@@ -179,16 +213,7 @@ const ClientForm = ({ formType }) => {
                             </StyledBtn>
                             {currentFormType === 'editClient' && (
                                 <StyledBtn
-                                    onClick={() => {
-                                        notebookAPI
-                                            .deleteClient(id)
-                                            .then(() => {
-                                                toggleModal();
-                                                setIsEditClientBtn(false);
-                                                notifyUser();
-                                                setGetClients([]);
-                                            });
-                                    }}
+                                    onClick={deleteClient}
                                     $delete
                                     style={{ marginLeft: '20px' }}
                                     type="button"
