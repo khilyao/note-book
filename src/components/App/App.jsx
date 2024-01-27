@@ -58,7 +58,6 @@ const App = () => {
             .then(data => {
                 checkCurrentDay(data);
             })
-            .finally()
             .catch(e => {
                 console.error('Error fetching clients:', e);
             });

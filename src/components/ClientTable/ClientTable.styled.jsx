@@ -8,7 +8,7 @@ export const TableWrapper = styled.div`
 
     width: 100%;
     max-width: 1024px;
-    padding: 60px 24px;
+    padding: 60px 24px 30px;
 
     border: 1px solid rgb(229, 231, 235);
     border-radius: 10px;
@@ -17,10 +17,6 @@ export const TableWrapper = styled.div`
         position: absolute;
         top: 20px;
         right: 20px;
-    }
-
-    @media screen and (min-width: 768px) {
-        padding-bottom: 40px;
     }
 `;
 
@@ -98,9 +94,12 @@ export const Data = styled.td`
 export const MonthlyProfit = styled.p`
     font-family: 'Inter', sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+
+    color: #4343d6;
 
     @media screen and (min-width: 768px) {
-        font-size: 16px;
+        font-size: 18px;
     }
 `;
