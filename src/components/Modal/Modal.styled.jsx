@@ -57,7 +57,7 @@ export const StyledCancelSVG = styled(CancelSVG)`
 
     &:hover,
     &:focus {
-        fill: rgb(194, 65, 170);
+        fill: rgb(102, 102, 110);
     }
 
     @media screen and (min-width: 460px) {
