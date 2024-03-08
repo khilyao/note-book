@@ -3,12 +3,17 @@ import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
 import notebookAPI from 'services/notebookAPI';
 import { modalContext } from 'contexts/context';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, Section } from './App.styled';
+import AuthForm from 'components/AuthForm';
+import { appContext } from 'contexts/context';
 
 const App = () => {
     const { isModalShown, modalShownToggle, getClients } =
         useContext(modalContext);
     const [clients, setClients] = useState([]);
+    const { authenticated } = useContext(appContext);
+    const location = useLocation();
 
     // const checkCurrentDay = async clients => {
     //     const localStorageDay = Number(localStorage.getItem('currentDay'));
@@ -67,7 +72,17 @@ const App = () => {
         <>
             <Container $isModalShown={isModalShown}>
                 <Section>
-                    {clients.length !== 0 && <ClientTable clients={clients} />}
+                    {(location.pathname === '/' || !authenticated) && (
+                        <AuthForm />
+                    )}
+                    {(authenticated || location.pathname !== '/') && (
+                        <Routes>
+                            <Route
+                                index
+                                element={<ClientTable clients={clients} />}
+                            />
+                        </Routes>
+                    )}
                 </Section>
             </Container>
             {isModalShown && <Modal onClose={modalShownToggle} />}

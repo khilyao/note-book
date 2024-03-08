@@ -5,12 +5,15 @@ import './index.css';
 import 'reset-css';
 import ModalProvider from 'contexts/modalProvider';
 import AppProvider from 'contexts/appProvider';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <AppProvider>
             <ModalProvider>
-                <App />
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
             </ModalProvider>
         </AppProvider>
     </React.StrictMode>

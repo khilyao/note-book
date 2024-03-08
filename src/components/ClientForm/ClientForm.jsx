@@ -179,7 +179,7 @@ const ClientForm = ({ formType }) => {
                                         onClick={() => {
                                             setFieldValue(
                                                 'credit',
-                                                Number(credit) + price
+                                                Number(credit) + 1
                                             );
                                         }}
                                     >
@@ -189,7 +189,7 @@ const ClientForm = ({ formType }) => {
                                         onClick={() => {
                                             setFieldValue(
                                                 'credit',
-                                                Number(credit) - price
+                                                Number(credit) - 1
                                             );
                                         }}
                                     >

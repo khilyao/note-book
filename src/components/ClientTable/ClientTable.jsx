@@ -65,7 +65,7 @@ const ClientsTable = ({ clients }) => {
                                         <Data />
                                     ) : (
                                         <Data $credit={credit}>
-                                            {credit} UAH
+                                            {credit} lessons
                                         </Data>
                                     )}
                                     <Data>
