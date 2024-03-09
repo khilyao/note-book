@@ -7,6 +7,8 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, Section } from './App.styled';
 import AuthForm from 'components/AuthForm';
 import { appContext } from 'contexts/context';
+import { ToastContainer } from 'react-toastify';
+import ClientInfoPage from 'components/ClientInfoPage';
 
 const App = () => {
     const { isModalShown, modalShownToggle, getClients } =
@@ -70,9 +72,10 @@ const App = () => {
 
     return (
         <>
+            <ToastContainer />
             <Container $isModalShown={isModalShown}>
                 <Section>
-                    {(location.pathname === '/' || !authenticated) && (
+                    {location.pathname === '/' && !authenticated && (
                         <AuthForm />
                     )}
                     {(authenticated || location.pathname !== '/') && (
@@ -80,6 +83,10 @@ const App = () => {
                             <Route
                                 index
                                 element={<ClientTable clients={clients} />}
+                            />
+                            <Route
+                                path="/clients/:clientId"
+                                element={<ClientInfoPage />}
                             />
                         </Routes>
                     )}

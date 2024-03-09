@@ -8,10 +8,10 @@ import {
     Row,
     Data,
     MonthlyProfit,
+    StyledLink,
 } from './ClientTable.styled';
 import Button from 'components/Button/Button';
 import { modalContext } from 'contexts/context';
-import { ToastContainer } from 'react-toastify';
 
 const ClientsTable = ({ clients }) => {
     const { toggleModal, handleGenerateModalContent, setClientInfo } =
@@ -26,7 +26,6 @@ const ClientsTable = ({ clients }) => {
     return (
         <>
             <TableWrapper>
-                <ToastContainer />
                 <Button
                     type="button"
                     onClick={e => {
@@ -58,7 +57,11 @@ const ClientsTable = ({ clients }) => {
                                 lessonsDate,
                             }) => (
                                 <Row key={id}>
-                                    <Data>{name}</Data>
+                                    <Data>
+                                        <StyledLink to={`/clients/${id}`}>
+                                            {name}
+                                        </StyledLink>
+                                    </Data>
                                     <Data>{lessonsPerWeek}</Data>
                                     <Data>{price} UAH</Data>
                                     {credit === 0 || credit === '' ? (

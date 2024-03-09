@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const TableWrapper = styled.div`
     position: relative;
@@ -88,6 +89,19 @@ export const Data = styled.td`
         &:nth-child(3) {
             display: table-cell;
         }
+    }
+`;
+
+export const StyledLink = styled(Link)`
+    display: inline-block;
+
+    color: rgb(49, 46, 129);
+    text-decoration: none;
+
+    transition: background-color 100ms linear;
+
+    &:hover {
+        color: rgb(17, 8, 82);
     }
 `;
 

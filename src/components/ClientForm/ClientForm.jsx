@@ -121,7 +121,7 @@ const ClientForm = ({ formType }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ values: { price, credit }, setFieldValue }) => (
+                {({ values: { credit }, setFieldValue }) => (
                     <StyledForm>
                         <FieldWrapper>
                             <StyledLabel htmlFor={nameInputId}>

@@ -1,11 +1,29 @@
 import styled, { css } from 'styled-components';
 
+const defaultButtonStyles = css`
+    display: inline-block;
+
+    min-width: 120px;
+
+    margin: 0px auto;
+    padding: 8px 12px;
+
+    transition: background-color 100ms linear;
+
+    &:hover {
+        background-color: rgb(99, 102, 241);
+    }
+`;
+
 const editInfoStyles = css`
     color: rgb(79, 70, 229);
     background-color: transparent;
 
+    transition: background-color 100ms linear;
+
     &:hover {
         color: rgb(49, 46, 129);
+        background-color: rgb(241 240 249);
     }
 `;
 
@@ -14,7 +32,6 @@ const addClientStyles = css`
 
     color: #fff;
     background-color: rgb(79, 70, 229);
-    border-radius: 6px;
 
     transition: background-color 100ms linear;
 
@@ -32,7 +49,11 @@ export const StyledButton = styled.button`
     font-weight: 500;
     font-family: 'Inter', sans-serif;
 
+    color: #fff;
+    background-color: rgb(79, 70, 229);
+
     border: 0;
+    border-radius: 6px;
     outline: 0;
 
     transition: color 100ms linear;
@@ -47,6 +68,7 @@ export const StyledButton = styled.button`
         font-size: 18px;
     }
 
+    ${({ $btnType }) => $btnType === 'button' && defaultButtonStyles}
     ${({ $btnType }) => $btnType === 'edit' && editInfoStyles}
     ${({ $btnType }) => $btnType === 'addClient' && addClientStyles}
 `;
