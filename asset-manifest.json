@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/note-book/static/css/main.59557c63.css",
-    "main.js": "/note-book/static/js/main.ae429faa.js",
+    "main.js": "/note-book/static/js/main.c02c6336.js",
     "index.html": "/note-book/index.html",
     "static/media/cancel-circle.svg": "/note-book/static/media/cancel-circle.ff7d68a6e62311f2d207693ccf2b8b1e.svg",
     "main.59557c63.css.map": "/note-book/static/css/main.59557c63.css.map",
-    "main.ae429faa.js.map": "/note-book/static/js/main.ae429faa.js.map"
+    "main.c02c6336.js.map": "/note-book/static/js/main.c02c6336.js.map"
   },
   "entrypoints": [
     "static/css/main.59557c63.css",
-    "static/js/main.ae429faa.js"
+    "static/js/main.c02c6336.js"
   ]
 }
