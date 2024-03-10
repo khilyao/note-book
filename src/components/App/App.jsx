@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, memo } from 'react';
+import { useContext, useEffect, memo } from 'react';
 import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
 import notebookAPI from 'services/notebookAPI';
@@ -13,51 +13,8 @@ import ClientInfoPage from 'components/ClientInfoPage';
 const App = () => {
     const { isModalShown, modalShownToggle, getClients } =
         useContext(modalContext);
-    const [clients, setClients] = useState([]);
-    const { authenticated } = useContext(appContext);
-    const location = useLocation();
-
-    // const checkCurrentDay = async clients => {
-    //     const localStorageDay = Number(localStorage.getItem('currentDay'));
-    //     const currentDay = new Date().getDay();
-
-    //     if (!localStorageDay) {
-    //         localStorage.setItem('currentDay', currentDay);
-    //         setClients(clients);
-    //         return;
-    //     }
-
-    //     if (localStorageDay !== currentDay) {
-    //         localStorage.setItem('currentDay', currentDay);
-
-    //         const updateClientsAsync = async () => {
-    //             const updatedClients = await Promise.all(
-    //                 clients.map(async client => {
-    //                     const lessonsDays = client.lessonsDate.map(
-    //                         ({ value }) => {
-    //                             return value;
-    //                         }
-    //                     );
-
-    //                     if (lessonsDays.includes(currentDay)) {
-    //                         client.credit -= client.price;
-    //                         await notebookAPI.updateClientInfo(
-    //                             client.id,
-    //                             client
-    //                         );
-    //                     }
-    //                     return client;
-    //                 })
-    //             );
-    //          setClients(updatedClients);
-    //         };
-
-    //         updateClientsAsync();
-    //         return;
-    //     }
-
-    //     setClients(clients);
-    // };
+    const { authenticated, setClients } = useContext(appContext);
+    const { pathname } = useLocation();
 
     useEffect(() => {
         notebookAPI
@@ -75,21 +32,22 @@ const App = () => {
             <ToastContainer />
             <Container $isModalShown={isModalShown}>
                 <Section>
-                    {location.pathname === '/' && !authenticated && (
+                    {pathname === '/note-book' && !authenticated && (
                         <AuthForm />
                     )}
-                    {(authenticated || location.pathname !== '/') && (
-                        <Routes>
+                    <Routes>
+                        {authenticated && (
                             <Route
                                 index
-                                element={<ClientTable clients={clients} />}
+                                path="/note-book"
+                                element={<ClientTable />}
                             />
-                            <Route
-                                path="/clients/:clientId"
-                                element={<ClientInfoPage />}
-                            />
-                        </Routes>
-                    )}
+                        )}
+                        <Route
+                            path="/note-book/clients/:clientId"
+                            element={<ClientInfoPage />}
+                        />
+                    </Routes>
                 </Section>
             </Container>
             {isModalShown && <Modal onClose={modalShownToggle} />}

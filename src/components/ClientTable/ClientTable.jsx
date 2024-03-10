@@ -11,11 +11,12 @@ import {
     StyledLink,
 } from './ClientTable.styled';
 import Button from 'components/Button/Button';
-import { modalContext } from 'contexts/context';
+import { appContext, modalContext } from 'contexts/context';
 
-const ClientsTable = ({ clients }) => {
+const ClientsTable = () => {
     const { toggleModal, handleGenerateModalContent, setClientInfo } =
         useContext(modalContext);
+    const { clients } = useContext(appContext);
 
     const monthlyProfit =
         clients.reduce(
@@ -58,7 +59,9 @@ const ClientsTable = ({ clients }) => {
                             }) => (
                                 <Row key={id}>
                                     <Data>
-                                        <StyledLink to={`/clients/${id}`}>
+                                        <StyledLink
+                                            to={`/note-book/clients/${id}`}
+                                        >
                                             {name}
                                         </StyledLink>
                                     </Data>
