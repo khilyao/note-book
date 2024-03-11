@@ -100,8 +100,10 @@ export const StyledLink = styled(Link)`
 
     transition: background-color 100ms linear;
 
-    &:hover {
+    &:hover,
+    &:focus {
         color: rgb(17, 8, 82);
+        text-decoration: underline;
     }
 `;
 

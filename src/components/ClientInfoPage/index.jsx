@@ -35,7 +35,11 @@ const ClientInfoPage = () => {
                             )}
                     </StyledList>
                     <StyledTitle>
-                        Кількість годин: {currentClient.paidHours}
+                        Кількість
+                        {currentClient.lessonsPayment.paid >= 0
+                            ? ' оплачених '
+                            : ' неоплачених '}
+                        годин: {Math.abs(currentClient.paidHours)}
                     </StyledTitle>
                 </StyledInfoBlock>
             )}

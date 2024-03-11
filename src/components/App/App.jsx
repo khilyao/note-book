@@ -25,7 +25,7 @@ const App = () => {
             .catch(e => {
                 console.error('Error fetching clients:', e);
             });
-    }, [getClients]);
+    }, [setClients, getClients]);
 
     return (
         <>

@@ -44,7 +44,7 @@ const ClientsTable = () => {
                             <TableHeading>Name</TableHeading>
                             <TableHeading>Lessons per week</TableHeading>
                             <TableHeading>Price</TableHeading>
-                            <TableHeading>Credit</TableHeading>
+                            <TableHeading>Paid Hours</TableHeading>
                         </Row>
                     </TableHead>
                     <TableBody>
@@ -54,7 +54,7 @@ const ClientsTable = () => {
                                 name,
                                 lessonsPerWeek,
                                 price,
-                                credit,
+                                paidHours,
                                 lessonsDate,
                             }) => (
                                 <Row key={id}>
@@ -67,11 +67,11 @@ const ClientsTable = () => {
                                     </Data>
                                     <Data>{lessonsPerWeek}</Data>
                                     <Data>{price} UAH</Data>
-                                    {credit === 0 || credit === '' ? (
+                                    {paidHours === 0 || paidHours === '' ? (
                                         <Data />
                                     ) : (
-                                        <Data $credit={credit}>
-                                            {credit} lessons
+                                        <Data $paidHours={paidHours}>
+                                            {paidHours} lessons
                                         </Data>
                                     )}
                                     <Data>
@@ -85,7 +85,7 @@ const ClientsTable = () => {
                                                     name,
                                                     lessonsPerWeek,
                                                     price,
-                                                    credit,
+                                                    paidHours,
                                                     lessonsDate,
                                                 });
                                             }}

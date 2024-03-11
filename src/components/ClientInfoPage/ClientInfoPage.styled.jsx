@@ -8,11 +8,12 @@ export const StyledInfoBlock = styled.div`
 `;
 
 export const StyledList = styled.ul`
-    display: inline-flex;
+    display: flex;
+    align-items: center;
     flex-direction: column;
     gap: 10px;
 
-    min-width: 200px;
+    margin-bottom: 30px;
 
     font-size: 20px;
 `;
@@ -20,6 +21,7 @@ export const StyledList = styled.ul`
 export const StyledLessonDate = styled.li`
     display: inline-flex;
     justify-content: center;
+    width: 200px;
 
     padding: 15px;
 
@@ -31,4 +33,8 @@ export const StyledLessonDate = styled.li`
     border-radius: 8px;
 `;
 
-export const StyledTitle = styled.h2``;
+export const StyledTitle = styled.h2`
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+`;
