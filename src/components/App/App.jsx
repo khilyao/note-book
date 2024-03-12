@@ -32,14 +32,14 @@ const App = () => {
             <ToastContainer />
             <Container $isModalShown={isModalShown}>
                 <Section>
-                    {pathname === '/note-book' && !authenticated && (
+                    {pathname === '/note-book/' && !authenticated && (
                         <AuthForm />
                     )}
                     <Routes>
                         {authenticated && (
                             <Route
                                 index
-                                path="/note-book"
+                                path="/note-book/"
                                 element={<ClientTable />}
                             />
                         )}
