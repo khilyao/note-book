@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { appContext } from 'contexts/context';
+import Button from 'components/Button/Button';
 import {
     StyledLessonDate,
     StyledList,
@@ -9,6 +10,7 @@ import {
 } from './ClientInfoPage.styled';
 
 const ClientInfoPage = () => {
+    const navigate = useNavigate();
     const { clientId } = useParams();
     const { clients, authenticated } = useContext(appContext);
     const currentClient = clients.find(client => client.id === clientId);
@@ -36,14 +38,25 @@ const ClientInfoPage = () => {
                     </StyledList>
                     <StyledTitle>
                         Кількість
-                        {currentClient.lessonsPayment.paid >= 0
+                        {currentClient.paidHours >= 0
                             ? ' оплачених '
                             : ' неоплачених '}
                         годин: {Math.abs(currentClient.paidHours)}
                     </StyledTitle>
                 </StyledInfoBlock>
             )}
-            {authenticated && <p>admin tools</p>}
+            {authenticated && (
+                <>
+                    <Button
+                        style={{ alignSelf: 'flex-start', margin: '0px' }}
+                        onClick={() => {
+                            navigate(-1);
+                        }}
+                    >
+                        Go back
+                    </Button>
+                </>
+            )}
         </>
     );
 };

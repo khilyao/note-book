@@ -77,7 +77,8 @@ export const Data = styled.td`
         display: none;
     }
     &:nth-child(4) {
-        color: ${({ $credit }) => ($credit > 0 ? '#07be07' : 'red')}!important;
+        color: ${({ $paidHours }) =>
+            $paidHours > 0 ? '#07be07' : 'red'}!important;
     }
 
     &:not(:first-child) {

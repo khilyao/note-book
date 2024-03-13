@@ -27,7 +27,7 @@ const ClientForm = ({ formType }) => {
         setGetClients,
         setIsAddClientBtn,
         setIsEditClientBtn,
-        clientInfo: { id, name, lessonsPerWeek, price, credit, lessonsDate },
+        clientInfo: { id, name, lessonsPerWeek, price, paidHours, lessonsDate },
     } = useContext(modalContext);
 
     const initialSelectedWeekDays = formType === 'addClient' ? [] : lessonsDate;
@@ -56,13 +56,13 @@ const ClientForm = ({ formType }) => {
     const nameInputId = uuidv4();
     const lessonsPerWeekId = uuidv4();
     const priceId = uuidv4();
-    const creditId = uuidv4();
+    const paidHoursId = uuidv4();
 
     const validationSchema = object({
         name: string().trim().required(),
         lessonsPerWeek: number().required(),
         price: number().required(),
-        credit: number(),
+        paidHours: number(),
     });
 
     const currentFormType =
@@ -101,7 +101,7 @@ const ClientForm = ({ formType }) => {
                 name: '',
                 lessonsPerWeek: '',
                 price: '',
-                credit: '',
+                paidHours: '',
             };
         }
 
@@ -109,7 +109,7 @@ const ClientForm = ({ formType }) => {
             name,
             lessonsPerWeek,
             price,
-            credit,
+            paidHours,
             lessonsDate,
         };
     };
@@ -121,7 +121,7 @@ const ClientForm = ({ formType }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ values: { credit }, setFieldValue }) => (
+                {({ values: { paidHours }, setFieldValue }) => (
                     <StyledForm>
                         <FieldWrapper>
                             <StyledLabel htmlFor={nameInputId}>
@@ -166,10 +166,12 @@ const ClientForm = ({ formType }) => {
                             </ErrorMessage>
                         </FieldWrapper>
                         <FieldWrapper>
-                            <StyledLabel htmlFor={creditId}>Credit</StyledLabel>
+                            <StyledLabel htmlFor={paidHoursId}>
+                                Paid Hours
+                            </StyledLabel>
                             <StyledField
-                                name="credit"
-                                id={creditId}
+                                name="paidHours"
+                                id={paidHoursId}
                                 type="number"
                                 placeholder="0"
                             />
@@ -178,8 +180,8 @@ const ClientForm = ({ formType }) => {
                                     <CounterButton
                                         onClick={() => {
                                             setFieldValue(
-                                                'credit',
-                                                Number(credit) + 1
+                                                'paidHours',
+                                                Number(paidHours) + 1
                                             );
                                         }}
                                     >
@@ -188,8 +190,8 @@ const ClientForm = ({ formType }) => {
                                     <CounterButton
                                         onClick={() => {
                                             setFieldValue(
-                                                'credit',
-                                                Number(credit) - 1
+                                                'paidHours',
+                                                Number(paidHours) - 1
                                             );
                                         }}
                                     >

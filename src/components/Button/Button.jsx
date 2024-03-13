@@ -1,9 +1,10 @@
 import { StyledButton } from './Button.styled';
 import PropTypes from 'prop-types';
 
-const Button = ({ children, onClick, btnType = 'button' }) => {
+const Button = ({ style = {}, children, onClick, btnType = 'button' }) => {
     return (
         <StyledButton
+            style={style}
             $btnType={btnType}
             data-btntype={btnType}
             type="button"
