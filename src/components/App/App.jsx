@@ -2,11 +2,10 @@ import { useContext, useEffect, memo } from 'react';
 import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
 import notebookAPI from 'services/notebookAPI';
-import { modalContext } from 'contexts/context';
+import { modalContext, appContext } from 'contexts/context';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, Section } from './App.styled';
 import AuthForm from 'components/AuthForm';
-import { appContext } from 'contexts/context';
 import { ToastContainer } from 'react-toastify';
 import ClientInfoPage from 'components/ClientInfoPage';
 

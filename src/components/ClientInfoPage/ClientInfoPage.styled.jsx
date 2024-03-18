@@ -89,8 +89,6 @@ export const StyledLessonDate = styled.li`
     justify-content: center;
     width: 200px;
 
-    z-index: -1;
-
     padding: 15px;
 
     font-family: 'Inter', sans-serif;
@@ -99,6 +97,8 @@ export const StyledLessonDate = styled.li`
     background-color: ${({ $paid }) =>
         $paid === 'true' ? '#bafa83' : '#ffa3a3'};
     border-radius: 8px;
+
+    cursor: pointer;
 
     @media screen and (min-width: 768px) {
         width: 300px;

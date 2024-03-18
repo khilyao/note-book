@@ -8,22 +8,30 @@ import {
     StyledTitle,
     StyledInfoBlock,
 } from './ClientInfoPage.styled';
+import apiTool from 'services/notebookAPI';
 
 const ClientInfoPage = () => {
     const navigate = useNavigate();
     const { clientId } = useParams();
     const { clients, authenticated } = useContext(appContext);
     const currentClient = clients.find(client => client.id === clientId);
+    // const isAdmin = localStorage.getItem('isPassEntered') !== null;
 
     return (
         <>
             {currentClient && (
                 <StyledInfoBlock>
                     <StyledList>
-                        {currentClient.lessonsPayment &&
+                        {currentClient.lessonsPayment.length !== 0 &&
                             currentClient.lessonsPayment.map(
                                 ({ date, paid, duration }) => (
                                     <StyledLessonDate
+                                        onClick={() => {
+                                            apiTool.toggleLessonPaid(
+                                                currentClient,
+                                                date
+                                            );
+                                        }}
                                         $paid={paid.toString()}
                                         key={date}
                                     >

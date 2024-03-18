@@ -28,6 +28,7 @@ const updateClientInfo = async (id, client) => {
         const currentPayment = client.lessonsPayment.find(
             payment => payment.date === getCurrentData()
         );
+        console.log(currentPayment);
 
         if (!currentPayment) {
             const isPaid = paidHours >= 0 ? true : false;
@@ -49,6 +50,29 @@ const updateClientInfo = async (id, client) => {
     }
 };
 
+const toggleLessonPaid = async (client, dateToUpdate) => {
+    const updatedLessonsPayment = client.lessonsPayment.map(
+        ({ date, duration, paid }) => {
+            if (date === dateToUpdate) {
+                paid = !paid;
+            }
+
+            return { date, duration, paid };
+        }
+    );
+
+    const updatedClient = {
+        ...client,
+        lessonsPayment: updatedLessonsPayment,
+    };
+
+    try {
+        return await axios.put(`/clients/${client.id}`, updatedClient);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 const deleteClient = async id => {
     try {
         return await axios.delete(`/clients/${id}`);
@@ -57,6 +81,12 @@ const deleteClient = async id => {
     }
 };
 
-const apiTool = { fetchClients, addClient, updateClientInfo, deleteClient };
+const apiTool = {
+    fetchClients,
+    toggleLessonPaid,
+    addClient,
+    updateClientInfo,
+    deleteClient,
+};
 
 export default apiTool;

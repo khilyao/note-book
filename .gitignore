@@ -30,3 +30,4 @@ yarn-error.log*
 .husky
 .eslintcache
 tech-task.md
+test.json
