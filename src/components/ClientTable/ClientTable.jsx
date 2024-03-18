@@ -56,6 +56,7 @@ const ClientsTable = () => {
                                 price,
                                 paidHours,
                                 lessonsDate,
+                                lessonsPayment,
                             }) => (
                                 <Row key={id}>
                                     <Data>
@@ -87,6 +88,7 @@ const ClientsTable = () => {
                                                     price,
                                                     paidHours,
                                                     lessonsDate,
+                                                    lessonsPayment,
                                                 });
                                             }}
                                             btnType="edit"

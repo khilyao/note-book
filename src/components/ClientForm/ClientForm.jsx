@@ -12,7 +12,7 @@ import {
     StyledPlusIcon,
     StyledMinusIcon,
 } from './ClientForm.styled';
-import { object, string, number } from 'yup';
+import { object, string, number, boolean } from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import { modalContext } from 'contexts/context';
 import { toast } from 'react-toastify';
@@ -27,14 +27,22 @@ const ClientForm = ({ formType }) => {
         setGetClients,
         setIsAddClientBtn,
         setIsEditClientBtn,
-        clientInfo: { id, name, lessonsPerWeek, price, paidHours, lessonsDate },
+        clientInfo: {
+            id,
+            name,
+            lessonsPerWeek,
+            price,
+            paidHours,
+            lessonsDate,
+            lessonsPayment,
+        },
     } = useContext(modalContext);
-
     const initialSelectedWeekDays = formType === 'addClient' ? [] : lessonsDate;
-
+    const [previousPaidHoursValue] = useState(paidHours);
     const [selectedWeekdays, setSelectedWeekdays] = useState(
         initialSelectedWeekDays
     );
+    // const [isLessonChecked, setIsLessonChecked] = useState(false);
 
     const notifyUser = () => {
         const options = {
@@ -46,7 +54,6 @@ const ClientForm = ({ formType }) => {
 
         if (formType === 'addClient') {
             toast.success('Client was added', options);
-
             return;
         }
 
@@ -63,6 +70,7 @@ const ClientForm = ({ formType }) => {
         lessonsPerWeek: number().required(),
         price: number().required(),
         paidHours: number(),
+        isLessonChecked: boolean(),
     });
 
     const currentFormType =
@@ -111,6 +119,8 @@ const ClientForm = ({ formType }) => {
             price,
             paidHours,
             lessonsDate,
+            lessonsPayment,
+            previousPaidHoursValue,
         };
     };
 
@@ -200,6 +210,32 @@ const ClientForm = ({ formType }) => {
                                 </CounterWrapper>
                             )}
                         </FieldWrapper>
+                        {/* {currentFormType === 'editClient' && (
+                            <StyledField
+                                name="isLessonChecked"
+                                type="checkbox"
+                                checked={isLessonChecked}
+                                onChange={() => {
+                                    setIsLessonChecked(
+                                        prevIsLessonChecked =>
+                                            !prevIsLessonChecked
+                                    );
+                                }}
+                            />
+                        )} */}
+                        {/* {currentFormType === 'editClient' && (
+                            <FieldWrapper>
+                                <StyledLabel htmlFor={lessonDurationId}>
+                                    Lesson duration
+                                </StyledLabel>
+                                <StyledField
+                                    name="duration"
+                                    id={lessonDurationId}
+                                    type="number"
+                                    placeholder="0"
+                                />
+                            </FieldWrapper>
+                        )} */}
                         <FieldWrapper>
                             <StyledLabel htmlFor={priceId}>Date</StyledLabel>
                             <WeekdayPicker
