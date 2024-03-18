@@ -6,7 +6,7 @@ import { StyledContainer, StyledField, StyledInput } from './AuthForm.styled';
 
 const AuthForm = () => {
     const [password, setPassword] = useState('');
-    const { setAuthenticated } = useContext(appContext);
+    const { authenticated, setAuthenticated } = useContext(appContext);
 
     const options = {
         theme: 'colored',
@@ -22,6 +22,7 @@ const AuthForm = () => {
     const handleSubmitPassword = () => {
         if (password === 'sfwew12') {
             setAuthenticated(true);
+            localStorage.setItem('isPassEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
@@ -30,21 +31,27 @@ const AuthForm = () => {
         toast.error('Incorrect password. Try again', options);
     };
 
+    if (localStorage.getItem('isPassEntered')) {
+        setAuthenticated(true);
+    }
+
     return (
         <>
-            <StyledContainer>
-                <StyledField htmlFor="password">Password</StyledField>
-                <StyledInput
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                />
-                <Button type="button" onClick={handleSubmitPassword}>
-                    Войти
-                </Button>
-            </StyledContainer>
+            {!authenticated && (
+                <StyledContainer>
+                    <StyledField htmlFor="password">Password</StyledField>
+                    <StyledInput
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                    />
+                    <Button type="button" onClick={handleSubmitPassword}>
+                        Войти
+                    </Button>
+                </StyledContainer>
+            )}
         </>
     );
 };
