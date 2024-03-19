@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { appContext } from 'contexts/context';
 import Button from 'components/Button/Button';
@@ -8,14 +8,27 @@ import {
     StyledTitle,
     StyledInfoBlock,
 } from './ClientInfoPage.styled';
-import apiTool from 'services/notebookAPI';
+import notebookAPI from 'services/notebookAPI';
 
 const ClientInfoPage = () => {
     const navigate = useNavigate();
     const { clientId } = useParams();
-    const { clients, authenticated } = useContext(appContext);
+    const { authenticated } = useContext(appContext);
+    const [clients, setClients] = useState([]);
+    const [needUpdate, setNeedUpdate] = useState(false);
     const currentClient = clients.find(client => client.id === clientId);
     // const isAdmin = localStorage.getItem('isPassEntered') !== null;
+
+    useEffect(() => {
+        notebookAPI
+            .fetchClients()
+            .then(data => {
+                setClients(data);
+            })
+            .catch(e => {
+                console.error('Error fetching clients:', e);
+            });
+    }, [needUpdate]);
 
     return (
         <>
@@ -26,11 +39,21 @@ const ClientInfoPage = () => {
                             currentClient.lessonsPayment.map(
                                 ({ date, paid, duration }) => (
                                     <StyledLessonDate
-                                        onClick={() => {
-                                            apiTool.toggleLessonPaid(
-                                                currentClient,
-                                                date
-                                            );
+                                        onClick={async () => {
+                                            try {
+                                                await notebookAPI.toggleLessonPaid(
+                                                    currentClient,
+                                                    date
+                                                );
+                                                setNeedUpdate(
+                                                    prevState => !prevState
+                                                );
+                                            } catch (error) {
+                                                console.error(
+                                                    'Error toggling lesson paid status:',
+                                                    error
+                                                );
+                                            }
                                         }}
                                         $paid={paid.toString()}
                                         key={date}

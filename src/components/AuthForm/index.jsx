@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { appContext } from 'contexts/context';
 import { toast } from 'react-toastify';
 import Button from 'components/Button/Button';
@@ -31,9 +31,11 @@ const AuthForm = () => {
         toast.error('Incorrect password. Try again', options);
     };
 
-    if (localStorage.getItem('isPassEntered')) {
-        setAuthenticated(true);
-    }
+    useEffect(() => {
+        if (localStorage.getItem('isPassEntered')) {
+            setAuthenticated(true);
+        }
+    });
 
     return (
         <>
