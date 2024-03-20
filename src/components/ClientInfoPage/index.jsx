@@ -7,6 +7,7 @@ import {
     StyledList,
     StyledTitle,
     StyledInfoBlock,
+    StyledDeleteBtn,
 } from './ClientInfoPage.styled';
 import notebookAPI from 'services/notebookAPI';
 
@@ -17,7 +18,7 @@ const ClientInfoPage = () => {
     const [clients, setClients] = useState([]);
     const [needUpdate, setNeedUpdate] = useState(false);
     const currentClient = clients.find(client => client.id === clientId);
-    // const isAdmin = localStorage.getItem('isPassEntered') !== null;
+    const isAdmin = localStorage.getItem('isPassEntered') !== null;
 
     useEffect(() => {
         notebookAPI
@@ -63,6 +64,31 @@ const ClientInfoPage = () => {
                                                 ? ''
                                                 : `(${duration} год)`
                                         }`}
+                                        {isAdmin && (
+                                            <StyledDeleteBtn
+                                                type="button"
+                                                onClick={async e => {
+                                                    e.stopPropagation();
+                                                    try {
+                                                        await notebookAPI.removeLesson(
+                                                            currentClient,
+                                                            date
+                                                        );
+                                                        setNeedUpdate(
+                                                            prevState =>
+                                                                !prevState
+                                                        );
+                                                    } catch (error) {
+                                                        console.error(
+                                                            'Error toggling lesson paid status:',
+                                                            error
+                                                        );
+                                                    }
+                                                }}
+                                            >
+                                                X
+                                            </StyledDeleteBtn>
+                                        )}
                                     </StyledLessonDate>
                                 )
                             )}

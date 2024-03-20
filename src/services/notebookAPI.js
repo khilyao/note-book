@@ -73,6 +73,23 @@ const toggleLessonPaid = async (client, dateToUpdate) => {
     }
 };
 
+const removeLesson = async (client, dateToDelete) => {
+    const updatedLessonsPayment = client.lessonsPayment.filter(
+        ({ date }) => date !== dateToDelete
+    );
+
+    const updatedClient = {
+        ...client,
+        lessonsPayment: updatedLessonsPayment,
+    };
+
+    try {
+        return await axios.put(`/clients/${client.id}`, updatedClient);
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 const deleteClient = async id => {
     try {
         return await axios.delete(`/clients/${id}`);
@@ -87,6 +104,7 @@ const apiTool = {
     addClient,
     updateClientInfo,
     deleteClient,
+    removeLesson,
 };
 
 export default apiTool;
