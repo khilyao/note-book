@@ -42,6 +42,8 @@ const ClientInfoPage = () => {
                                     <StyledLessonDate
                                         onClick={async () => {
                                             try {
+                                                if (!isAdmin) return;
+
                                                 await notebookAPI.toggleLessonPaid(
                                                     currentClient,
                                                     date

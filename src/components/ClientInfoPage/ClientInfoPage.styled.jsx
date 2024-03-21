@@ -88,12 +88,13 @@ export const StyledLessonDate = styled.li`
 
     display: inline-flex;
     justify-content: center;
-    width: 200px;
+    width: 250px;
 
-    padding: 15px;
+    padding: 20px 20px;
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
+    font-size: 24px;
 
     background-color: ${({ $paid }) =>
         $paid === 'true' ? '#bafa83' : '#ffa3a3'};
@@ -103,6 +104,7 @@ export const StyledLessonDate = styled.li`
 
     @media screen and (min-width: 768px) {
         width: 300px;
+        padding: 15px;
         font-size: 30px;
     }
 `;
@@ -135,7 +137,7 @@ export const StyledDeleteBtn = styled.button`
 `;
 
 export const StyledTitle = styled.h2`
-    font-size: 20px;
+    font-size: 24px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 
