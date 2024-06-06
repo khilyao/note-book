@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { appContext } from 'contexts/context';
 import { toast } from 'react-toastify';
 import Button from 'components/Button/Button';
@@ -6,7 +6,8 @@ import { StyledContainer, StyledField, StyledInput } from './AuthForm.styled';
 
 const AuthForm = () => {
     const [password, setPassword] = useState('');
-    const { authenticated, setAuthenticated } = useContext(appContext);
+    const { authenticated, setAuthenticated, setIsSofiaAuthenticated } =
+        useContext(appContext);
 
     const options = {
         theme: 'colored',
@@ -18,7 +19,7 @@ const AuthForm = () => {
     const handlePasswordChange = event => {
         setPassword(event.target.value);
     };
-
+    console.log(authenticated);
     const handleSubmitPassword = () => {
         if (password === 'sfwew12') {
             setAuthenticated(true);
@@ -27,15 +28,22 @@ const AuthForm = () => {
             return;
         }
 
+        if (password === 'sofia2308') {
+            setIsSofiaAuthenticated(true);
+            localStorage.setItem('isSofiaEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
         setPassword('');
         toast.error('Incorrect password. Try again', options);
     };
 
-    useEffect(() => {
-        if (localStorage.getItem('isPassEntered')) {
-            setAuthenticated(true);
+    const handleKeyPress = event => {
+        if (event.key === 'Enter') {
+            handleSubmitPassword();
         }
-    });
+    };
 
     return (
         <>
@@ -48,8 +56,9 @@ const AuthForm = () => {
                         type="password"
                         value={password}
                         onChange={handlePasswordChange}
+                        onKeyDown={handleKeyPress}
                     />
-                    <Button type="button" onClick={handleSubmitPassword}>
+                    <Button type="submit" onClick={handleSubmitPassword}>
                         Войти
                     </Button>
                 </StyledContainer>

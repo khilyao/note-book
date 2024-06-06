@@ -35,22 +35,15 @@ const updateClientInfo = async (id, client) => {
     const { paidHours, previousPaidHoursValue } = client;
 
     if (previousPaidHoursValue > paidHours) {
-        const currentPayment = client.lessonsPayment.find(
-            payment => payment.date === getCurrentData()
-        );
-        console.log(currentPayment);
+        const isPaid = paidHours >= 0 ? true : false;
+        const lessonDuration = Math.abs(previousPaidHoursValue - paidHours);
+        const lessonDate = getCurrentData();
 
-        if (!currentPayment) {
-            const isPaid = paidHours >= 0 ? true : false;
-            const lessonDuration = Math.abs(previousPaidHoursValue - paidHours);
-            const lessonDate = getCurrentData();
-
-            client.lessonsPayment.push({
-                date: lessonDate,
-                duration: lessonDuration,
-                paid: isPaid,
-            });
-        }
+        client.lessonsPayment.push({
+            date: lessonDate,
+            duration: lessonDuration,
+            paid: isPaid,
+        });
     }
 
     try {

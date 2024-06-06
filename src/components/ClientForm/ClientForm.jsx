@@ -216,32 +216,6 @@ const ClientForm = ({ formType }) => {
                                 </CounterWrapper>
                             )}
                         </FieldWrapper>
-                        {/* {currentFormType === 'editClient' && (
-                            <StyledField
-                                name="isLessonChecked"
-                                type="checkbox"
-                                checked={isLessonChecked}
-                                onChange={() => {
-                                    setIsLessonChecked(
-                                        prevIsLessonChecked =>
-                                            !prevIsLessonChecked
-                                    );
-                                }}
-                            />
-                        )} */}
-                        {/* {currentFormType === 'editClient' && (
-                            <FieldWrapper>
-                                <StyledLabel htmlFor={lessonDurationId}>
-                                    Lesson duration
-                                </StyledLabel>
-                                <StyledField
-                                    name="duration"
-                                    id={lessonDurationId}
-                                    type="number"
-                                    placeholder="0"
-                                />
-                            </FieldWrapper>
-                        )} */}
                         <FieldWrapper>
                             <StyledLabel htmlFor={priceId}>Date</StyledLabel>
                             <WeekdayPicker

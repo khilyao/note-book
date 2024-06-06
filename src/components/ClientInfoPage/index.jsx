@@ -14,11 +14,13 @@ import notebookAPI from 'services/notebookAPI';
 const ClientInfoPage = () => {
     const navigate = useNavigate();
     const { clientId } = useParams();
-    const { authenticated } = useContext(appContext);
+    const { authenticated, isSofiaAuthenticated } = useContext(appContext);
     const [clients, setClients] = useState([]);
     const [needUpdate, setNeedUpdate] = useState(false);
     const currentClient = clients.find(client => client.id === clientId);
-    const isAdmin = localStorage.getItem('isPassEntered') !== null;
+    const isAdmin =
+        localStorage.getItem('isPassEntered') !== null ||
+        localStorage.getItem('isSofiaEntered') !== null;
 
     useEffect(() => {
         notebookAPI
@@ -38,7 +40,7 @@ const ClientInfoPage = () => {
                     <StyledList>
                         {currentClient.lessonsPayment.length !== 0 &&
                             currentClient.lessonsPayment.map(
-                                ({ date, paid, duration }) => (
+                                ({ date, paid, mentor, duration }) => (
                                     <StyledLessonDate
                                         onClick={async () => {
                                             try {
@@ -104,7 +106,7 @@ const ClientInfoPage = () => {
                     </StyledTitle>
                 </StyledInfoBlock>
             )}
-            {authenticated && (
+            {(authenticated || isSofiaAuthenticated) && (
                 <>
                     <Button
                         style={{ alignSelf: 'flex-start', margin: '0px' }}

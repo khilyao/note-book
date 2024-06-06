@@ -4,6 +4,7 @@ import { appContext } from './context';
 const AppProvider = ({ children }) => {
     const [lastUpdateDate, setLastUpdateDate] = useState('');
     const [authenticated, setAuthenticated] = useState(false);
+    const [isSofiaAuthenticated, setIsSofiaAuthenticated] = useState(false);
     const [clients, setClients] = useState([]);
     const [tutors, setTutors] = useState([]);
 
@@ -16,6 +17,8 @@ const AppProvider = ({ children }) => {
         setClients,
         tutors,
         setTutors,
+        isSofiaAuthenticated,
+        setIsSofiaAuthenticated,
     };
 
     return (

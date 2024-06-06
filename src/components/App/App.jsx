@@ -1,7 +1,6 @@
-import { useContext, useEffect, memo } from 'react';
+import { useContext, memo, useEffect } from 'react';
 import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
-import notebookAPI from 'services/notebookAPI';
 import { modalContext, appContext } from 'contexts/context';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container, Section } from './App.styled';
@@ -10,39 +9,48 @@ import { ToastContainer } from 'react-toastify';
 import ClientInfoPage from 'components/ClientInfoPage';
 
 const App = () => {
-    const { isModalShown, modalShownToggle, getClients } =
-        useContext(modalContext);
-    const { authenticated, setClients } = useContext(appContext);
+    const { isModalShown, modalShownToggle } = useContext(modalContext);
+    const {
+        authenticated,
+        isSofiaAuthenticated,
+        setAuthenticated,
+        setIsSofiaAuthenticated,
+    } = useContext(appContext);
     const { pathname } = useLocation();
+
+    useEffect(() => {
+        if (localStorage.getItem('isPassEntered')) {
+            setAuthenticated(true);
+        }
+
+        if (localStorage.getItem('isSofiaEntered')) {
+            setIsSofiaAuthenticated(true);
+        }
+    });
 
     return (
         <>
             <ToastContainer />
             <Container $isModalShown={isModalShown}>
                 <Section>
-                    {(pathname === '/note-book/' ||
-                        pathname === '/note-book') &&
-                        !authenticated && <AuthForm />}
+                    {pathname === '/note-book/sanya' && !authenticated && (
+                        <AuthForm />
+                    )}
+                    {pathname === '/note-book/sofia' &&
+                        !isSofiaAuthenticated && <AuthForm />}
                     <Routes>
                         {authenticated && (
                             <Route
-                                index
-                                path="/note-book"
+                                path="/note-book/sanya"
                                 element={<ClientTable />}
                             />
                         )}
-                        <Route
-                            path="/note-book/sanya"
-                            element={<ClientTable />}
-                        />
-                        <Route
-                            path="/note-book/sofia"
-                            element={<ClientTable />}
-                        />
-                        <Route
-                            path="/note-book/clients/:clientId"
-                            element={<ClientInfoPage />}
-                        />
+                        {(isSofiaAuthenticated || authenticated) && (
+                            <Route
+                                path="/note-book/sofia"
+                                element={<ClientTable />}
+                            />
+                        )}
                         <Route
                             path="/note-book/clients/:clientId"
                             element={<ClientInfoPage />}
