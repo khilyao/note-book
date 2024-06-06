@@ -15,33 +15,34 @@ const App = () => {
     const { authenticated, setClients } = useContext(appContext);
     const { pathname } = useLocation();
 
-    useEffect(() => {
-        notebookAPI
-            .fetchClients()
-            .then(data => {
-                setClients(data);
-            })
-            .catch(e => {
-                console.error('Error fetching clients:', e);
-            });
-    }, [setClients, getClients]);
-
     return (
         <>
             <ToastContainer />
             <Container $isModalShown={isModalShown}>
                 <Section>
-                    {pathname === '/note-book/' && !authenticated && (
-                        <AuthForm />
-                    )}
+                    {(pathname === '/note-book/' ||
+                        pathname === '/note-book') &&
+                        !authenticated && <AuthForm />}
                     <Routes>
                         {authenticated && (
                             <Route
                                 index
-                                path="/note-book/"
+                                path="/note-book"
                                 element={<ClientTable />}
                             />
                         )}
+                        <Route
+                            path="/note-book/sanya"
+                            element={<ClientTable />}
+                        />
+                        <Route
+                            path="/note-book/sofia"
+                            element={<ClientTable />}
+                        />
+                        <Route
+                            path="/note-book/clients/:clientId"
+                            element={<ClientInfoPage />}
+                        />
                         <Route
                             path="/note-book/clients/:clientId"
                             element={<ClientInfoPage />}

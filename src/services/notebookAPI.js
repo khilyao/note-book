@@ -1,11 +1,21 @@
 import axios from 'axios';
 import { getCurrentData } from 'utils/getCurrentData';
 
-axios.defaults.baseURL = 'https://65760b1e0febac18d403a082.mockapi.io/';
+axios.defaults.baseURL = 'https://6644c641b8925626f88fe500.mockapi.io/';
 
 const fetchClients = async () => {
     try {
         const data = await axios.get('/clients').then(res => res.data);
+
+        return data;
+    } catch (e) {
+        throw new Error(e);
+    }
+};
+
+const fetchTutors = async () => {
+    try {
+        const data = await axios.get('/tutors').then(res => res.data);
 
         return data;
     } catch (e) {
@@ -100,6 +110,7 @@ const deleteClient = async id => {
 
 const apiTool = {
     fetchClients,
+    fetchTutors,
     toggleLessonPaid,
     addClient,
     updateClientInfo,

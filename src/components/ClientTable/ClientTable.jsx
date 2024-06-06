@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
     TableWrapper,
     Table,
@@ -11,15 +12,49 @@ import {
     StyledLink,
 } from './ClientTable.styled';
 import Button from 'components/Button/Button';
+import notebookAPI from 'services/notebookAPI';
 import { appContext, modalContext } from 'contexts/context';
 
 const ClientsTable = () => {
-    const { toggleModal, handleGenerateModalContent, setClientInfo } =
-        useContext(modalContext);
-    const { clients } = useContext(appContext);
+    const { pathname } = useLocation();
+    const currentTutorName = pathname.split('/').pop();
+    const {
+        toggleModal,
+        handleGenerateModalContent,
+        setClientInfo,
+        getClients,
+    } = useContext(modalContext);
+    const { clients, setClients, tutors, setTutors } = useContext(appContext);
 
+    useEffect(() => {
+        notebookAPI
+            .fetchClients()
+            .then(data => {
+                setClients(data);
+            })
+            .catch(e => {
+                console.error('Error fetching clients:', e);
+            });
+
+        notebookAPI
+            .fetchTutors()
+            .then(data => {
+                setTutors(data);
+            })
+            .catch(e => {
+                console.error('Error fetching clients:', e);
+            });
+    }, [setClients, getClients, setTutors]);
+
+    const tutor = tutors.find(({ tutor }) => tutor === currentTutorName)?.tutor;
+
+    if (!tutor) {
+        return null;
+    }
+
+    const students = clients.filter(({ mentor }) => mentor === tutor);
     const monthlyProfit =
-        clients.reduce(
+        students.reduce(
             (acc, { lessonsPerWeek, price }) => acc + lessonsPerWeek * price,
             0
         ) * 4;
@@ -48,7 +83,7 @@ const ClientsTable = () => {
                         </Row>
                     </TableHead>
                     <TableBody>
-                        {clients.map(
+                        {students.map(
                             ({
                                 id,
                                 name,

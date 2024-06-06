@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Formik, ErrorMessage } from 'formik';
 import {
     StyledForm,
@@ -42,7 +43,8 @@ const ClientForm = ({ formType }) => {
     const [selectedWeekdays, setSelectedWeekdays] = useState(
         initialSelectedWeekDays
     );
-    // const [isLessonChecked, setIsLessonChecked] = useState(false);
+    const { pathname } = useLocation();
+    const tutor = pathname.split('/').pop();
 
     const notifyUser = () => {
         const options = {
@@ -77,7 +79,11 @@ const ClientForm = ({ formType }) => {
         formType === 'addClient' ? 'addClient' : 'editClient';
 
     const handleSubmit = (client, { setSubmitting, resetForm }) => {
-        const newClient = { ...client, lessonsDate: selectedWeekdays };
+        const newClient = {
+            ...client,
+            lessonsDate: selectedWeekdays,
+            mentor: tutor,
+        };
 
         const formActions = () => {
             setGetClients([]);
@@ -90,7 +96,7 @@ const ClientForm = ({ formType }) => {
         };
 
         formType === 'addClient'
-            ? notebookAPI.addClient(newClient).then(formActions)
+            ? notebookAPI.addClient(newClient, tutor).then(formActions)
             : notebookAPI.updateClientInfo(id, newClient).then(formActions);
     };
 
