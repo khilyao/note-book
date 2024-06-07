@@ -14,8 +14,9 @@ export const StyledList = styled.ul`
     gap: 10px;
     padding: 10px;
 
-    max-height: 500px;
+    max-height: 460px;
 
+    margin-top: 40px;
     margin-bottom: 30px;
 
     &::-webkit-scrollbar {
@@ -90,7 +91,7 @@ export const StyledLessonDate = styled.li`
     justify-content: center;
     width: 250px;
 
-    padding: 20px 20px;
+    padding: 15px;
 
     font-family: 'Inter', sans-serif;
     font-weight: 500;
@@ -100,12 +101,19 @@ export const StyledLessonDate = styled.li`
         $paid === 'true' ? '#bafa83' : '#ffa3a3'};
     border-radius: 8px;
 
+    transition:
+        background-color 150ms linear,
+        transform 150ms linear;
     cursor: pointer;
 
     @media screen and (min-width: 768px) {
         width: 300px;
         padding: 15px;
         font-size: 30px;
+    }
+
+    &:hover {
+        transform: scale(1.05);
     }
 `;
 

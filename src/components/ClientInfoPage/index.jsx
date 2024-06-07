@@ -33,6 +33,17 @@ const ClientInfoPage = () => {
             });
     }, [needUpdate]);
 
+    const handleLessonPaid = async date => {
+        try {
+            if (!isAdmin) return;
+
+            await notebookAPI.toggleLessonPaid(currentClient, date);
+            setNeedUpdate(prevState => !prevState);
+        } catch (error) {
+            console.error('Error toggling lesson paid status:', error);
+        }
+    };
+
     return (
         <>
             {currentClient && (
@@ -40,25 +51,10 @@ const ClientInfoPage = () => {
                     <StyledList>
                         {currentClient.lessonsPayment.length !== 0 &&
                             currentClient.lessonsPayment.map(
-                                ({ date, paid, mentor, duration }) => (
+                                ({ date, paid, duration }) => (
                                     <StyledLessonDate
-                                        onClick={async () => {
-                                            try {
-                                                if (!isAdmin) return;
-
-                                                await notebookAPI.toggleLessonPaid(
-                                                    currentClient,
-                                                    date
-                                                );
-                                                setNeedUpdate(
-                                                    prevState => !prevState
-                                                );
-                                            } catch (error) {
-                                                console.error(
-                                                    'Error toggling lesson paid status:',
-                                                    error
-                                                );
-                                            }
+                                        onClick={() => {
+                                            handleLessonPaid(date);
                                         }}
                                         $paid={paid.toString()}
                                         key={date}
@@ -109,7 +105,11 @@ const ClientInfoPage = () => {
             {(authenticated || isSofiaAuthenticated) && (
                 <>
                     <Button
-                        style={{ alignSelf: 'flex-start', margin: '0px' }}
+                        style={{
+                            alignSelf: 'flex-start',
+                            margin: '0px',
+                            marginTop: '20px',
+                        }}
                         onClick={() => {
                             navigate(-1);
                         }}
