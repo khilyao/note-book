@@ -130,8 +130,8 @@ const ClientForm = ({ formType }) => {
             lessonsDate,
             lessonsPayment,
             previousPaidHoursValue,
-            review: '',
-            homework: false,
+            review: 5,
+            homework: true,
         };
     };
 

@@ -6,7 +6,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Container } from './App.styled';
 import AuthForm from 'components/AuthForm';
 import { ToastContainer } from 'react-toastify';
-import ClientInfoPage from 'components/ClientInfoPage';
+import ClientInfoPage from 'components/ClientInfoPage/ClientInfoPage';
 
 const App = () => {
     const { isModalShown, modalShownToggle } = useContext(modalContext);

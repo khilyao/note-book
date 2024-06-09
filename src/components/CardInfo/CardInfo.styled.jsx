@@ -4,8 +4,12 @@ import { ReactComponent as DeleteIcon } from 'assets/close.svg';
 export const Card = styled.div`
     position: relative;
 
-    padding: 23px 25px;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+
     max-width: 320px;
+    padding: 23px 25px;
 
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
@@ -70,14 +74,18 @@ export const CloseBtn = styled(DeleteIcon)`
 export const Title = styled.h2`
     padding-bottom: 10px;
 
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
     line-height: 1.4;
     letter-spacing: 0.05em;
 
     color: rgb(15, 15, 15);
 
+    text-align: left;
     border-bottom: 2px solid rgb(180, 136, 136);
+    @media screen and (min-width: 768px) {
+        font-size: 20px;
+    }
 `;
 
 export const InfoBlock = styled.div`
@@ -88,11 +96,15 @@ export const InfoBlock = styled.div`
 
     gap: 12px;
 
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     line-height: 1.4;
 
     color: rgb(15, 15, 15);
+
+    @media screen and (min-width: 768px) {
+        font-size: 16px;
+    }
 `;
 
 export const Field = styled.div`
@@ -102,6 +114,8 @@ export const Field = styled.div`
 
 export const Paid = styled.span`
     color: ${({ $paid }) => ($paid ? '#039900' : '#FB0303')};
+
+    cursor: pointer;
 `;
 
 export const Score = styled.div`

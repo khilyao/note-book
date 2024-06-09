@@ -7,7 +7,6 @@ axios.defaults.baseURL = 'https://6644c641b8925626f88fe500.mockapi.io/';
 const fetchClients = async () => {
     try {
         const data = await axios.get('/clients').then(res => res.data);
-
         return data;
     } catch (e) {
         throw new Error(e);
@@ -17,7 +16,6 @@ const fetchClients = async () => {
 const fetchTutors = async () => {
     try {
         const data = await axios.get('/tutors').then(res => res.data);
-
         return data;
     } catch (e) {
         throw new Error(e);
@@ -32,38 +30,73 @@ const addClient = async client => {
     }
 };
 
-const updateClientInfo = async (id, client) => {
-    const { paidHours, previousPaidHoursValue } = client;
-    const isPaid = paidHours >= 0 ? true : false;
-    const lessonDuration = Math.abs(previousPaidHoursValue - paidHours);
-    const lessonDate = getCurrentData();
+const distributePayment = (client, amount) => {
+    let credit = 0;
+    let remainingAmount = amount;
 
-    if (previousPaidHoursValue > paidHours) {
-        client.lessonsPayment.push({
-            id: uuidv4(),
-            date: lessonDate,
-            type: 'lesson',
-            duration: lessonDuration,
-            paid: isPaid,
-            review: client.review,
-            homework: client.homework,
-        });
+    for (let lesson of client.lessonsPayment) {
+        if (lesson.type === 'lesson' && !lesson.paid) {
+            const payment = Math.min(lesson.duration, remainingAmount);
+            remainingAmount -= payment;
+            credit += payment;
+            lesson.paid = payment === lesson.duration;
 
-        client.review = undefined;
-        client.homework = undefined;
-    } else if (previousPaidHoursValue < paidHours) {
-        client.lessonsPayment.push({
-            id: uuidv4(),
-            date: lessonDate,
-            type: 'payment',
-            amount: paidHours - previousPaidHoursValue,
-        });
-
-        client.review = undefined;
-        client.homework = undefined;
+            if (remainingAmount <= 0) break;
+        }
     }
 
-    console.log(client);
+    return credit;
+};
+
+const addLesson = (client, duration, date) => {
+    client.lessonsPayment.push({
+        id: uuidv4(),
+        date: date,
+        type: 'lesson',
+        duration: duration,
+        paid: false,
+        review: client.review,
+        homework: client.homework,
+    });
+
+    client.review = undefined;
+    client.homework = undefined;
+};
+
+const addPayment = (client, amount, credit, balance, date) => {
+    client.lessonsPayment.push({
+        id: uuidv4(),
+        date: date,
+        type: 'payment',
+        amount: amount,
+        credit: credit,
+        balance: balance,
+    });
+};
+
+const updateClientInfo = async (id, client) => {
+    const { paidHours, previousPaidHoursValue } = client;
+    const lessonDate = getCurrentData();
+    const lessonDuration = Math.abs(previousPaidHoursValue - paidHours);
+
+    if (paidHours > previousPaidHoursValue) {
+        const amount = paidHours - previousPaidHoursValue;
+        const credit = distributePayment(client, amount);
+        addPayment(client, amount, credit, paidHours, lessonDate);
+    } else if (paidHours < previousPaidHoursValue) {
+        addLesson(client, lessonDuration, lessonDate);
+    }
+
+    if (paidHours >= 0) {
+        client.lessonsPayment = client.lessonsPayment.map(lesson => {
+            if (lesson.type === 'lesson') {
+                return { ...lesson, paid: true };
+            }
+            return lesson;
+        });
+    }
+
+    client.previousPaidHoursValue = paidHours;
 
     try {
         return await axios.put(`/clients/${id}`, client);
