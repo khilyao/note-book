@@ -1,14 +1,18 @@
 {
   "files": {
     "main.css": "/note-book/static/css/main.59557c63.css",
-    "main.js": "/note-book/static/js/main.7aa47b9e.js",
+    "main.js": "/note-book/static/js/main.496d6b98.js",
     "index.html": "/note-book/index.html",
+    "static/media/close.svg": "/note-book/static/media/close.992ad15f3ddf74427dd5c6fe25858bfc.svg",
     "static/media/cancel-circle.svg": "/note-book/static/media/cancel-circle.ff7d68a6e62311f2d207693ccf2b8b1e.svg",
+    "static/media/emptyStar.svg": "/note-book/static/media/emptyStar.8447e40da6090b1b1fa24df07f5e8e18.svg",
+    "static/media/filledStar.svg": "/note-book/static/media/filledStar.16f32ac26b3e195a873af797750746ec.svg",
+    "static/media/home.svg": "/note-book/static/media/home.9ae4982af42963df0755c369bcbfb051.svg",
     "main.59557c63.css.map": "/note-book/static/css/main.59557c63.css.map",
-    "main.7aa47b9e.js.map": "/note-book/static/js/main.7aa47b9e.js.map"
+    "main.496d6b98.js.map": "/note-book/static/js/main.496d6b98.js.map"
   },
   "entrypoints": [
     "static/css/main.59557c63.css",
-    "static/js/main.7aa47b9e.js"
+    "static/js/main.496d6b98.js"
   ]
 }
