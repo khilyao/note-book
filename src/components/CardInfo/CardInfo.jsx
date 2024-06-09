@@ -72,6 +72,7 @@ const CardInfo = ({
                                           }
                                         : null
                                 }
+                                $isAdmin={isAdmin}
                                 $paid={paid}
                             >
                                 {paid ? 'Так' : 'Ні'}

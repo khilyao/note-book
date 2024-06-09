@@ -116,6 +116,19 @@ export const Paid = styled.span`
     color: ${({ $paid }) => ($paid ? '#039900' : '#FB0303')};
 
     cursor: pointer;
+
+    transition:
+        color 150ms,
+        transform 150ms;
+
+    ${({ $isAdmin }) =>
+        $isAdmin &&
+        css`
+            &:hover {
+                transform: scale(1.1);
+                color: #0c0ccd;
+            }
+        `}
 `;
 
 export const Score = styled.div`

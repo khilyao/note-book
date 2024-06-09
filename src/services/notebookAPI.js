@@ -106,15 +106,13 @@ const updateClientInfo = async (id, client) => {
 };
 
 const toggleLessonPaid = async (client, lessonId) => {
-    const updatedLessonsPayment = client.lessonsPayment.map(
-        ({ id, duration, date, paid, type }) => {
-            if (id === lessonId) {
-                paid = !paid;
-            }
-
-            return { id, type, date, duration, paid };
+    const updatedLessonsPayment = client.lessonsPayment.map(lesson => {
+        if (lesson.id === lessonId) {
+            lesson.paid = !lesson.paid;
         }
-    );
+
+        return lesson;
+    });
 
     const updatedClient = {
         ...client,
