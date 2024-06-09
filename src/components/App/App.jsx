@@ -3,7 +3,7 @@ import ClientTable from 'components/ClientTable/ClientTable';
 import Modal from 'components/Modal/Modal';
 import { modalContext, appContext } from 'contexts/context';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { Container, Section } from './App.styled';
+import { Container } from './App.styled';
 import AuthForm from 'components/AuthForm';
 import { ToastContainer } from 'react-toastify';
 import ClientInfoPage from 'components/ClientInfoPage';
@@ -32,31 +32,30 @@ const App = () => {
         <>
             <ToastContainer />
             <Container $isModalShown={isModalShown}>
-                <Section>
-                    {pathname === '/note-book/sanya' && !authenticated && (
-                        <AuthForm />
-                    )}
-                    {pathname === '/note-book/sofia' &&
-                        !isSofiaAuthenticated && <AuthForm />}
-                    <Routes>
-                        {authenticated && (
-                            <Route
-                                path="/note-book/sanya"
-                                element={<ClientTable />}
-                            />
-                        )}
-                        {(isSofiaAuthenticated || authenticated) && (
-                            <Route
-                                path="/note-book/sofia"
-                                element={<ClientTable />}
-                            />
-                        )}
+                {pathname === '/note-book/sanya' && !authenticated && (
+                    <AuthForm />
+                )}
+                {pathname === '/note-book/sofia' && !isSofiaAuthenticated && (
+                    <AuthForm />
+                )}
+                <Routes>
+                    {authenticated && (
                         <Route
-                            path="/note-book/clients/:clientId"
-                            element={<ClientInfoPage />}
+                            path="/note-book/sanya"
+                            element={<ClientTable />}
                         />
-                    </Routes>
-                </Section>
+                    )}
+                    {(isSofiaAuthenticated || authenticated) && (
+                        <Route
+                            path="/note-book/sofia"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    <Route
+                        path="/note-book/clients/:clientId"
+                        element={<ClientInfoPage />}
+                    />
+                </Routes>
             </Container>
             {isModalShown && <Modal onClose={modalShownToggle} />}
         </>

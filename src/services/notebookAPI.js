@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getCurrentData } from 'utils/getCurrentData';
+import { v4 as uuidv4 } from 'uuid';
 
 axios.defaults.baseURL = 'https://6644c641b8925626f88fe500.mockapi.io/';
 
@@ -33,18 +34,36 @@ const addClient = async client => {
 
 const updateClientInfo = async (id, client) => {
     const { paidHours, previousPaidHoursValue } = client;
+    const isPaid = paidHours >= 0 ? true : false;
+    const lessonDuration = Math.abs(previousPaidHoursValue - paidHours);
+    const lessonDate = getCurrentData();
 
     if (previousPaidHoursValue > paidHours) {
-        const isPaid = paidHours >= 0 ? true : false;
-        const lessonDuration = Math.abs(previousPaidHoursValue - paidHours);
-        const lessonDate = getCurrentData();
-
         client.lessonsPayment.push({
+            id: uuidv4(),
             date: lessonDate,
+            type: 'lesson',
             duration: lessonDuration,
             paid: isPaid,
+            review: client.review,
+            homework: client.homework,
         });
+
+        client.review = undefined;
+        client.homework = undefined;
+    } else if (previousPaidHoursValue < paidHours) {
+        client.lessonsPayment.push({
+            id: uuidv4(),
+            date: lessonDate,
+            type: 'payment',
+            amount: paidHours - previousPaidHoursValue,
+        });
+
+        client.review = undefined;
+        client.homework = undefined;
     }
+
+    console.log(client);
 
     try {
         return await axios.put(`/clients/${id}`, client);
@@ -53,14 +72,14 @@ const updateClientInfo = async (id, client) => {
     }
 };
 
-const toggleLessonPaid = async (client, dateToUpdate) => {
+const toggleLessonPaid = async (client, lessonId) => {
     const updatedLessonsPayment = client.lessonsPayment.map(
-        ({ date, duration, paid }) => {
-            if (date === dateToUpdate) {
+        ({ id, duration, date, paid, type }) => {
+            if (id === lessonId) {
                 paid = !paid;
             }
 
-            return { date, duration, paid };
+            return { id, type, date, duration, paid };
         }
     );
 
@@ -76,9 +95,9 @@ const toggleLessonPaid = async (client, dateToUpdate) => {
     }
 };
 
-const removeLesson = async (client, dateToDelete) => {
+const removeLesson = async (client, lessonId) => {
     const updatedLessonsPayment = client.lessonsPayment.filter(
-        ({ date }) => date !== dateToDelete
+        ({ id }) => id !== lessonId
     );
 
     const updatedClient = {

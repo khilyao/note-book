@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { appContext } from 'contexts/context';
 import Button from 'components/Button/Button';
+import CardInfo from 'components/CardInfo/CardInfo';
 import {
-    StyledLessonDate,
     StyledList,
     StyledTitle,
     StyledInfoBlock,
-    StyledDeleteBtn,
 } from './ClientInfoPage.styled';
 import notebookAPI from 'services/notebookAPI';
 
@@ -33,11 +32,11 @@ const ClientInfoPage = () => {
             });
     }, [needUpdate]);
 
-    const handleLessonPaid = async date => {
+    const handleLessonPaid = async lessonId => {
         try {
             if (!isAdmin) return;
 
-            await notebookAPI.toggleLessonPaid(currentClient, date);
+            await notebookAPI.toggleLessonPaid(currentClient, lessonId);
             setNeedUpdate(prevState => !prevState);
         } catch (error) {
             console.error('Error toggling lesson paid status:', error);
@@ -50,48 +49,11 @@ const ClientInfoPage = () => {
                 <StyledInfoBlock>
                     <StyledList>
                         {currentClient.lessonsPayment.length !== 0 &&
-                            currentClient.lessonsPayment.map(
-                                ({ date, paid, duration }) => (
-                                    <StyledLessonDate
-                                        onClick={() => {
-                                            handleLessonPaid(date);
-                                        }}
-                                        $paid={paid.toString()}
-                                        key={date}
-                                    >
-                                        {`${date} ${
-                                            duration === 1
-                                                ? ''
-                                                : `(${duration} год)`
-                                        }`}
-                                        {isAdmin && (
-                                            <StyledDeleteBtn
-                                                type="button"
-                                                onClick={async e => {
-                                                    e.stopPropagation();
-                                                    try {
-                                                        await notebookAPI.removeLesson(
-                                                            currentClient,
-                                                            date
-                                                        );
-                                                        setNeedUpdate(
-                                                            prevState =>
-                                                                !prevState
-                                                        );
-                                                    } catch (error) {
-                                                        console.error(
-                                                            'Error toggling lesson paid status:',
-                                                            error
-                                                        );
-                                                    }
-                                                }}
-                                            >
-                                                X
-                                            </StyledDeleteBtn>
-                                        )}
-                                    </StyledLessonDate>
-                                )
-                            )}
+                            currentClient.lessonsPayment
+                                .map((lesson, index) => (
+                                    <CardInfo key={index} {...lesson} />
+                                ))
+                                .reverse()}
                     </StyledList>
                     <StyledTitle>
                         Кількість
@@ -123,3 +85,67 @@ const ClientInfoPage = () => {
 };
 
 export default ClientInfoPage;
+
+// {isAdmin && (
+//     <StyledDeleteBtn
+//         type="button"
+//         onClick={async e => {
+//             e.stopPropagation();
+//             try {
+//                 await notebookAPI.removeLesson(
+//                     currentClient,
+//                     id
+//                 );
+//                 setNeedUpdate(
+//                     prevState =>
+//                         !prevState
+//                 );
+//             } catch (error) {
+//                 console.error(
+//                     'Error toggling lesson paid status:',
+//                     error
+//                 );
+//             }
+//         }}
+//     >
+//         X
+//     </StyledDeleteBtn>
+// )}
+
+// {
+/* <CardInfo key={index}>
+<Line />
+<StyledLessonDate $payment>
+    Оплачено занять: {amount}
+    <Signature>{date}</Signature>
+    {isAdmin && (
+        <StyledDeleteBtn
+            type="button"
+            onClick={async (
+                e,
+                date
+            ) => {
+                e.stopPropagation();
+                try {
+                    await notebookAPI.removeLesson(
+                        currentClient,
+                        date
+                    );
+                    setNeedUpdate(
+                        prevState =>
+                            !prevState
+                    );
+                } catch (error) {
+                    console.error(
+                        'Error toggling lesson paid status:',
+                        error
+                    );
+                }
+            }}
+        >
+            X
+        </StyledDeleteBtn>
+    )}
+</StyledLessonDate>
+</CardInfo> */
+// }

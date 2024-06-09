@@ -1,120 +1,37 @@
 import styled from 'styled-components';
 
 export const StyledInfoBlock = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media screen and (min-width: 768px) {
+        display: block;
+    }
 `;
 
 export const StyledList = styled.ul`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 30px;
     padding: 10px;
-
-    max-height: 460px;
 
     margin-top: 40px;
     margin-bottom: 30px;
 
-    &::-webkit-scrollbar {
-        width: 14px;
-        height: 8px;
-        background-color: #f0f0f0;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #666;
-        border-radius: 9em;
-        box-shadow: inset 1px 1px 10px #ddd;
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-        background-color: #444;
-    }
-
-    &::-webkit-scrollbar-button:vertical:start:decrement {
-        background: linear-gradient(
-                120deg,
-                #ddd 40%,
-                rgba(255, 255, 255, 0) 41%
-            ),
-            linear-gradient(240deg, #ddd 40%, rgba(255, 255, 255, 0) 41%),
-            linear-gradient(0deg, #ddd 30%, rgba(255, 255, 255, 0) 31%);
-        background-color: #f0f0f0;
-    }
-
-    &::-webkit-scrollbar-button:vertical:end:increment {
-        background: linear-gradient(
-                300deg,
-                #ddd 40%,
-                rgba(255, 255, 255, 0) 41%
-            ),
-            linear-gradient(60deg, #ddd 40%, rgba(255, 255, 255, 0) 41%),
-            linear-gradient(180deg, #ddd 30%, rgba(255, 255, 255, 0) 31%);
-        background-color: #f0f0f0;
-    }
-
-    &::-webkit-scrollbar-button:horizontal:start:decrement {
-        background: linear-gradient(30deg, #ddd 40%, rgba(255, 255, 255, 0) 41%),
-            linear-gradient(150deg, #ddd 40%, rgba(255, 255, 255, 0) 41%),
-            linear-gradient(270deg, #ddd 30%, rgba(255, 255, 255, 0) 31%);
-        background-color: #f0f0f0;
-    }
-
-    &::-webkit-scrollbar-button:horizontal:end:increment {
-        background: linear-gradient(
-                210deg,
-                #ddd 40%,
-                rgba(255, 255, 255, 0) 41%
-            ),
-            linear-gradient(330deg, #ddd 40%, rgba(255, 255, 255, 0) 41%),
-            linear-gradient(90deg, #ddd 30%, rgba(255, 255, 255, 0) 31%);
-        background-color: #f0f0f0;
-    }
-
     font-size: 20px;
-
-    overflow: auto;
 
     @media screen and (min-width: 768px) {
         gap: 20px;
     }
 `;
 
-export const StyledLessonDate = styled.li`
-    position: relative;
+export const Signature = styled.span`
+    position: absolute;
+    left: 0;
+    bottom: 0;
 
-    display: inline-flex;
-    justify-content: center;
-    width: 250px;
-
-    padding: 15px;
-
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 24px;
-
-    background-color: ${({ $paid }) =>
-        $paid === 'true' ? '#bafa83' : '#ffa3a3'};
-    border-radius: 8px;
-
-    transition:
-        background-color 150ms linear,
-        transform 150ms linear;
-    cursor: pointer;
-
-    @media screen and (min-width: 768px) {
-        width: 300px;
-        padding: 15px;
-        font-size: 30px;
-    }
-
-    &:hover {
-        transform: scale(1.05);
-    }
+    font-size: 20px;
 `;
 
 export const StyledDeleteBtn = styled.button`

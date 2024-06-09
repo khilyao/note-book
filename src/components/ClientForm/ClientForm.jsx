@@ -66,13 +66,16 @@ const ClientForm = ({ formType }) => {
     const lessonsPerWeekId = uuidv4();
     const priceId = uuidv4();
     const paidHoursId = uuidv4();
+    const homeworkId = uuidv4();
+    const reviewId = uuidv4();
 
     const validationSchema = object({
         name: string().trim().required(),
         lessonsPerWeek: number().required(),
         price: number().required(),
         paidHours: number(),
-        isLessonChecked: boolean(),
+        review: number().min(1).max(5),
+        homework: boolean(),
     });
 
     const currentFormType =
@@ -127,6 +130,8 @@ const ClientForm = ({ formType }) => {
             lessonsDate,
             lessonsPayment,
             previousPaidHoursValue,
+            review: '',
+            homework: false,
         };
     };
 
@@ -192,28 +197,65 @@ const ClientForm = ({ formType }) => {
                                 placeholder="0"
                             />
                             {currentFormType === 'editClient' && (
-                                <CounterWrapper>
-                                    <CounterButton
-                                        onClick={() => {
-                                            setFieldValue(
-                                                'paidHours',
-                                                Number(paidHours) + 1
-                                            );
+                                <>
+                                    <CounterWrapper>
+                                        <CounterButton
+                                            onClick={() => {
+                                                setFieldValue(
+                                                    'paidHours',
+                                                    Number(paidHours) + 1
+                                                );
+                                            }}
+                                        >
+                                            <StyledPlusIcon />
+                                        </CounterButton>
+                                        <CounterButton
+                                            onClick={() => {
+                                                setFieldValue(
+                                                    'paidHours',
+                                                    Number(paidHours) - 1
+                                                );
+                                            }}
+                                        >
+                                            <StyledMinusIcon />
+                                        </CounterButton>
+                                    </CounterWrapper>
+                                    <FieldWrapper
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
                                         }}
                                     >
-                                        <StyledPlusIcon />
-                                    </CounterButton>
-                                    <CounterButton
-                                        onClick={() => {
-                                            setFieldValue(
-                                                'paidHours',
-                                                Number(paidHours) - 1
-                                            );
-                                        }}
-                                    >
-                                        <StyledMinusIcon />
-                                    </CounterButton>
-                                </CounterWrapper>
+                                        <StyledLabel
+                                            htmlFor={homeworkId}
+                                            style={{
+                                                marginRight: 5,
+                                                marginBottom: 0,
+                                            }}
+                                        >
+                                            Homework
+                                        </StyledLabel>
+                                        <StyledField
+                                            name="homework"
+                                            id={homeworkId}
+                                            type="checkbox"
+                                        />
+                                    </FieldWrapper>
+                                    <FieldWrapper>
+                                        <StyledLabel htmlFor={reviewId}>
+                                            Review (1-5)
+                                        </StyledLabel>
+                                        <StyledField
+                                            name="review"
+                                            min="1"
+                                            max="5"
+                                            id={reviewId}
+                                            type="number"
+                                            placeholder="4"
+                                        />
+                                    </FieldWrapper>
+                                </>
                             )}
                         </FieldWrapper>
                         <FieldWrapper>

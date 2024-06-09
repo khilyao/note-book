@@ -11,6 +11,7 @@ import {
     MonthlyProfit,
     StyledLink,
 } from './ClientTable.styled';
+import { Section } from 'components/App/App.styled';
 import Button from 'components/Button/Button';
 import notebookAPI from 'services/notebookAPI';
 import { appContext, modalContext } from 'contexts/context';
@@ -60,7 +61,7 @@ const ClientsTable = () => {
         ) * 4;
 
     return (
-        <>
+        <Section>
             <TableWrapper>
                 <Button
                     type="button"
@@ -139,7 +140,7 @@ const ClientsTable = () => {
                 </Table>
                 <MonthlyProfit>Monthly profit: {monthlyProfit}</MonthlyProfit>
             </TableWrapper>
-        </>
+        </Section>
     );
 };
 

@@ -70,6 +70,8 @@ export const CounterWrapper = styled.div`
     display: flex;
     gap: 10px;
 
+    margin-bottom: 20px;
+
     margin-top: 15px;
 `;
 
