@@ -3,22 +3,25 @@ import { appContext } from './context';
 
 const AppProvider = ({ children }) => {
     const [lastUpdateDate, setLastUpdateDate] = useState('');
-    const [authenticated, setAuthenticated] = useState(false);
+    const [isSanyaAuthenticated, setIsSanyaAuthenticated] = useState(false);
     const [isSofiaAuthenticated, setIsSofiaAuthenticated] = useState(false);
+    const [isEmirAuthenticated, setIsEmirAuthenticated] = useState(false);
     const [clients, setClients] = useState([]);
     const [tutors, setTutors] = useState([]);
 
     const providerValue = {
         lastUpdateDate,
         setLastUpdateDate,
-        authenticated,
-        setAuthenticated,
+        isSanyaAuthenticated,
+        setIsSanyaAuthenticated,
         clients,
         setClients,
         tutors,
         setTutors,
         isSofiaAuthenticated,
         setIsSofiaAuthenticated,
+        isEmirAuthenticated,
+        setIsEmirAuthenticated,
     };
 
     return (

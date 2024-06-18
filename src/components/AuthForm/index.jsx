@@ -6,8 +6,12 @@ import { StyledContainer, StyledField, StyledInput } from './AuthForm.styled';
 
 const AuthForm = () => {
     const [password, setPassword] = useState('');
-    const { authenticated, setAuthenticated, setIsSofiaAuthenticated } =
-        useContext(appContext);
+    const {
+        isSanyaAuthenticated,
+        setIsSanyaAuthenticated,
+        setIsSofiaAuthenticated,
+        setIsEmirAuthenticated,
+    } = useContext(appContext);
 
     const options = {
         theme: 'colored',
@@ -19,11 +23,11 @@ const AuthForm = () => {
     const handlePasswordChange = event => {
         setPassword(event.target.value);
     };
-    console.log(authenticated);
+
     const handleSubmitPassword = () => {
         if (password === 'sfwew12') {
-            setAuthenticated(true);
-            localStorage.setItem('isPassEntered', true);
+            setIsSanyaAuthenticated(true);
+            localStorage.setItem('isSanyaEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
@@ -31,6 +35,13 @@ const AuthForm = () => {
         if (password === 'sofia2308') {
             setIsSofiaAuthenticated(true);
             localStorage.setItem('isSofiaEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
+        if (password === 'emir_boss') {
+            setIsEmirAuthenticated(true);
+            localStorage.setItem('isEmirEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
@@ -47,7 +58,9 @@ const AuthForm = () => {
 
     return (
         <>
-            {!authenticated && (
+            {(!isSanyaAuthenticated ||
+                !setIsSofiaAuthenticated ||
+                !isSanyaAuthenticated) && (
                 <StyledContainer>
                     <StyledField htmlFor="password">Password</StyledField>
                     <StyledInput

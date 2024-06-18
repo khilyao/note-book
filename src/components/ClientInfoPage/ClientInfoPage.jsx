@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { appContext } from 'contexts/context';
 import { Suspense } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import CardInfo from 'components/CardInfo/CardInfo';
@@ -17,15 +16,14 @@ import notebookAPI from 'services/notebookAPI';
 const ClientInfoPage = () => {
     const navigate = useNavigate();
     const { clientId } = useParams();
-    const { authenticated, isSofiaAuthenticated } = useContext(appContext);
     const [clients, setClients] = useState([]);
     const [needUpdate, setNeedUpdate] = useState(false);
     const [itemsToShow, setItemsToShow] = useState(6);
     const currentClient = clients.find(client => client.id === clientId);
     const isAdmin =
-        localStorage.getItem('isPassEntered') !== null ||
-        localStorage.getItem('isSofiaEntered') !== null;
-
+        localStorage.getItem('isSanyaEntered') !== null ||
+        localStorage.getItem('isSofiaEntered') !== null ||
+        localStorage.getItem('isEmirEntered') !== null;
     useEffect(() => {
         notebookAPI
             .fetchClients()
@@ -60,7 +58,7 @@ const ClientInfoPage = () => {
                         <Home
                             style={{}}
                             onClick={
-                                authenticated || isSofiaAuthenticated
+                                isAdmin
                                     ? () => {
                                           navigate(-1);
                                       }
