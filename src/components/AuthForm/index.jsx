@@ -8,9 +8,13 @@ const AuthForm = () => {
     const [password, setPassword] = useState('');
     const {
         isSanyaAuthenticated,
+        isSofiaAuthenticated,
+        isEmirAuthenticated,
+        isRavilAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
+        setIsRavilAuthenticated,
     } = useContext(appContext);
 
     const options = {
@@ -46,6 +50,13 @@ const AuthForm = () => {
             return;
         }
 
+        if (password === 'ravil1488') {
+            setIsRavilAuthenticated(true);
+            localStorage.setItem('isRavilEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
         setPassword('');
         toast.error('Incorrect password. Try again', options);
     };
@@ -59,8 +70,9 @@ const AuthForm = () => {
     return (
         <>
             {(!isSanyaAuthenticated ||
-                !setIsSofiaAuthenticated ||
-                !isSanyaAuthenticated) && (
+                !isSofiaAuthenticated ||
+                !isEmirAuthenticated ||
+                !isRavilAuthenticated) && (
                 <StyledContainer>
                     <StyledField htmlFor="password">Password</StyledField>
                     <StyledInput
@@ -72,7 +84,7 @@ const AuthForm = () => {
                         onKeyDown={handleKeyPress}
                     />
                     <Button type="submit" onClick={handleSubmitPassword}>
-                        Войти
+                        Log in
                     </Button>
                 </StyledContainer>
             )}

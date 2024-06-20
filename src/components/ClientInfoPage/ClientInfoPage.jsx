@@ -23,7 +23,8 @@ const ClientInfoPage = () => {
     const isAdmin =
         localStorage.getItem('isSanyaEntered') !== null ||
         localStorage.getItem('isSofiaEntered') !== null ||
-        localStorage.getItem('isEmirEntered') !== null;
+        localStorage.getItem('isEmirEntered') !== null ||
+        localStorage.getItem('isRavilEntered') !== null;
     useEffect(() => {
         notebookAPI
             .fetchClients()

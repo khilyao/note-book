@@ -14,9 +14,11 @@ const App = () => {
         isSanyaAuthenticated,
         isSofiaAuthenticated,
         isEmirAuthenticated,
+        isRavilAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
+        setIsRavilAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -32,21 +34,25 @@ const App = () => {
         if (localStorage.getItem('isEmirEntered')) {
             setIsEmirAuthenticated(true);
         }
+
+        if (localStorage.getItem('isRavilEntered')) {
+            setIsRavilAuthenticated(true);
+        }
     });
+
+    const isAuth =
+        (pathname === '/note-book/sanya' && !isSanyaAuthenticated) ||
+        (pathname === '/note-book/sofia' && !isSofiaAuthenticated) ||
+        (pathname === '/note-book/emir' && !isEmirAuthenticated) ||
+        (pathname === '/note-book/ravil' && !isRavilAuthenticated)
+            ? false
+            : true;
 
     return (
         <>
             <ToastContainer />
             <Container $isModalShown={isModalShown}>
-                {pathname === '/note-book/sanya' && !isSanyaAuthenticated && (
-                    <AuthForm />
-                )}
-                {pathname === '/note-book/sofia' && !isSofiaAuthenticated && (
-                    <AuthForm />
-                )}
-                {pathname === '/note-book/emir' && !isEmirAuthenticated && (
-                    <AuthForm />
-                )}
+                {!isAuth && <AuthForm />}
                 <Routes>
                     {isSanyaAuthenticated && (
                         <Route
@@ -63,6 +69,12 @@ const App = () => {
                     {isEmirAuthenticated && (
                         <Route
                             path="/note-book/emir"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isRavilAuthenticated && (
+                        <Route
+                            path="/note-book/ravil"
                             element={<ClientTable />}
                         />
                     )}
