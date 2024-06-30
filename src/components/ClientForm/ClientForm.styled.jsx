@@ -13,13 +13,17 @@ export const StyledField = styled(Field)`
     display: flex;
     align-items: center;
 
+    padding: 10px 14px;
+
     font-size: initial;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
+    border-radius: 8px;
+    border: 2px solid #d0d5dd;
 
     &:focus {
         outline: none;
-        border: 2px solid rgb(37, 99, 235);
+        border: 2px solid #d0d5dd;
         border-radius: 3px;
     }
 
@@ -37,6 +41,7 @@ export const StyledField = styled(Field)`
 
 export const StyledLabel = styled.label`
     margin-bottom: 5px;
+    font-size: 12px;
 `;
 
 export const FieldWrapper = styled.div`
@@ -105,7 +110,7 @@ export const StyledBtn = styled.button`
     &:hover,
     &:focus {
         background-color: rgb(224, 231, 255);
-        ${({ $delete }) => $delete && `background-color: rgb(219, 10, 80);`}
+        ${({ $delete }) => $delete && `background-color: #D92D20;`}
     }
 
     @media screen and (min-width: 460px) {

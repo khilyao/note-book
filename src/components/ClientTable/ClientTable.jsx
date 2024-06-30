@@ -72,15 +72,17 @@ const ClientsTable = () => {
                     data-btnType="addClient"
                     btnType="addClient"
                 >
-                    Add Client
+                    Додати учня
                 </Button>
                 <Table>
                     <TableHead>
                         <Row>
-                            <TableHeading>Name</TableHeading>
-                            <TableHeading>Lessons per week</TableHeading>
-                            <TableHeading>Price</TableHeading>
-                            <TableHeading>Paid Hours</TableHeading>
+                            <TableHeading>Імʼя</TableHeading>
+                            <TableHeading style={{ width: '240px' }}>
+                                Кількість занять/тижд
+                            </TableHeading>
+                            <TableHeading>Ціна за заняття</TableHeading>
+                            <TableHeading>Баланс годин</TableHeading>
                         </Row>
                     </TableHead>
                     <TableBody>
@@ -104,11 +106,17 @@ const ClientsTable = () => {
                                     </Data>
                                     <Data>{lessonsPerWeek}</Data>
                                     <Data>{price} UAH</Data>
-                                    {paidHours === 0 || paidHours === '' ? (
+                                    {(paidHours === 0 || paidHours === '') && (
                                         <Data />
-                                    ) : (
+                                    )}
+                                    {paidHours > 0 && (
                                         <Data $paidHours={paidHours}>
-                                            {paidHours} lessons
+                                            {paidHours} год.
+                                        </Data>
+                                    )}
+                                    {paidHours < 0 && (
+                                        <Data $paidHours={paidHours}>
+                                            {Math.abs(paidHours)} год.
                                         </Data>
                                     )}
                                     <Data>
@@ -130,7 +138,7 @@ const ClientsTable = () => {
                                             btnType="edit"
                                             data-btnType="edit"
                                         >
-                                            Edit
+                                            Редагувати
                                         </Button>
                                     </Data>
                                 </Row>
@@ -138,7 +146,7 @@ const ClientsTable = () => {
                         )}
                     </TableBody>
                 </Table>
-                <MonthlyProfit>Monthly profit: {monthlyProfit}</MonthlyProfit>
+                <MonthlyProfit>Місячний дохід: {monthlyProfit}</MonthlyProfit>
             </TableWrapper>
         </Section>
     );

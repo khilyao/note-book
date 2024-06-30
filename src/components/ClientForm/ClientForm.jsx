@@ -20,7 +20,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import notebookAPI from 'services/notebookAPI';
 import CounterButton from 'components/CounterButton/CounterButton';
-import WeekdayPicker from 'components/WeekdayPicker/WeekdayPicker';
 
 const ClientForm = ({ formType }) => {
     const {
@@ -55,11 +54,11 @@ const ClientForm = ({ formType }) => {
         };
 
         if (formType === 'addClient') {
-            toast.success('Client was added', options);
+            toast.success('Учень доданий!', options);
             return;
         }
 
-        toast.success('Information was updated', options);
+        toast.success('Інформацію оновлено!', options);
     };
 
     const nameInputId = uuidv4();
@@ -146,7 +145,7 @@ const ClientForm = ({ formType }) => {
                     <StyledForm>
                         <FieldWrapper>
                             <StyledLabel htmlFor={nameInputId}>
-                                Name
+                                Імʼя
                             </StyledLabel>
                             <StyledField
                                 name="name"
@@ -162,7 +161,7 @@ const ClientForm = ({ formType }) => {
                         </FieldWrapper>
                         <FieldWrapper>
                             <StyledLabel htmlFor={lessonsPerWeekId}>
-                                Lessons per week
+                                Кількість занять/тижд
                             </StyledLabel>
                             <StyledField
                                 name="lessonsPerWeek"
@@ -175,7 +174,7 @@ const ClientForm = ({ formType }) => {
                             </ErrorMessage>
                         </FieldWrapper>
                         <FieldWrapper>
-                            <StyledLabel htmlFor={priceId}>Price</StyledLabel>
+                            <StyledLabel htmlFor={priceId}>Ціна</StyledLabel>
                             <StyledField
                                 name="price"
                                 id={priceId}
@@ -186,9 +185,9 @@ const ClientForm = ({ formType }) => {
                                 <StyledErrorMsg>*required field</StyledErrorMsg>
                             </ErrorMessage>
                         </FieldWrapper>
-                        <FieldWrapper>
+                        <FieldWrapper style={{ marginBottom: '30px' }}>
                             <StyledLabel htmlFor={paidHoursId}>
-                                Paid Hours
+                                Баланс годин
                             </StyledLabel>
                             <StyledField
                                 name="paidHours"
@@ -234,7 +233,7 @@ const ClientForm = ({ formType }) => {
                                                 marginBottom: 0,
                                             }}
                                         >
-                                            Homework
+                                            Домашня робота
                                         </StyledLabel>
                                         <StyledField
                                             name="homework"
@@ -244,7 +243,7 @@ const ClientForm = ({ formType }) => {
                                     </FieldWrapper>
                                     <FieldWrapper>
                                         <StyledLabel htmlFor={reviewId}>
-                                            Review (1-5)
+                                            Відгук за заняття (1-5)
                                         </StyledLabel>
                                         <StyledField
                                             name="review"
@@ -258,18 +257,11 @@ const ClientForm = ({ formType }) => {
                                 </>
                             )}
                         </FieldWrapper>
-                        <FieldWrapper>
-                            <StyledLabel htmlFor={priceId}>Date</StyledLabel>
-                            <WeekdayPicker
-                                selectedWeekdays={selectedWeekdays}
-                                setSelectedWeekdays={setSelectedWeekdays}
-                            />
-                        </FieldWrapper>
                         <ButtonsWrapper>
                             <StyledBtn type="submit">
                                 {currentFormType === 'addClient'
-                                    ? 'Add Client'
-                                    : 'Apply'}
+                                    ? 'Додати учня'
+                                    : 'Зберегти'}
                             </StyledBtn>
                             {currentFormType === 'editClient' && (
                                 <StyledBtn
@@ -278,7 +270,7 @@ const ClientForm = ({ formType }) => {
                                     style={{ marginLeft: '20px' }}
                                     type="button"
                                 >
-                                    Delete
+                                    Видалити
                                 </StyledBtn>
                             )}
                         </ButtonsWrapper>

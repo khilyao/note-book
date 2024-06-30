@@ -25,8 +25,8 @@ export const StyledModal = styled.div`
     align-items: center;
     justify-content: center;
 
-    width: calc(100vw / 1.5);
-    max-width: 260px;
+    /* width: calc(100vw / 1.5); */
+
     padding: calc(100vh / 15) 15px 15px 15px;
 
     background-color: #fff;
@@ -41,6 +41,9 @@ export const StyledModal = styled.div`
     @media screen and (min-width: 768px) {
         min-height: 350px;
         padding-top: 60px;
+        width: 50%;
+
+        max-width: auto;
     }
 `;
 
