@@ -93,7 +93,6 @@ const ClientsTable = () => {
                                 lessonsPerWeek,
                                 price,
                                 paidHours,
-                                lessonsDate,
                                 lessonsPayment,
                             }) => (
                                 <Row key={id}>
@@ -131,7 +130,6 @@ const ClientsTable = () => {
                                                     lessonsPerWeek,
                                                     price,
                                                     paidHours,
-                                                    lessonsDate,
                                                     lessonsPayment,
                                                 });
                                             }}

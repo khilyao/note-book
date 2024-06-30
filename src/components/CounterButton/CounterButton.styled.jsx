@@ -8,11 +8,11 @@ export const StyledButton = styled.button`
 
     background-color: transparent;
     outline: none;
-    border: 2px solid #000;
+    border: 2px solid #676767;
 
     cursor: pointer;
 
-    transition: border 100ms linear;
+    transition: border 150ms linear;
 
     &:nth-child(1) {
         &:hover {

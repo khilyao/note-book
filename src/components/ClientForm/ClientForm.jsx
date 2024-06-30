@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Checkbox from '@mui/material/Checkbox';
 import { Formik, ErrorMessage } from 'formik';
 import {
     StyledForm,
@@ -33,15 +34,10 @@ const ClientForm = ({ formType }) => {
             lessonsPerWeek,
             price,
             paidHours,
-            lessonsDate,
             lessonsPayment,
         },
     } = useContext(modalContext);
-    const initialSelectedWeekDays = formType === 'addClient' ? [] : lessonsDate;
     const [previousPaidHoursValue] = useState(paidHours);
-    const [selectedWeekdays, setSelectedWeekdays] = useState(
-        initialSelectedWeekDays
-    );
     const { pathname } = useLocation();
     const tutor = pathname.split('/').pop();
 
@@ -83,7 +79,6 @@ const ClientForm = ({ formType }) => {
     const handleSubmit = (client, { setSubmitting, resetForm }) => {
         const newClient = {
             ...client,
-            lessonsDate: selectedWeekdays,
             mentor: tutor,
         };
 
@@ -126,7 +121,6 @@ const ClientForm = ({ formType }) => {
             lessonsPerWeek,
             price,
             paidHours,
-            lessonsDate,
             lessonsPayment,
             previousPaidHoursValue,
             review: 5,
@@ -235,10 +229,16 @@ const ClientForm = ({ formType }) => {
                                         >
                                             Домашня робота
                                         </StyledLabel>
-                                        <StyledField
-                                            name="homework"
+                                        <Checkbox
+                                            defaultChecked
                                             id={homeworkId}
-                                            type="checkbox"
+                                            sx={{
+                                                color: '#4f46e5',
+                                                '&.Mui-checked': {
+                                                    color: '#4f46e5',
+                                                },
+                                            }}
+                                            name="homework"
                                         />
                                     </FieldWrapper>
                                     <FieldWrapper>

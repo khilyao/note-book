@@ -25,25 +25,21 @@ export const StyledModal = styled.div`
     align-items: center;
     justify-content: center;
 
-    /* width: calc(100vw / 1.5); */
-
     padding: calc(100vh / 15) 15px 15px 15px;
 
-    background-color: #fff;
+    background-color: #eeeffb;
+    border-radius: 8px;
 
     @media screen and (min-width: 460px) {
     }
 
     @media screen and (min-width: 460px) {
-        padding: 50px 25px 15px;
+        padding: 50px 25px 30px;
     }
 
     @media screen and (min-width: 768px) {
         min-height: 350px;
         padding-top: 60px;
-        width: 50%;
-
-        max-width: auto;
     }
 `;
 

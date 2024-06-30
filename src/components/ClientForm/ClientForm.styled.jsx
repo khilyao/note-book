@@ -9,46 +9,10 @@ export const StyledForm = styled(Form)`
     align-items: center;
 `;
 
-export const StyledField = styled(Field)`
-    display: flex;
-    align-items: center;
-
-    padding: 10px 14px;
-
-    font-size: initial;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    border-radius: 8px;
-    border: 2px solid #d0d5dd;
-
-    &:focus {
-        outline: none;
-        border: 2px solid #d0d5dd;
-        border-radius: 3px;
-    }
-
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-    &[type='number'] {
-        appearance: textfield;
-        -moz-appearance: textfield;
-    }
-`;
-
-export const StyledLabel = styled.label`
-    margin-bottom: 5px;
-    font-size: 12px;
-`;
-
 export const FieldWrapper = styled.div`
     display: flex;
     flex-direction: column;
 
-    font-size: 14px;
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 
@@ -62,6 +26,53 @@ export const FieldWrapper = styled.div`
 
     &:not(:last-of-type) {
         margin-bottom: 15px;
+    }
+`;
+
+export const StyledLabel = styled.label`
+    margin-bottom: 5px;
+
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.4;
+
+    color: #344054;
+`;
+
+export const StyledField = styled(Field)`
+    display: flex;
+    align-items: center;
+
+    padding: 10px 14px;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+
+    color: #101828;
+    border: 2px solid #d0d5dd;
+    border-radius: 8px;
+    background-color: #f6f7fc;
+
+    &:focus {
+        outline: none;
+        border: 2px solid #d0d5dd;
+    }
+
+    &::placeholder {
+        color: #667085;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    &[type='number'] {
+        appearance: textfield;
+        -moz-appearance: textfield;
     }
 `;
 
@@ -90,7 +101,7 @@ export const StyledBtn = styled.button`
     font-weight: 600;
 
     color: rgb(79 70 229);
-    background-color: rgb(238 242 255);
+    background-color: #dae1f8;
     border: none;
     border-radius: 4px;
     box-shadow:
@@ -109,7 +120,7 @@ export const StyledBtn = styled.button`
 
     &:hover,
     &:focus {
-        background-color: rgb(224, 231, 255);
+        background-color: #cfd9f9;
         ${({ $delete }) => $delete && `background-color: #D92D20;`}
     }
 
@@ -131,7 +142,8 @@ export const StyledErrorMsg = styled.div`
 `;
 
 export const StyledPlusIcon = styled(FaPlus)`
-    transition: fill 100ms linear;
+    transition: fill 150ms linear;
+    fill: #232323;
 
     ${StyledButton}:hover & {
         fill: #07be07;
@@ -139,7 +151,8 @@ export const StyledPlusIcon = styled(FaPlus)`
 `;
 
 export const StyledMinusIcon = styled(FaMinus)`
-    transition: fill 100ms linear;
+    transition: fill 150ms linear;
+    fill: #232323;
 
     ${StyledButton}:hover & {
         fill: red;

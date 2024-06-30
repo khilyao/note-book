@@ -87,7 +87,7 @@ const CardInfo = ({
                             ></img>
                         </Field>
                         <Field>
-                            <p>Відгук</p>
+                            <p>Відгук за заняття</p>
                             <Score>
                                 {[...Array(5)].map((_, index) => (
                                     <img
@@ -116,7 +116,7 @@ const CardInfo = ({
                             <span>{date}</span>
                         </Field>
                         <Field>
-                            <p>Кількість занять</p>
+                            <p>Кількість годин</p>
                             <span>{amount}</span>
                         </Field>
                         <Field>
@@ -127,7 +127,7 @@ const CardInfo = ({
                             <span>{credit}</span>
                         </Field>
                         <Field>
-                            <p>Залишок годин</p>
+                            <p>Поточний баланс годин</p>
                             <span>{balance}</span>
                         </Field>
                     </InfoBlock>
