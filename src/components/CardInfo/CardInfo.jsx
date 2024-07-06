@@ -84,7 +84,7 @@ const CardInfo = ({
                                 src={homework ? cool : sad}
                                 alt="mark"
                                 width={28}
-                            ></img>
+                            />
                         </Field>
                         <Field>
                             <p>Відгук за заняття</p>

@@ -232,6 +232,12 @@ const ClientForm = ({ formType }) => {
                                         <Checkbox
                                             defaultChecked
                                             id={homeworkId}
+                                            onChange={e =>
+                                                setFieldValue(
+                                                    'homework',
+                                                    e.target.checked
+                                                )
+                                            }
                                             sx={{
                                                 color: '#4f46e5',
                                                 '&.Mui-checked': {
