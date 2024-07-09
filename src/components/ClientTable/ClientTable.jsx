@@ -60,6 +60,18 @@ const ClientsTable = () => {
             0
         ) * 4;
 
+    const transformLessonDuration = time => {
+        const hours = Math.floor(time / 60);
+        const minutes = time % 60;
+        if (hours > 0 && minutes > 0) {
+            return `${hours} год ${minutes} хв`;
+        } else if (hours > 0 && minutes === 0) {
+            return `${hours} год`;
+        } else {
+            return `${minutes} хв`;
+        }
+    };
+
     return (
         <Section>
             <TableWrapper>
@@ -110,12 +122,16 @@ const ClientsTable = () => {
                                     )}
                                     {paidHours > 0 && (
                                         <Data $paidHours={paidHours}>
-                                            {paidHours} год.
+                                            {transformLessonDuration(
+                                                paidHours * 60
+                                            )}
                                         </Data>
                                     )}
                                     {paidHours < 0 && (
                                         <Data $paidHours={paidHours}>
-                                            {Math.abs(paidHours)} год.
+                                            {transformLessonDuration(
+                                                Math.abs(paidHours) * 60
+                                            )}
                                         </Data>
                                     )}
                                     <Data>

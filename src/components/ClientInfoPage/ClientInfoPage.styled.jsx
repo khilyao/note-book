@@ -93,7 +93,7 @@ export const LoadMore = styled.button`
 
     padding: 12px 16px;
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 15px;
 
     color: #fff;
     background: #000;

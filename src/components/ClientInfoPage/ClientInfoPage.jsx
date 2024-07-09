@@ -47,6 +47,18 @@ const ClientInfoPage = () => {
         }
     };
 
+    const transformLessonDuration = time => {
+        const hours = Math.floor(time / 60);
+        const minutes = time % 60;
+        if (hours > 0 && minutes > 0) {
+            return `${hours} год ${minutes} хв`;
+        } else if (hours > 0 && minutes === 0) {
+            return `${hours} год`;
+        } else {
+            return `${minutes} хв`;
+        }
+    };
+
     const handleLoadMore = () => {
         setItemsToShow(prev => prev + 6);
     };
@@ -68,11 +80,11 @@ const ClientInfoPage = () => {
                         />
                         <StyledTitle>
                             {currentClient.paidHours >= 0
-                                ? `Кількість оплачених годин ${Math.abs(
-                                      currentClient.paidHours
+                                ? `Всього оплаченого часу: ${transformLessonDuration(
+                                      Math.abs(currentClient.paidHours) * 60
                                   )}`
-                                : `Кількість неоплачених годин ${Math.abs(
-                                      currentClient.paidHours
+                                : `Всього неоплаченого часу: ${transformLessonDuration(
+                                      Math.abs(currentClient.paidHours) * 60
                                   )}`}
                         </StyledTitle>
                     </Main>

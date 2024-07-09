@@ -31,6 +31,18 @@ const CardInfo = ({
 }) => {
     const title = type === 'lesson' ? 'Деталі заняття' : 'Платіж';
 
+    const transformLessonDuration = time => {
+        const hours = Math.floor(time / 60);
+        const minutes = time % 60;
+        if (hours > 0 && minutes > 0) {
+            return `${hours} год ${minutes} хв`;
+        } else if (hours > 0 && minutes === 0) {
+            return `${hours} год`;
+        } else {
+            return `${minutes} хв`;
+        }
+    };
+
     return (
         <Card $type={type}>
             <CloseBtn
@@ -60,7 +72,9 @@ const CardInfo = ({
                         </Field>
                         <Field>
                             <p>Тривалість</p>
-                            <span>{duration} год</span>
+                            <span>
+                                {transformLessonDuration(duration * 60)}
+                            </span>
                         </Field>
                         <Field>
                             <p>Оплачено</p>
@@ -117,18 +131,18 @@ const CardInfo = ({
                         </Field>
                         <Field>
                             <p>Кількість годин</p>
-                            <span>{amount}</span>
+                            <span>{transformLessonDuration(amount * 60)}</span>
                         </Field>
                         <Field>
                             <p>З них оплачено:</p>
                         </Field>
                         <Field>
-                            <p>Заборгованих годин</p>
-                            <span>{credit}</span>
+                            <p>Заборгованість</p>
+                            <span>{transformLessonDuration(credit * 60)}</span>
                         </Field>
                         <Field>
-                            <p>Поточний баланс годин</p>
-                            <span>{balance}</span>
+                            <p>Поточний залишок</p>
+                            <span>{transformLessonDuration(balance * 60)}</span>
                         </Field>
                     </InfoBlock>
                 )}
