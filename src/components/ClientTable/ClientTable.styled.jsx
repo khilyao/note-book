@@ -9,15 +9,20 @@ export const TableWrapper = styled.div`
 
     width: 100%;
     max-width: 1024px;
-    padding: 60px 24px 30px;
+    padding: 20px 24px 30px;
 
     border: 1px solid rgb(229, 231, 235);
     border-radius: 10px;
 
+    overflow: scroll;
+
     & > button {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+        margin-right: auto;
+
+        @media screen and (min-width: 768px) {
+            margin-right: 0;
+            margin-left: auto;
+        }
     }
 `;
 
@@ -50,18 +55,8 @@ export const TableHeading = styled.th`
 
     text-align: left;
 
-    &:nth-child(3) {
-        display: none;
-    }
-
     &:not(:first-child) {
         padding: 14px 12px;
-    }
-
-    @media screen and (min-width: 410px) {
-        &:nth-child(3) {
-            display: inherit;
-        }
     }
 `;
 
@@ -73,9 +68,6 @@ export const Data = styled.td`
     padding: 16px 12px 16px 0px;
     max-width: 100px;
 
-    &:nth-child(3) {
-        display: none;
-    }
     &:nth-child(4) {
         color: ${({ $paidHours }) =>
             $paidHours > 0 ? '#07be07' : 'red'}!important;
@@ -84,12 +76,6 @@ export const Data = styled.td`
     &:not(:first-child) {
         padding: 16px 12px;
         color: rgb(107, 114, 128);
-    }
-
-    @media screen and (min-width: 410px) {
-        &:nth-child(3) {
-            display: table-cell;
-        }
     }
 `;
 

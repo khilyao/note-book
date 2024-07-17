@@ -25,7 +25,7 @@ export const StyledModal = styled.div`
     align-items: center;
     justify-content: center;
 
-    padding: calc(100vh / 15) 15px 15px 15px;
+    padding: 40px 15px 15px 15px;
 
     background-color: #eeeffb;
     border-radius: 8px;
@@ -56,7 +56,7 @@ export const StyledCancelSVG = styled(CancelSVG)`
 
     &:hover,
     &:focus {
-        fill: rgb(102, 102, 110);
+        fill: #0606a4;
     }
 
     @media screen and (min-width: 460px) {

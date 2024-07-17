@@ -16,6 +16,8 @@ export const FieldWrapper = styled.div`
     font-family: 'Inter', sans-serif;
     font-weight: 500;
 
+    width: 100%;
+
     @media screen and (min-width: 460px) {
         font-size: 16px;
     }
@@ -25,7 +27,13 @@ export const FieldWrapper = styled.div`
     }
 
     &:not(:last-of-type) {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+
+        @media screen and (min-width: 768px) {
+            &:not(:last-of-type) {
+                margin-bottom: 15px;
+            }
+        }
     }
 `;
 
@@ -86,9 +94,13 @@ export const CounterWrapper = styled.div`
     display: flex;
     gap: 10px;
 
-    margin-bottom: 20px;
+    margin-top: 10px;
 
-    margin-top: 15px;
+    @media screen and (min-width: 768px) {
+        margin-bottom: 15px;
+
+        margin-top: 15px;
+    }
 `;
 
 export const StyledBtn = styled.button`

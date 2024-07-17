@@ -179,7 +179,7 @@ const ClientForm = ({ formType }) => {
                                 <StyledErrorMsg>*required field</StyledErrorMsg>
                             </ErrorMessage>
                         </FieldWrapper>
-                        <FieldWrapper style={{ marginBottom: '30px' }}>
+                        <FieldWrapper style={{ marginBottom: '15px' }}>
                             <StyledLabel htmlFor={paidHoursId}>
                                 Баланс годин
                             </StyledLabel>
