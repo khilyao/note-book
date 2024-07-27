@@ -7,6 +7,7 @@ import { Container } from './App.styled';
 import AuthForm from 'components/AuthForm';
 import { ToastContainer } from 'react-toastify';
 import ClientInfoPage from 'components/ClientInfoPage/ClientInfoPage';
+import ReferralView from 'components/ReferralView/ReferralView';
 
 const App = () => {
     const { isModalShown, modalShownToggle } = useContext(modalContext);
@@ -81,6 +82,10 @@ const App = () => {
                     <Route
                         path="/note-book/clients/:clientId"
                         element={<ClientInfoPage />}
+                    />
+                    <Route
+                        path="/note-book/referral"
+                        element={<ReferralView />}
                     />
                 </Routes>
             </Container>

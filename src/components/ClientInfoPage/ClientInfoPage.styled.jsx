@@ -8,7 +8,11 @@ export const Main = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    margin-top: 40px;
+    margin-top: 80px;
+
+    @media screen and (min-width: 1024px) {
+        margin-top: 110px;
+    }
 `;
 
 export const StyledInfoBlock = styled.div`

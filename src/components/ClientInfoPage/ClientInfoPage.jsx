@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Suspense } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
+import notebookAPI from 'services/notebookAPI';
 import CardInfo from 'components/CardInfo/CardInfo';
 import {
     StyledList,
@@ -11,7 +12,7 @@ import {
     StyledInfoBlock,
     LoadMore,
 } from './ClientInfoPage.styled';
-import notebookAPI from 'services/notebookAPI';
+import NavBar from 'components/NavBar/NavBar';
 
 const ClientInfoPage = () => {
     const navigate = useNavigate();
@@ -65,6 +66,7 @@ const ClientInfoPage = () => {
 
     return (
         <>
+            <NavBar />
             {currentClient && (
                 <>
                     <Main>
