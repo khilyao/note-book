@@ -8,6 +8,7 @@ import AuthForm from 'components/AuthForm';
 import { ToastContainer } from 'react-toastify';
 import ClientInfoPage from 'components/ClientInfoPage/ClientInfoPage';
 import ReferralView from 'components/ReferralView/ReferralView';
+import Promo from 'components/Promo/Promo';
 
 const App = () => {
     const { isModalShown, modalShownToggle } = useContext(modalContext);
@@ -16,10 +17,12 @@ const App = () => {
         isSofiaAuthenticated,
         isEmirAuthenticated,
         isRavilAuthenticated,
+        isVikaAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
         setIsRavilAuthenticated,
+        setIsVikaAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -39,13 +42,18 @@ const App = () => {
         if (localStorage.getItem('isRavilEntered')) {
             setIsRavilAuthenticated(true);
         }
+
+        if (localStorage.getItem('isVikaEntered')) {
+            setIsVikaAuthenticated(true);
+        }
     });
 
     const isAuth =
         (pathname === '/note-book/sanya' && !isSanyaAuthenticated) ||
         (pathname === '/note-book/sofia' && !isSofiaAuthenticated) ||
         (pathname === '/note-book/emir' && !isEmirAuthenticated) ||
-        (pathname === '/note-book/ravil' && !isRavilAuthenticated)
+        (pathname === '/note-book/ravil' && !isRavilAuthenticated) ||
+        (pathname === '/note-book/vika' && !isVikaAuthenticated)
             ? false
             : true;
 
@@ -79,6 +87,12 @@ const App = () => {
                             element={<ClientTable />}
                         />
                     )}
+                    {isVikaAuthenticated && (
+                        <Route
+                            path="/note-book/vika"
+                            element={<ClientTable />}
+                        />
+                    )}
                     <Route
                         path="/note-book/clients/:clientId"
                         element={<ClientInfoPage />}
@@ -87,6 +101,7 @@ const App = () => {
                         path="/note-book/referral"
                         element={<ReferralView />}
                     />
+                    <Route path="/note-book/promo" element={<Promo />} />
                 </Routes>
             </Container>
             {isModalShown && <Modal onClose={modalShownToggle} />}

@@ -10,7 +10,7 @@ const NavBar = () => {
                 <StyledLink $new to="/note-book/referral">
                     Запрошення
                 </StyledLink>
-                <StyledButton $new type="button">
+                <StyledButton $new to="/note-book/promo" type="button">
                     Промокод
                 </StyledButton>
             </Nav>
