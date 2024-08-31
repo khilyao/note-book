@@ -113,7 +113,7 @@ export const StyledBtn = styled.button`
     font-weight: 600;
 
     color: rgb(79 70 229);
-    background-color: #dae1f8;
+    background-color: #cfd9f9;
     border: none;
     border-radius: 4px;
     box-shadow:
@@ -132,7 +132,7 @@ export const StyledBtn = styled.button`
 
     &:hover,
     &:focus {
-        background-color: #cfd9f9;
+        background-color: #c4cff5;
         ${({ $delete }) => $delete && `background-color: #D92D20;`}
     }
 

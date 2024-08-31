@@ -179,18 +179,18 @@ const ClientForm = ({ formType }) => {
                                 <StyledErrorMsg>*required field</StyledErrorMsg>
                             </ErrorMessage>
                         </FieldWrapper>
-                        <FieldWrapper style={{ marginBottom: '15px' }}>
-                            <StyledLabel htmlFor={paidHoursId}>
-                                Баланс годин
-                            </StyledLabel>
-                            <StyledField
-                                name="paidHours"
-                                id={paidHoursId}
-                                type="number"
-                                placeholder="0"
-                            />
-                            {currentFormType === 'editClient' && (
-                                <>
+                        {currentFormType === 'editClient' && (
+                            <>
+                                <FieldWrapper style={{ marginBottom: '15px' }}>
+                                    <StyledLabel htmlFor={paidHoursId}>
+                                        Баланс годин
+                                    </StyledLabel>
+                                    <StyledField
+                                        name="paidHours"
+                                        id={paidHoursId}
+                                        type="number"
+                                        placeholder="0"
+                                    />
                                     <CounterWrapper>
                                         <CounterButton
                                             onClick={() => {
@@ -260,9 +260,9 @@ const ClientForm = ({ formType }) => {
                                             placeholder="4"
                                         />
                                     </FieldWrapper>
-                                </>
-                            )}
-                        </FieldWrapper>
+                                </FieldWrapper>
+                            </>
+                        )}
                         <ButtonsWrapper>
                             <StyledBtn type="submit">
                                 {currentFormType === 'addClient'
