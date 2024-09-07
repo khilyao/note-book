@@ -27,7 +27,11 @@ const ClientInfoPage = () => {
         localStorage.getItem('isEmirEntered') !== null ||
         localStorage.getItem('isRavilEntered') !== null ||
         localStorage.getItem('isVikaEntered') !== null ||
-        localStorage.getItem('isVeronikaEntered') !== null;
+        localStorage.getItem('isVeronikaEntered') !== null ||
+        localStorage.getItem('isYuliaEntered') !== null ||
+        localStorage.getItem('isAnyaEntered') !== null ||
+        localStorage.getItem('isOlyaEntered') !== null;
+
     useEffect(() => {
         notebookAPI
             .fetchClients()

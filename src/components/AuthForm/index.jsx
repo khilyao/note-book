@@ -13,12 +13,18 @@ const AuthForm = () => {
         isRavilAuthenticated,
         isVikaAuthenticated,
         isVeronikaAuthenticated,
+        isYuliaAuthenticated,
+        isAnyaAuthenticated,
+        isOlyaAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
         setIsRavilAuthenticated,
         setIsVikaAuthenticated,
         setIsVeronikaAuthenticated,
+        setIsYuliaAuthenticated,
+        setIsAnyaAuthenticated,
+        setIsOlyaAuthenticated,
     } = useContext(appContext);
 
     const options = {
