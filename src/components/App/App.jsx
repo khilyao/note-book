@@ -19,12 +19,18 @@ const App = () => {
         isRavilAuthenticated,
         isVikaAuthenticated,
         isVeronikaAuthenticated,
+        isYuliaAuthenticated,
+        isAnyaAuthenticated,
+        isOlyaAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
         setIsRavilAuthenticated,
         setIsVikaAuthenticated,
         setIsVeronikaAuthenticated,
+        setIsYuliaAuthenticated,
+        setIsAnyaAuthenticated,
+        setIsOlyaAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -52,6 +58,18 @@ const App = () => {
         if (localStorage.getItem('isVeronikaEntered')) {
             setIsVeronikaAuthenticated(true);
         }
+
+        if (localStorage.getItem('isYuliaEntered')) {
+            setIsYuliaAuthenticated(true);
+        }
+
+        if (localStorage.getItem('isAnyaEntered')) {
+            setIsAnyaAuthenticated(true);
+        }
+
+        if (localStorage.getItem('isOlyaEntered')) {
+            setIsOlyaAuthenticated(true);
+        }
     });
 
     const isAuth =
@@ -60,7 +78,10 @@ const App = () => {
         (pathname === '/note-book/emir' && !isEmirAuthenticated) ||
         (pathname === '/note-book/ravil' && !isRavilAuthenticated) ||
         (pathname === '/note-book/vika' && !isVikaAuthenticated) ||
-        (pathname === '/note-book/veronika' && !isVeronikaAuthenticated)
+        (pathname === '/note-book/veronika' && !isVeronikaAuthenticated) ||
+        (pathname === '/note-book/yulia' && !isYuliaAuthenticated) ||
+        (pathname === '/note-book/anya' && !isAnyaAuthenticated) ||
+        (pathname === '/note-book/olya' && !isOlyaAuthenticated)
             ? false
             : true;
 
@@ -103,6 +124,24 @@ const App = () => {
                     {isVeronikaAuthenticated && (
                         <Route
                             path="/note-book/veronika"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isYuliaAuthenticated && (
+                        <Route
+                            path="/note-book/yulia"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isAnyaAuthenticated && (
+                        <Route
+                            path="/note-book/anya"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isOlyaAuthenticated && (
+                        <Route
+                            path="/note-book/olya"
                             element={<ClientTable />}
                         />
                     )}

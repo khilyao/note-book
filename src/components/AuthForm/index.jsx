@@ -75,6 +75,27 @@ const AuthForm = () => {
             return;
         }
 
+        if (password === 'yulia2024') {
+            setIsYuliaAuthenticated(true);
+            localStorage.setItem('isYuliaEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
+        if (password === 'anya2024') {
+            setIsAnyaAuthenticated(true);
+            localStorage.setItem('isAnyaEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
+        if (password === 'olya2024') {
+            setIsOlyaAuthenticated(true);
+            localStorage.setItem('isOlyaEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
         setPassword('');
         toast.error('Incorrect password. Try again', options);
     };
@@ -92,7 +113,10 @@ const AuthForm = () => {
                 !isEmirAuthenticated ||
                 !isRavilAuthenticated ||
                 !isVikaAuthenticated ||
-                !isVeronikaAuthenticated) && (
+                !isVeronikaAuthenticated ||
+                !isYuliaAuthenticated ||
+                !isAnyaAuthenticated ||
+                !isOlyaAuthenticated) && (
                 <StyledContainer>
                     <StyledField htmlFor="password">Password</StyledField>
                     <StyledInput
