@@ -3,7 +3,8 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase } from 'firebase/database';
 
 const firebaseConfig = {
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    databaseURL:
+        'https://note-book-e6c0b-default-rtdb.europe-west1.firebasedatabase.app',
 };
 
 initializeApp(firebaseConfig);
