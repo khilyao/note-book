@@ -13,39 +13,25 @@ import {
 } from './ClientTable.styled';
 import { Section } from 'components/App/App.styled';
 import Button from 'components/Button/Button';
-import notebookAPI from 'services/notebookAPI';
 import { appContext, modalContext } from 'contexts/context';
+import { fbGetClients, fbGetTutors } from '../../firebase/functions/index';
 
 const ClientsTable = () => {
     const { pathname } = useLocation();
     const currentTutorName = pathname.split('/').pop();
-    const {
-        toggleModal,
-        handleGenerateModalContent,
-        setClientInfo,
-        getClients,
-    } = useContext(modalContext);
+    const { toggleModal, handleGenerateModalContent, setClientInfo } =
+        useContext(modalContext);
     const { clients, setClients, tutors, setTutors } = useContext(appContext);
 
     useEffect(() => {
-        notebookAPI
-            .fetchClients()
-            .then(data => {
-                setClients(data);
-            })
-            .catch(e => {
-                console.error('Error fetching clients:', e);
-            });
+        fbGetClients().then(clients => {
+            setClients(clients);
+        });
 
-        notebookAPI
-            .fetchTutors()
-            .then(data => {
-                setTutors(data);
-            })
-            .catch(e => {
-                console.error('Error fetching clients:', e);
-            });
-    }, [setClients, getClients, setTutors]);
+        fbGetTutors().then(tutors => {
+            setTutors(tutors);
+        });
+    }, [setClients, setTutors]);
 
     const tutor = tutors.find(({ tutor }) => tutor === currentTutorName)?.tutor;
 

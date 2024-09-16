@@ -31,3 +31,4 @@ yarn-error.log*
 .eslintcache
 tech-task.md
 test.json
+.env

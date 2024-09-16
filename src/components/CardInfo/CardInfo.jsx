@@ -2,7 +2,7 @@ import sad from 'assets/sad.png';
 import cool from 'assets/cool.png';
 import filledStar from 'assets/filledStar.svg';
 import emptyStar from 'assets/emptyStar.svg';
-import notebookAPI from 'services/notebookAPI';
+import { removeLesson } from '../../firebase/functions';
 import {
     Card,
     Title,
@@ -12,6 +12,9 @@ import {
     Score,
     Paid,
 } from './CardInfo.styled';
+import { useContext } from 'react';
+import { appContext } from 'contexts/context';
+import { fbGetClients } from '../../firebase/functions';
 
 const CardInfo = ({
     client,
@@ -30,6 +33,7 @@ const CardInfo = ({
     onTogglePaid,
 }) => {
     const title = type === 'lesson' ? 'Деталі заняття' : 'Платіж';
+    const { setClients } = useContext(appContext);
 
     const transformLessonDuration = time => {
         const hours = Math.floor(time / 60);
@@ -50,11 +54,13 @@ const CardInfo = ({
                     isAdmin
                         ? async () => {
                               try {
-                                  await notebookAPI.removeLesson(client, id);
-                                  onDelete(prevState => !prevState);
+                                  await removeLesson(client, id);
+                                  const clients = await fbGetClients();
+                                  setClients(clients);
+                                  onDelete(clients);
                               } catch (error) {
                                   console.error(
-                                      'Error toggling lesson paid status:',
+                                      'Error removing lesson:',
                                       error
                                   );
                               }

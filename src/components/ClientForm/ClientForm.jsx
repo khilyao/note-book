@@ -16,16 +16,20 @@ import {
 } from './ClientForm.styled';
 import { object, string, number, boolean } from 'yup';
 import { v4 as uuidv4 } from 'uuid';
-import { modalContext } from 'contexts/context';
+import { appContext, modalContext } from 'contexts/context';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import notebookAPI from 'services/notebookAPI';
 import CounterButton from 'components/CounterButton/CounterButton';
+import {
+    createClient,
+    fbGetClients,
+    deleteClient,
+    updateClientInfo,
+} from '../../firebase/functions';
 
 const ClientForm = ({ formType }) => {
     const {
         toggleModal,
-        setGetClients,
         setIsAddClientBtn,
         setIsEditClientBtn,
         clientInfo: {
@@ -37,6 +41,7 @@ const ClientForm = ({ formType }) => {
             lessonsPayment,
         },
     } = useContext(modalContext);
+    const { setClients } = useContext(appContext);
     const [previousPaidHoursValue] = useState(paidHours);
     const { pathname } = useLocation();
     const tutor = pathname.split('/').pop();
@@ -83,7 +88,10 @@ const ClientForm = ({ formType }) => {
         };
 
         const formActions = () => {
-            setGetClients([]);
+            fbGetClients().then(clients => {
+                setClients(clients);
+            });
+
             resetForm();
             toggleModal();
             setIsAddClientBtn(false);
@@ -93,17 +101,22 @@ const ClientForm = ({ formType }) => {
         };
 
         formType === 'addClient'
-            ? notebookAPI.addClient(newClient, tutor).then(formActions)
-            : notebookAPI.updateClientInfo(id, newClient).then(formActions);
+            ? createClient(newClient).then(formActions)
+            : updateClientInfo(id, newClient).then(formActions);
     };
 
-    const deleteClient = () => {
-        notebookAPI.deleteClient(id).then(() => {
-            toggleModal();
-            setIsEditClientBtn(false);
-            notifyUser();
-            setGetClients([]);
-        });
+    const handleDeleteClient = () => {
+        deleteClient(id)
+            .then(() => {
+                toggleModal();
+                setIsEditClientBtn(false);
+                notifyUser();
+            })
+            .then(() => {
+                fbGetClients().then(clients => {
+                    setClients(clients);
+                });
+            });
     };
 
     const defineInitialValues = () => {
@@ -112,7 +125,7 @@ const ClientForm = ({ formType }) => {
                 name: '',
                 lessonsPerWeek: '',
                 price: '',
-                paidHours: '',
+                paidHours: 0,
             };
         }
 
@@ -271,7 +284,7 @@ const ClientForm = ({ formType }) => {
                             </StyledBtn>
                             {currentFormType === 'editClient' && (
                                 <StyledBtn
-                                    onClick={deleteClient}
+                                    onClick={handleDeleteClient}
                                     $delete
                                     style={{ marginLeft: '20px' }}
                                     type="button"

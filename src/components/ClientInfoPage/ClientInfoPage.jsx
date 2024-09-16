@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Suspense } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
-import notebookAPI from 'services/notebookAPI';
+import { fbGetClients, toggleLessonPaid } from '../../firebase/functions';
 import CardInfo from 'components/CardInfo/CardInfo';
 import {
     StyledList,
@@ -21,6 +21,7 @@ const ClientInfoPage = () => {
     const [needUpdate, setNeedUpdate] = useState(false);
     const [itemsToShow, setItemsToShow] = useState(6);
     const currentClient = clients.find(client => client.id === clientId);
+
     const isAdmin =
         localStorage.getItem('isSanyaEntered') !== null ||
         localStorage.getItem('isSofiaEntered') !== null ||
@@ -33,8 +34,7 @@ const ClientInfoPage = () => {
         localStorage.getItem('isOlyaEntered') !== null;
 
     useEffect(() => {
-        notebookAPI
-            .fetchClients()
+        fbGetClients()
             .then(data => {
                 setClients(data);
             })
@@ -47,11 +47,20 @@ const ClientInfoPage = () => {
         try {
             if (!isAdmin) return;
 
-            await notebookAPI.toggleLessonPaid(currentClient, lessonId);
+            toggleLessonPaid(currentClient, lessonId).then(() => {
+                fbGetClients().then(clients => {
+                    setClients(clients);
+                });
+            });
             setNeedUpdate(prevState => !prevState);
         } catch (error) {
             console.error('Error toggling lesson paid status:', error);
         }
+    };
+
+    const handleDelete = updatedClients => {
+        setClients(updatedClients);
+        setNeedUpdate(prev => !prev);
     };
 
     const transformLessonDuration = time => {
@@ -98,7 +107,7 @@ const ClientInfoPage = () => {
                     </Main>
                 </>
             )}
-            {currentClient && (
+            {currentClient && currentClient.lessonsPayment && (
                 <>
                     <StyledInfoBlock>
                         <StyledList>
@@ -108,7 +117,7 @@ const ClientInfoPage = () => {
                                         <CardInfo
                                             onTogglePaid={handleLessonPaid}
                                             client={currentClient}
-                                            onDelete={setNeedUpdate}
+                                            onDelete={handleDelete}
                                             key={index}
                                             isAdmin={isAdmin}
                                             {...lesson}
