@@ -57,9 +57,7 @@ export const deleteClient = async id => {
     if (snapshot.exists()) {
         const clients = snapshot.val();
 
-        const indexToDelete = clients.findIndex(
-            ({ id: clientId }) => id === clientId
-        );
+        const indexToDelete = clients.findIndex(client => id === client?.id);
 
         const clientToRemoveRef = ref(db, `/clients/${indexToDelete}`);
         remove(clientToRemoveRef)
@@ -122,9 +120,15 @@ export const updateClientInfo = async (id, client) => {
     const snapshot = await get(clientsRef);
     if (snapshot.exists()) {
         const clients = snapshot.val();
-        const currentId = clients.findIndex(
-            ({ id: clientId }) => id === clientId
-        );
+
+        const currentId = clients?.findIndex(client => {
+            // if (client?.id) {
+            //     console.log(client?.id);
+            // } else {
+            //     console.log('no id');
+            // }
+            return id === client?.id;
+        });
 
         const clientToUpdateRef = ref(db, `/clients/${currentId}`);
 
@@ -167,7 +171,7 @@ export const removeLesson = async (client, lessonId) => {
         const clients = snapshot.val();
 
         const currentId = clients.findIndex(
-            ({ id: clientId }) => clientId === client.id
+            clientEl => clientEl?.id === client?.id
         );
 
         const clientToUpdateRef = ref(db, `/clients/${currentId}`);
@@ -195,7 +199,7 @@ export const toggleLessonPaid = async (client, lessonId) => {
         const clients = snapshot.val();
 
         const currentId = clients.findIndex(
-            ({ id: clientId }) => clientId === client.id
+            ({ id: clientId }) => clientId === client?.id
         );
         const updatedClient = {
             ...client,

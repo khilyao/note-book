@@ -39,7 +39,7 @@ const ClientsTable = () => {
         return null;
     }
 
-    const students = clients.filter(({ mentor }) => mentor === tutor);
+    const students = clients?.filter(({ mentor }) => mentor === tutor);
     const monthlyProfit =
         students.reduce(
             (acc, { lessonsPerWeek, price }) => acc + lessonsPerWeek * price,

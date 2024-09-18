@@ -20,7 +20,7 @@ const ClientInfoPage = () => {
     const [clients, setClients] = useState([]);
     const [needUpdate, setNeedUpdate] = useState(false);
     const [itemsToShow, setItemsToShow] = useState(6);
-    const currentClient = clients.find(client => client.id === clientId);
+    const currentClient = clients?.find(client => client?.id === clientId);
 
     const isAdmin =
         localStorage.getItem('isSanyaEntered') !== null ||
