@@ -22,6 +22,7 @@ const App = () => {
         isYuliaAuthenticated,
         isAnyaAuthenticated,
         isOlyaAuthenticated,
+        isAlbinaAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
@@ -31,6 +32,7 @@ const App = () => {
         setIsYuliaAuthenticated,
         setIsAnyaAuthenticated,
         setIsOlyaAuthenticated,
+        setIsAlbinaAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -70,6 +72,10 @@ const App = () => {
         if (localStorage.getItem('isOlyaEntered')) {
             setIsOlyaAuthenticated(true);
         }
+
+        if (localStorage.getItem('isAlbinaEntered')) {
+            setIsAlbinaAuthenticated(true);
+        }
     });
 
     const isAuth =
@@ -81,7 +87,8 @@ const App = () => {
         (pathname === '/note-book/veronika' && !isVeronikaAuthenticated) ||
         (pathname === '/note-book/yulia' && !isYuliaAuthenticated) ||
         (pathname === '/note-book/anya' && !isAnyaAuthenticated) ||
-        (pathname === '/note-book/olya' && !isOlyaAuthenticated)
+        (pathname === '/note-book/olya' && !isOlyaAuthenticated) ||
+        (pathname === '/note-book/albina' && !isAlbinaAuthenticated)
             ? false
             : true;
 
@@ -142,6 +149,12 @@ const App = () => {
                     {isOlyaAuthenticated && (
                         <Route
                             path="/note-book/olya"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isAlbinaAuthenticated && (
+                        <Route
+                            path="/note-book/albina"
                             element={<ClientTable />}
                         />
                     )}
