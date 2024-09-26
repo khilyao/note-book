@@ -124,7 +124,7 @@ const AuthForm = () => {
 
         if (password === 'alina2024') {
             setIsAlinaAuthenticated(true);
-            localStorage.setItem('isAnnaEntered', true);
+            localStorage.setItem('isAlinaEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
