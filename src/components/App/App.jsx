@@ -23,6 +23,8 @@ const App = () => {
         isAnyaAuthenticated,
         isOlyaAuthenticated,
         isAlbinaAuthenticated,
+        isAnnaAuthenticated,
+        isAlinaAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
@@ -33,6 +35,8 @@ const App = () => {
         setIsAnyaAuthenticated,
         setIsOlyaAuthenticated,
         setIsAlbinaAuthenticated,
+        setIsAnnaAuthenticated,
+        setIsAlinaAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -76,6 +80,14 @@ const App = () => {
         if (localStorage.getItem('isAlbinaEntered')) {
             setIsAlbinaAuthenticated(true);
         }
+
+        if (localStorage.getItem('isAnnaEntered')) {
+            setIsAnnaAuthenticated(true);
+        }
+
+        if (localStorage.getItem('isAlinaEntered')) {
+            setIsAlinaAuthenticated(true);
+        }
     });
 
     const isAuth =
@@ -88,7 +100,9 @@ const App = () => {
         (pathname === '/note-book/yulia' && !isYuliaAuthenticated) ||
         (pathname === '/note-book/anya' && !isAnyaAuthenticated) ||
         (pathname === '/note-book/olya' && !isOlyaAuthenticated) ||
-        (pathname === '/note-book/albina' && !isAlbinaAuthenticated)
+        (pathname === '/note-book/albina' && !isAlbinaAuthenticated) ||
+        (pathname === '/note-book/anna' && !isAnnaAuthenticated) ||
+        (pathname === '/note-book/alina' && !isAlinaAuthenticated)
             ? false
             : true;
 
@@ -155,6 +169,18 @@ const App = () => {
                     {isAlbinaAuthenticated && (
                         <Route
                             path="/note-book/albina"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isAnnaAuthenticated && (
+                        <Route
+                            path="/note-book/anna"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isAlinaAuthenticated && (
+                        <Route
+                            path="/note-book/alina"
                             element={<ClientTable />}
                         />
                     )}
