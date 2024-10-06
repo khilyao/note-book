@@ -34,7 +34,8 @@ const ClientInfoPage = () => {
         localStorage.getItem('isOlyaEntered') !== null ||
         localStorage.getItem('isAlbinaEntered') !== null ||
         localStorage.getItem('isAnnaEntered') !== null ||
-        localStorage.getItem('isAlinaEntered') !== null;
+        localStorage.getItem('isAlinaEntered') !== null ||
+        localStorage.getItem('isMarynaEntered') !== null;
 
     useEffect(() => {
         fbGetClients()

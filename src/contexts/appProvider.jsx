@@ -16,6 +16,7 @@ const AppProvider = ({ children }) => {
     const [isAlbinaAuthenticated, setIsAlbinaAuthenticated] = useState(false);
     const [isAnnaAuthenticated, setIsAnnaAuthenticated] = useState(false);
     const [isAlinaAuthenticated, setIsAlinaAuthenticated] = useState(false);
+    const [isMarynaAuthenticated, setIsMarynaAuthenticated] = useState(false);
 
     const [clients, setClients] = useState([]);
     const [tutors, setTutors] = useState([]);
@@ -51,6 +52,8 @@ const AppProvider = ({ children }) => {
         setIsAnnaAuthenticated,
         isAlinaAuthenticated,
         setIsAlinaAuthenticated,
+        isMarynaAuthenticated,
+        setIsMarynaAuthenticated,
     };
 
     return (
