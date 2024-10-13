@@ -211,3 +211,40 @@ export const toggleLessonPaid = async (client, lessonId) => {
         update(clientToUpdateRef, updatedClient);
     }
 };
+
+export const changeClientDate = async (lessonPaymentId, clientId, newDate) => {
+    try {
+        const snapshot = await get(clientsRef);
+        if (snapshot.exists()) {
+            const clients = snapshot.val();
+            const currentId = clients.findIndex(
+                clientEl => clientEl?.id === clientId
+            );
+
+            if (currentId === -1) {
+                console.log('Client not found');
+                throw new Error('Something went wrong, try later...');
+            }
+
+            const client = clients[currentId];
+
+            const updatedLessonsPayment = client.lessonsPayment.map(payment => {
+                if (payment.id === lessonPaymentId) {
+                    return { ...payment, date: newDate };
+                }
+                return payment;
+            });
+
+            const clientToUpdateRef = ref(db, `/clients/${currentId}`);
+
+            const updatedClient = {
+                ...client,
+                lessonsPayment: updatedLessonsPayment,
+            };
+            await update(clientToUpdateRef, updatedClient);
+            return 'Дату успішно оновлено!';
+        }
+    } catch (e) {
+        return e;
+    }
+};

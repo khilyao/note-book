@@ -112,6 +112,31 @@ export const Field = styled.div`
     justify-content: space-between;
 `;
 
+export const DateLabel = styled.p``;
+
+export const Date = styled.input`
+    border: none;
+
+    background-color: transparent;
+    font-size: 16px;
+    color: rgb(15, 15, 15);
+    font-family: 'Open Sans';
+    font-weight: 600;
+    max-width: 86px;
+
+    outline: red;
+    border-radius: 4px;
+    transition: background-color 150ms linear;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #dfd3fd;
+    }
+    &:focus {
+        background-color: #bbb9fd;
+    }
+`;
+
 export const Paid = styled.span`
     color: ${({ $paid }) => ($paid ? '#039900' : '#FB0303')};
 

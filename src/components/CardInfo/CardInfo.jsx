@@ -1,6 +1,8 @@
 import sad from 'assets/sad.png';
 import cool from 'assets/cool.png';
 import filledStar from 'assets/filledStar.svg';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import emptyStar from 'assets/emptyStar.svg';
 import { removeLesson } from '../../firebase/functions';
 import {
@@ -11,10 +13,12 @@ import {
     Field,
     Score,
     Paid,
+    DateLabel,
+    Date,
 } from './CardInfo.styled';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { appContext } from 'contexts/context';
-import { fbGetClients } from '../../firebase/functions';
+import { fbGetClients, changeClientDate } from '../../firebase/functions';
 
 const CardInfo = ({
     client,
@@ -29,11 +33,13 @@ const CardInfo = ({
     homework,
     amount,
     balance,
-    date,
+    date: currentDate,
     onTogglePaid,
 }) => {
     const title = type === 'lesson' ? 'Деталі заняття' : 'Платіж';
     const { setClients } = useContext(appContext);
+    const [date, setDate] = useState(currentDate);
+    const { clientId } = useParams();
 
     const transformLessonDuration = time => {
         const hours = Math.floor(time / 60);
@@ -45,6 +51,37 @@ const CardInfo = ({
         } else {
             return `${minutes} хв`;
         }
+    };
+
+    const handleDate = e => {
+        const newDate = e.target.value;
+
+        setDate(newDate);
+    };
+
+    const onDateSubmit = async () => {
+        if (date === currentDate) return;
+
+        const res = await changeClientDate(id, clientId, date);
+        showSuccessfulChangedDate(res);
+    };
+
+    const onPressEnterKey = e => {
+        if (e.key === 'Enter') {
+            e.target.blur();
+            onDateSubmit();
+        }
+    };
+
+    const showSuccessfulChangedDate = msg => {
+        const options = {
+            theme: 'colored',
+            autoClose: 1500,
+            closeOnClick: true,
+            hideProgressBar: true,
+        };
+
+        toast.success(msg, options);
     };
 
     return (
@@ -73,8 +110,18 @@ const CardInfo = ({
                 {type === 'lesson' && (
                     <InfoBlock>
                         <Field>
-                            <p>Дата заняття</p>
-                            <span>{date}</span>
+                            <DateLabel>Дата заняття</DateLabel>
+                            {isAdmin ? (
+                                <Date
+                                    onChange={handleDate}
+                                    maxLength={10}
+                                    value={date}
+                                    onBlur={onDateSubmit}
+                                    onKeyDown={onPressEnterKey}
+                                />
+                            ) : (
+                                <span>{date}</span>
+                            )}
                         </Field>
                         <Field>
                             <p>Тривалість</p>
@@ -132,8 +179,18 @@ const CardInfo = ({
                 {type === 'payment' && (
                     <InfoBlock>
                         <Field>
-                            <p>Дата платежу</p>
-                            <span>{date}</span>
+                            <DateLabel>Дата заняття</DateLabel>
+                            {isAdmin ? (
+                                <Date
+                                    onChange={handleDate}
+                                    maxLength={10}
+                                    value={date}
+                                    onBlur={onDateSubmit}
+                                    onKeyDown={onPressEnterKey}
+                                />
+                            ) : (
+                                <span>{date}</span>
+                            )}
                         </Field>
                         <Field>
                             <p>Кількість годин</p>
