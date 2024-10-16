@@ -20,6 +20,8 @@ const AuthForm = () => {
         isAnnaAuthenticated,
         isAlinaAuthenticated,
         isMarynaAuthenticated,
+        isIvannaAuthenticated,
+        isOstapAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
@@ -33,6 +35,8 @@ const AuthForm = () => {
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
         setIsMarynaAuthenticated,
+        setIsIvannaAuthenticated,
+        setIsOstapAuthenticated,
     } = useContext(appContext);
 
     const options = {
@@ -138,6 +142,20 @@ const AuthForm = () => {
             return;
         }
 
+        if (password === 'ivanna_pro') {
+            setIsIvannaAuthenticated(true);
+            localStorage.setItem('isIvannaEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
+        if (password === 'ostap_pro') {
+            setIsOstapAuthenticated(true);
+            localStorage.setItem('isOstapEntered', true);
+            toast.success("Let's check profit :)", options);
+            return;
+        }
+
         setPassword('');
         toast.error('Incorrect password. Try again', options);
     };
@@ -162,7 +180,9 @@ const AuthForm = () => {
                 !isAlbinaAuthenticated ||
                 !isAnnaAuthenticated ||
                 !isAlinaAuthenticated ||
-                !isMarynaAuthenticated) && (
+                !isMarynaAuthenticated ||
+                !isIvannaAuthenticated ||
+                !isOstapAuthenticated) && (
                 <StyledContainer>
                     <StyledField htmlFor="password">Password</StyledField>
                     <StyledInput

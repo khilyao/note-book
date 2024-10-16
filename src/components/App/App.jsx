@@ -26,6 +26,8 @@ const App = () => {
         isAnnaAuthenticated,
         isAlinaAuthenticated,
         isMarynaAuthenticated,
+        isIvannaAuthenticated,
+        isOstapAuthenticated,
         setIsSanyaAuthenticated,
         setIsSofiaAuthenticated,
         setIsEmirAuthenticated,
@@ -39,6 +41,8 @@ const App = () => {
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
         setIsMarynaAuthenticated,
+        setIsIvannaAuthenticated,
+        setIsOstapAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -94,6 +98,14 @@ const App = () => {
         if (localStorage.getItem('isMarynaEntered')) {
             setIsMarynaAuthenticated(true);
         }
+
+        if (localStorage.getItem('isIvannaEntered')) {
+            setIsIvannaAuthenticated(true);
+        }
+
+        if (localStorage.getItem('isOstapEntered')) {
+            setIsOstapAuthenticated(true);
+        }
     });
 
     const isAuth =
@@ -109,7 +121,9 @@ const App = () => {
         (pathname === '/note-book/albina' && !isAlbinaAuthenticated) ||
         (pathname === '/note-book/anna' && !isAnnaAuthenticated) ||
         (pathname === '/note-book/alina' && !isAlinaAuthenticated) ||
-        (pathname === '/note-book/maryna' && !isMarynaAuthenticated)
+        (pathname === '/note-book/maryna' && !isMarynaAuthenticated) ||
+        (pathname === '/note-book/ivanna' && !isIvannaAuthenticated) ||
+        (pathname === '/note-book/ostap' && !isOstapAuthenticated)
             ? false
             : true;
 
@@ -194,6 +208,18 @@ const App = () => {
                     {isMarynaAuthenticated && (
                         <Route
                             path="/note-book/maryna"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isIvannaAuthenticated && (
+                        <Route
+                            path="/note-book/ivanna"
+                            element={<ClientTable />}
+                        />
+                    )}
+                    {isOstapAuthenticated && (
+                        <Route
+                            path="/note-book/ostap"
                             element={<ClientTable />}
                         />
                     )}
