@@ -115,17 +115,17 @@ export const Field = styled.div`
 export const DateLabel = styled.p``;
 
 export const Date = styled.input`
-    border: none;
+    max-width: 72px;
 
-    background-color: transparent;
-    font-size: 16px;
-    color: rgb(15, 15, 15);
     font-family: 'Open Sans';
     font-weight: 600;
-    max-width: 86px;
 
+    border: none;
+    background-color: transparent;
+    color: rgb(15, 15, 15);
     outline: red;
     border-radius: 4px;
+
     transition: background-color 150ms linear;
     cursor: pointer;
 
@@ -134,6 +134,11 @@ export const Date = styled.input`
     }
     &:focus {
         background-color: #bbb9fd;
+    }
+
+    @media screen and (min-width: 1024px) {
+        max-width: 86px;
+        font-size: 16px;
     }
 `;
 
