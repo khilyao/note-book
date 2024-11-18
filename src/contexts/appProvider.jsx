@@ -8,8 +8,7 @@ const AppProvider = ({ children }) => {
     const [isEmirAuthenticated, setIsEmirAuthenticated] = useState(false);
     const [isRavilAuthenticated, setIsRavilAuthenticated] = useState(false);
     const [isVikaAuthenticated, setIsVikaAuthenticated] = useState(false);
-    const [isVeronikaAuthenticated, setIsVeronikaAuthenticated] =
-        useState(false);
+    const [isVeronikaAuthenticated, setIsVeronikaAuthenticated] = useState(false);
     const [isYuliaAuthenticated, setIsYuliaAuthenticated] = useState(false);
     const [isAnyaAuthenticated, setIsAnyaAuthenticated] = useState(false);
     const [isOlyaAuthenticated, setIsOlyaAuthenticated] = useState(false);
@@ -19,6 +18,7 @@ const AppProvider = ({ children }) => {
     const [isMarynaAuthenticated, setIsMarynaAuthenticated] = useState(false);
     const [isIvannaAuthenticated, setIsIvannaAuthenticated] = useState(false);
     const [isOstapAuthenticated, setIsOstapAuthenticated] = useState(false);
+    const [isVaryaAuthenticated, setIsVaryaAuthenticated] = useState(false);
 
     const [clients, setClients] = useState([]);
     const [tutors, setTutors] = useState([]);
@@ -60,6 +60,8 @@ const AppProvider = ({ children }) => {
         setIsIvannaAuthenticated,
         isOstapAuthenticated,
         setIsOstapAuthenticated,
+        isVaryaAuthenticated,
+        setIsVaryaAuthenticated
     };
 
     return (
