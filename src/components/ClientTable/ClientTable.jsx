@@ -10,6 +10,8 @@ import {
     Data,
     MonthlyProfit,
     StyledLink,
+    RealProfit,
+    Rate,
 } from './ClientTable.styled';
 import { Section } from 'components/App/App.styled';
 import Button from 'components/Button/Button';
@@ -33,18 +35,64 @@ const ClientsTable = () => {
         });
     }, [setClients, setTutors]);
 
-    const tutor = tutors.find(({ tutor }) => tutor === currentTutorName)?.tutor;
+    const tutor = tutors.find(({ tutor }) => tutor === currentTutorName);
 
     if (!tutor) {
         return null;
     }
 
-    const students = clients?.filter(({ mentor }) => mentor === tutor);
+    const students = clients?.filter(
+        ({ mentor }) => mentor === currentTutorName
+    );
     const monthlyProfit =
         students.reduce(
             (acc, { lessonsPerWeek, price }) => acc + lessonsPerWeek * price,
             0
         ) * 4;
+
+    const realProfitPreviousMonth = students.reduce((totalProfit, student) => {
+        if (student.name.includes('*')) {
+            return totalProfit;
+        }
+
+        const studentProfit =
+            student.lessonsPayment?.reduce((sum, lesson) => {
+                const previousMonth = new Date().getMonth();
+                const lessonMonth = parseInt(lesson.date.split('.')[1]);
+
+                if (lesson.type === 'lesson' && previousMonth === lessonMonth) {
+                    return sum + lesson.duration * student.price;
+                }
+                return sum;
+            }, 0) || 0;
+        return totalProfit + studentProfit;
+    }, 0);
+
+    const ratePreviousMonth = parseInt(
+        realProfitPreviousMonth * tutor.percentage
+    );
+
+    const realProfitCurrentMonth = students.reduce((totalProfit, student) => {
+        if (student.name.includes('*')) {
+            return totalProfit;
+        }
+
+        const studentProfit =
+            student.lessonsPayment?.reduce((sum, lesson) => {
+                const currentMonth = new Date().getMonth() + 1;
+                const lessonMonth = parseInt(lesson.date.split('.')[1]);
+
+                if (lesson.type === 'lesson' && currentMonth === lessonMonth) {
+                    return sum + lesson.duration * student.price;
+                }
+                return sum;
+            }, 0) || 0;
+        return totalProfit + studentProfit;
+    }, 0);
+
+    const rateCurrentMonth = parseInt(
+        realProfitCurrentMonth * tutor.percentage
+    );
 
     const transformLessonDuration = time => {
         const hours = Math.floor(time / 60);
@@ -146,7 +194,32 @@ const ClientsTable = () => {
                         )}
                     </TableBody>
                 </Table>
-                <MonthlyProfit>Місячний дохід: {monthlyProfit}</MonthlyProfit>
+                <MonthlyProfit>
+                    Орієнтовний місячний дохід: {monthlyProfit}
+                </MonthlyProfit>
+                {realProfitCurrentMonth && (
+                    <RealProfit>
+                        Фактичий прибуток за поточний місяць:{' '}
+                        {realProfitCurrentMonth}{' '}
+                        {tutor.percentage !== 0 && (
+                            <Rate>
+                                ({rateCurrentMonth}) - {tutor.percentage * 100}%
+                            </Rate>
+                        )}
+                    </RealProfit>
+                )}
+                {realProfitPreviousMonth && (
+                    <RealProfit>
+                        Фактичий прибуток за попередній місяць:{' '}
+                        {realProfitPreviousMonth}{' '}
+                        {tutor.percentage !== 0 && (
+                            <Rate>
+                                ({ratePreviousMonth}) - {tutor.percentage * 100}
+                                %
+                            </Rate>
+                        )}
+                    </RealProfit>
+                )}
             </TableWrapper>
         </Section>
     );

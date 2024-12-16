@@ -94,13 +94,41 @@ export const StyledLink = styled(Link)`
     }
 `;
 
-export const MonthlyProfit = styled.p`
+export const MonthlyProfit = styled.span`
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     font-weight: 900;
     letter-spacing: 0.04em;
 
     color: #4343d6;
+
+    @media screen and (min-width: 768px) {
+        font-size: 18px;
+    }
+`;
+
+export const RealProfit = styled.span`
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+
+    margin-top: 14px;
+
+    color: #4343d6;
+
+    @media screen and (min-width: 768px) {
+        font-size: 18px;
+    }
+`;
+
+export const Rate = styled.span`
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+
+    color: #f55b5b;
 
     @media screen and (min-width: 768px) {
         font-size: 18px;
