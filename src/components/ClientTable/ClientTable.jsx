@@ -50,21 +50,35 @@ const ClientsTable = () => {
             0
         ) * 4;
 
+    const getPreviousMonth = () => {
+        const now = new Date();
+        const previousMonth = new Date(now.getFullYear(), now.getMonth() - 1);
+        return previousMonth;
+    };
+
     const realProfitPreviousMonth = students.reduce((totalProfit, student) => {
         if (student.name.includes('*')) {
             return totalProfit;
         }
 
+        const previousMonthDate = getPreviousMonth();
+        const previousMonth = previousMonthDate.getMonth() + 1; // Месяц в формате 1-12
+        const previousYear = previousMonthDate.getFullYear();
+
         const studentProfit =
             student.lessonsPayment?.reduce((sum, lesson) => {
-                const previousMonth = new Date().getMonth();
-                const lessonMonth = parseInt(lesson.date.split('.')[1]);
+                const [, month, year] = lesson.date.split('.').map(Number);
 
-                if (lesson.type === 'lesson' && previousMonth === lessonMonth) {
+                if (
+                    lesson.type === 'lesson' &&
+                    month === previousMonth &&
+                    year === previousYear
+                ) {
                     return sum + lesson.duration * student.price;
                 }
                 return sum;
             }, 0) || 0;
+
         return totalProfit + studentProfit;
     }, 0);
 
@@ -77,16 +91,23 @@ const ClientsTable = () => {
             return totalProfit;
         }
 
+        const currentMonth = new Date().getMonth() + 1;
+        const currentYear = new Date().getFullYear();
+
         const studentProfit =
             student.lessonsPayment?.reduce((sum, lesson) => {
-                const currentMonth = new Date().getMonth() + 1;
-                const lessonMonth = parseInt(lesson.date.split('.')[1]);
+                const [, month, year] = lesson.date.split('.').map(Number);
 
-                if (lesson.type === 'lesson' && currentMonth === lessonMonth) {
+                if (
+                    lesson.type === 'lesson' &&
+                    month === currentMonth &&
+                    year === currentYear
+                ) {
                     return sum + lesson.duration * student.price;
                 }
                 return sum;
             }, 0) || 0;
+
         return totalProfit + studentProfit;
     }, 0);
 
@@ -197,7 +218,7 @@ const ClientsTable = () => {
                 <MonthlyProfit>
                     Орієнтовний місячний дохід: {monthlyProfit}
                 </MonthlyProfit>
-                {realProfitCurrentMonth && (
+                {realProfitCurrentMonth ? (
                     <RealProfit>
                         Фактичий прибуток за поточний місяць:{' '}
                         {realProfitCurrentMonth}{' '}
@@ -207,8 +228,10 @@ const ClientsTable = () => {
                             </Rate>
                         )}
                     </RealProfit>
+                ) : (
+                    ''
                 )}
-                {realProfitPreviousMonth && (
+                {realProfitPreviousMonth ? (
                     <RealProfit>
                         Фактичий прибуток за попередній місяць:{' '}
                         {realProfitPreviousMonth}{' '}
@@ -219,6 +242,8 @@ const ClientsTable = () => {
                             </Rate>
                         )}
                     </RealProfit>
+                ) : (
+                    ''
                 )}
             </TableWrapper>
         </Section>
