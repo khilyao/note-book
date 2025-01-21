@@ -25,7 +25,7 @@ const App = () => {
         isAlbinaAuthenticated,
         isAnnaAuthenticated,
         isAlinaAuthenticated,
-        isMarynaAuthenticated,
+        isMaksymAuthenticated,
         isIvannaAuthenticated,
         isOstapAuthenticated,
         isVaryaAuthenticated,
@@ -41,10 +41,10 @@ const App = () => {
         setIsAlbinaAuthenticated,
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
-        setIsMarynaAuthenticated,
+        setIsMaksymAuthenticated,
         setIsIvannaAuthenticated,
         setIsOstapAuthenticated,
-        setIsVaryaAuthenticated
+        setIsVaryaAuthenticated,
     } = useContext(appContext);
     const { pathname } = useLocation();
 
@@ -97,8 +97,8 @@ const App = () => {
             setIsAlinaAuthenticated(true);
         }
 
-        if (localStorage.getItem('isMarynaEntered')) {
-            setIsMarynaAuthenticated(true);
+        if (localStorage.getItem('isMaksymEntered')) {
+            setIsMaksymAuthenticated(true);
         }
 
         if (localStorage.getItem('isIvannaEntered')) {
@@ -109,7 +109,7 @@ const App = () => {
             setIsOstapAuthenticated(true);
         }
 
-         if (localStorage.getItem('isVaryaEntered')) {
+        if (localStorage.getItem('isVaryaEntered')) {
             setIsVaryaAuthenticated(true);
         }
     });
@@ -127,7 +127,7 @@ const App = () => {
         (pathname === '/note-book/albina' && !isAlbinaAuthenticated) ||
         (pathname === '/note-book/anna' && !isAnnaAuthenticated) ||
         (pathname === '/note-book/alina' && !isAlinaAuthenticated) ||
-        (pathname === '/note-book/maryna' && !isMarynaAuthenticated) ||
+        (pathname === '/note-book/maksym' && !isMaksymAuthenticated) ||
         (pathname === '/note-book/ivanna' && !isIvannaAuthenticated) ||
         (pathname === '/note-book/ostap' && !isOstapAuthenticated) ||
         (pathname === '/note-book/varya' && !isVaryaAuthenticated)
@@ -212,9 +212,9 @@ const App = () => {
                             element={<ClientTable />}
                         />
                     )}
-                    {isMarynaAuthenticated && (
+                    {isMaksymAuthenticated && (
                         <Route
-                            path="/note-book/maryna"
+                            path="/note-book/maksym"
                             element={<ClientTable />}
                         />
                     )}
@@ -230,7 +230,7 @@ const App = () => {
                             element={<ClientTable />}
                         />
                     )}
-                      {isVaryaAuthenticated && (
+                    {isVaryaAuthenticated && (
                         <Route
                             path="/note-book/varya"
                             element={<ClientTable />}

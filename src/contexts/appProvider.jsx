@@ -8,14 +8,15 @@ const AppProvider = ({ children }) => {
     const [isEmirAuthenticated, setIsEmirAuthenticated] = useState(false);
     const [isRavilAuthenticated, setIsRavilAuthenticated] = useState(false);
     const [isVikaAuthenticated, setIsVikaAuthenticated] = useState(false);
-    const [isVeronikaAuthenticated, setIsVeronikaAuthenticated] = useState(false);
+    const [isVeronikaAuthenticated, setIsVeronikaAuthenticated] =
+        useState(false);
     const [isYuliaAuthenticated, setIsYuliaAuthenticated] = useState(false);
     const [isAnyaAuthenticated, setIsAnyaAuthenticated] = useState(false);
     const [isOlyaAuthenticated, setIsOlyaAuthenticated] = useState(false);
     const [isAlbinaAuthenticated, setIsAlbinaAuthenticated] = useState(false);
     const [isAnnaAuthenticated, setIsAnnaAuthenticated] = useState(false);
     const [isAlinaAuthenticated, setIsAlinaAuthenticated] = useState(false);
-    const [isMarynaAuthenticated, setIsMarynaAuthenticated] = useState(false);
+    const [isMaksymAuthenticated, setIsMaksymAuthenticated] = useState(false);
     const [isIvannaAuthenticated, setIsIvannaAuthenticated] = useState(false);
     const [isOstapAuthenticated, setIsOstapAuthenticated] = useState(false);
     const [isVaryaAuthenticated, setIsVaryaAuthenticated] = useState(false);
@@ -54,14 +55,14 @@ const AppProvider = ({ children }) => {
         setIsAnnaAuthenticated,
         isAlinaAuthenticated,
         setIsAlinaAuthenticated,
-        isMarynaAuthenticated,
-        setIsMarynaAuthenticated,
+        isMaksymAuthenticated,
+        setIsMaksymAuthenticated,
         isIvannaAuthenticated,
         setIsIvannaAuthenticated,
         isOstapAuthenticated,
         setIsOstapAuthenticated,
         isVaryaAuthenticated,
-        setIsVaryaAuthenticated
+        setIsVaryaAuthenticated,
     };
 
     return (

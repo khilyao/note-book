@@ -19,7 +19,7 @@ const AuthForm = () => {
         isAlbinaAuthenticated,
         isAnnaAuthenticated,
         isAlinaAuthenticated,
-        isMarynaAuthenticated,
+        isMaksymAuthenticated,
         isIvannaAuthenticated,
         isOstapAuthenticated,
         isVaryaAuthenticated,
@@ -35,10 +35,10 @@ const AuthForm = () => {
         setIsAlbinaAuthenticated,
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
-        setIsMarynaAuthenticated,
+        setIsMaksymAuthenticated,
         setIsIvannaAuthenticated,
         setIsOstapAuthenticated,
-        setIsVaryaAuthenticated
+        setIsVaryaAuthenticated,
     } = useContext(appContext);
 
     const options = {
@@ -137,9 +137,9 @@ const AuthForm = () => {
             return;
         }
 
-        if (password === 'maryna2024') {
-            setIsMarynaAuthenticated(true);
-            localStorage.setItem('isMarynaEntered', true);
+        if (password === 'maksym2025') {
+            setIsMaksymAuthenticated(true);
+            localStorage.setItem('isMaksymEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
@@ -158,7 +158,7 @@ const AuthForm = () => {
             return;
         }
 
-          if (password === 'varya_pro') {
+        if (password === 'varya_pro') {
             setIsVaryaAuthenticated(true);
             localStorage.setItem('isVaryaEntered', true);
             toast.success("Let's check profit :)", options);
@@ -189,7 +189,7 @@ const AuthForm = () => {
                 !isAlbinaAuthenticated ||
                 !isAnnaAuthenticated ||
                 !isAlinaAuthenticated ||
-                !isMarynaAuthenticated ||
+                !isMaksymAuthenticated ||
                 !isIvannaAuthenticated ||
                 !isOstapAuthenticated ||
                 !isVaryaAuthenticated) && (

@@ -35,7 +35,7 @@ const ClientInfoPage = () => {
         localStorage.getItem('isAlbinaEntered') !== null ||
         localStorage.getItem('isAnnaEntered') !== null ||
         localStorage.getItem('isAlinaEntered') !== null ||
-        localStorage.getItem('isMarynaEntered') !== null ||
+        localStorage.getItem('isMaksymEntered') !== null ||
         localStorage.getItem('isIvannaEntered') !== null ||
         localStorage.getItem('isOstapEntered') !== null;
 

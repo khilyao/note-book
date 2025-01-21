@@ -62,7 +62,7 @@ const ClientsTable = () => {
         }
 
         const previousMonthDate = getPreviousMonth();
-        const previousMonth = previousMonthDate.getMonth() + 1; // Месяц в формате 1-12
+        const previousMonth = previousMonthDate.getMonth() + 1;
         const previousYear = previousMonthDate.getFullYear();
 
         const studentProfit =
