@@ -36,7 +36,7 @@ const ClientInfoPage = () => {
         localStorage.getItem('isAnnaEntered') !== null ||
         localStorage.getItem('isAlinaEntered') !== null ||
         localStorage.getItem('isMaksymEntered') !== null ||
-        localStorage.getItem('isIvannaEntered') !== null ||
+        localStorage.getItem('isEvaEntered') !== null ||
         localStorage.getItem('isOstapEntered') !== null;
 
     useEffect(() => {

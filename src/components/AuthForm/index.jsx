@@ -20,7 +20,7 @@ const AuthForm = () => {
         isAnnaAuthenticated,
         isAlinaAuthenticated,
         isMaksymAuthenticated,
-        isIvannaAuthenticated,
+        isEvaAuthenticated,
         isOstapAuthenticated,
         isVaryaAuthenticated,
         setIsSanyaAuthenticated,
@@ -36,7 +36,7 @@ const AuthForm = () => {
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
         setIsMaksymAuthenticated,
-        setIsIvannaAuthenticated,
+        setIsEvaAuthenticated,
         setIsOstapAuthenticated,
         setIsVaryaAuthenticated,
     } = useContext(appContext);
@@ -144,9 +144,9 @@ const AuthForm = () => {
             return;
         }
 
-        if (password === 'ivanna_pro') {
-            setIsIvannaAuthenticated(true);
-            localStorage.setItem('isIvannaEntered', true);
+        if (password === 'eva2025') {
+            setIsEvaAuthenticated(true);
+            localStorage.setItem('isEvaEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
@@ -190,7 +190,7 @@ const AuthForm = () => {
                 !isAnnaAuthenticated ||
                 !isAlinaAuthenticated ||
                 !isMaksymAuthenticated ||
-                !isIvannaAuthenticated ||
+                !isEvaAuthenticated ||
                 !isOstapAuthenticated ||
                 !isVaryaAuthenticated) && (
                 <StyledContainer>

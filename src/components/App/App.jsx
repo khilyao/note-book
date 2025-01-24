@@ -26,7 +26,7 @@ const App = () => {
         isAnnaAuthenticated,
         isAlinaAuthenticated,
         isMaksymAuthenticated,
-        isIvannaAuthenticated,
+        isEvaAuthenticated,
         isOstapAuthenticated,
         isVaryaAuthenticated,
         setIsSanyaAuthenticated,
@@ -42,7 +42,7 @@ const App = () => {
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
         setIsMaksymAuthenticated,
-        setIsIvannaAuthenticated,
+        setIsEvaAuthenticated,
         setIsOstapAuthenticated,
         setIsVaryaAuthenticated,
     } = useContext(appContext);
@@ -101,8 +101,8 @@ const App = () => {
             setIsMaksymAuthenticated(true);
         }
 
-        if (localStorage.getItem('isIvannaEntered')) {
-            setIsIvannaAuthenticated(true);
+        if (localStorage.getItem('isEvaEntered')) {
+            setIsEvaAuthenticated(true);
         }
 
         if (localStorage.getItem('isOstapEntered')) {
@@ -128,7 +128,7 @@ const App = () => {
         (pathname === '/note-book/anna' && !isAnnaAuthenticated) ||
         (pathname === '/note-book/alina' && !isAlinaAuthenticated) ||
         (pathname === '/note-book/maksym' && !isMaksymAuthenticated) ||
-        (pathname === '/note-book/ivanna' && !isIvannaAuthenticated) ||
+        (pathname === '/note-book/eva' && !isEvaAuthenticated) ||
         (pathname === '/note-book/ostap' && !isOstapAuthenticated) ||
         (pathname === '/note-book/varya' && !isVaryaAuthenticated)
             ? false
@@ -218,9 +218,9 @@ const App = () => {
                             element={<ClientTable />}
                         />
                     )}
-                    {isIvannaAuthenticated && (
+                    {isEvaAuthenticated && (
                         <Route
-                            path="/note-book/ivanna"
+                            path="/note-book/eva"
                             element={<ClientTable />}
                         />
                     )}
