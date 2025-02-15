@@ -16,7 +16,7 @@ const AuthForm = () => {
         isYuliaAuthenticated,
         isAnyaAuthenticated,
         isOlyaAuthenticated,
-        isAlbinaAuthenticated,
+        isTanyaAuthenticated,
         isAnnaAuthenticated,
         isAlinaAuthenticated,
         isMaksymAuthenticated,
@@ -32,7 +32,7 @@ const AuthForm = () => {
         setIsYuliaAuthenticated,
         setIsAnyaAuthenticated,
         setIsOlyaAuthenticated,
-        setIsAlbinaAuthenticated,
+        setIsTanyaAuthenticated,
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
         setIsMaksymAuthenticated,
@@ -116,9 +116,9 @@ const AuthForm = () => {
             return;
         }
 
-        if (password === 'albina_poltava') {
-            setIsAlbinaAuthenticated(true);
-            localStorage.setItem('isAlbinaEntered', true);
+        if (password === 'tanya_2025') {
+            setIsTanyaAuthenticated(true);
+            localStorage.setItem('isTanyaEntered', true);
             toast.success("Let's check profit :)", options);
             return;
         }
@@ -186,7 +186,7 @@ const AuthForm = () => {
                 !isYuliaAuthenticated ||
                 !isAnyaAuthenticated ||
                 !isOlyaAuthenticated ||
-                !isAlbinaAuthenticated ||
+                !isTanyaAuthenticated ||
                 !isAnnaAuthenticated ||
                 !isAlinaAuthenticated ||
                 !isMaksymAuthenticated ||

@@ -32,7 +32,7 @@ const ClientInfoPage = () => {
         localStorage.getItem('isYuliaEntered') !== null ||
         localStorage.getItem('isAnyaEntered') !== null ||
         localStorage.getItem('isOlyaEntered') !== null ||
-        localStorage.getItem('isAlbinaEntered') !== null ||
+        localStorage.getItem('isTanyaEntered') !== null ||
         localStorage.getItem('isAnnaEntered') !== null ||
         localStorage.getItem('isAlinaEntered') !== null ||
         localStorage.getItem('isMaksymEntered') !== null ||

@@ -22,7 +22,7 @@ const App = () => {
         isYuliaAuthenticated,
         isAnyaAuthenticated,
         isOlyaAuthenticated,
-        isAlbinaAuthenticated,
+        isTanyaAuthenticated,
         isAnnaAuthenticated,
         isAlinaAuthenticated,
         isMaksymAuthenticated,
@@ -38,7 +38,7 @@ const App = () => {
         setIsYuliaAuthenticated,
         setIsAnyaAuthenticated,
         setIsOlyaAuthenticated,
-        setIsAlbinaAuthenticated,
+        setIsTanyaAuthenticated,
         setIsAnnaAuthenticated,
         setIsAlinaAuthenticated,
         setIsMaksymAuthenticated,
@@ -85,8 +85,8 @@ const App = () => {
             setIsOlyaAuthenticated(true);
         }
 
-        if (localStorage.getItem('isAlbinaEntered')) {
-            setIsAlbinaAuthenticated(true);
+        if (localStorage.getItem('isTanyaEntered')) {
+            setIsTanyaAuthenticated(true);
         }
 
         if (localStorage.getItem('isAnnaEntered')) {
@@ -124,7 +124,7 @@ const App = () => {
         (pathname === '/note-book/yulia' && !isYuliaAuthenticated) ||
         (pathname === '/note-book/anya' && !isAnyaAuthenticated) ||
         (pathname === '/note-book/olya' && !isOlyaAuthenticated) ||
-        (pathname === '/note-book/albina' && !isAlbinaAuthenticated) ||
+        (pathname === '/note-book/tanya' && !isTanyaAuthenticated) ||
         (pathname === '/note-book/anna' && !isAnnaAuthenticated) ||
         (pathname === '/note-book/alina' && !isAlinaAuthenticated) ||
         (pathname === '/note-book/maksym' && !isMaksymAuthenticated) ||
@@ -194,9 +194,9 @@ const App = () => {
                             element={<ClientTable />}
                         />
                     )}
-                    {isAlbinaAuthenticated && (
+                    {isTanyaAuthenticated && (
                         <Route
-                            path="/note-book/albina"
+                            path="/note-book/tanya"
                             element={<ClientTable />}
                         />
                     )}
