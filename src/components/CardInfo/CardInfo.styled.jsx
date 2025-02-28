@@ -115,7 +115,7 @@ export const Field = styled.div`
 export const DateLabel = styled.p``;
 
 export const Date = styled.input`
-    max-width: 72px;
+    max-width: 77px;
 
     font-family: 'Open Sans';
     font-weight: 600;
@@ -124,6 +124,7 @@ export const Date = styled.input`
     background-color: transparent;
     color: rgb(15, 15, 15);
     outline: red;
+    font-size: 14px;
     border-radius: 4px;
 
     transition: background-color 150ms linear;
